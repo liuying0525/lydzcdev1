@@ -1,0 +1,178 @@
+<style lang="less">
+    .cardChange{
+        padding: 84rpx 0;
+        .title{
+            font-size: 26rpx;
+            text-align: center;
+        }
+        .earlyInfo {
+            width: 546rpx;
+            margin: 130rpx auto 0;
+            font-size: 22rpx;
+            color: #595959;
+            text-align: center;
+        }
+        .stateText{
+            font-size: 40rpx;
+            color: #dd2a3f;
+            text-align: center;
+            margin: 68rpx 0;
+            font-weight: bold;
+        }
+        .stateIcons {
+            height:600rpx ;
+            width: 58rpx;
+            margin: 0 auto;
+            padding-top: 29rpx;
+        }
+        .circle {
+            position: absolute;
+            width: 58rpx;
+            height: 58rpx;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            background: #c4c4c4;
+            left: -15rpx;
+        }
+        .line{
+            width: 28rpx;
+            height: 275rpx;
+            background: #c4c4c4;
+            margin: 0 auto;
+            position: relative;
+        }
+        .active{
+            background: #6144cb;
+        }
+        .top{
+            top: -29rpx;
+        }
+        .bottom{
+            bottom: -29rpx;
+        }
+        .left{
+            right: 90rpx;
+            text-align: right;
+        }
+        .right{
+            left: 90rpx;
+            text-align: left;
+        }
+        .time{
+            position: absolute;
+            width: 190rpx;
+            font-size: 32rpx;
+            line-height: 58rpx;
+        }
+    }
+    .noData {
+        width: 500rpx;
+        margin: 300rpx auto;
+        image {
+            display: block;
+            height: 252rpx;
+            width: 309rpx;
+            margin: 0 auto;
+        }
+        .textInfo {
+            text-align: center;
+            font-size: 36rpx;
+            line-height: 120rpx;
+        }
+    }
+</style>
+<template>
+    <view class="cardChange">
+        <block wx:if="{{state != -1}}">
+            <view class="title">
+                你的还款卡变更状态为
+            </view>
+            <view class="stateText">
+                <text wx:if="{{state == 1 || state == 0 || state == 3}}">待受理</text>
+                <text style="color: #6144cb;" wx:if="{{state == 2}}">已受理</text>
+            </view>
+            <view class="stateIcons">
+                <view class="line {{state == 2?'active':''}}">
+                    <view class="circle top {{state == 2?'active':''}}"></view>
+                    <block wx:if="{{state == 2}}">
+                        <view class="time left top">{{acceptedtime}}</view>
+                        <view class="time right top">后台人员已受理</view>
+                    </block>
+                </view>
+                <view class="line active">
+                    <view class="circle active top"></view>
+                    <view class="time left top">{{accepttime}}</view>
+                    <view class="time right top">后台人员待受理</view>
+                    <view class="circle active bottom"></view>
+                    <view class="time left bottom">{{createtime}}</view>
+                    <view class="time right bottom">申请变更</view>
+                </view>
+            </view>
+            <view class="earlyInfo">
+                *如对此状态有疑问，可联系<text style="color: #6044cb;" @tap="makeCall('021-20689938')">021-20689938</text> 或 <text>\n</text><text style="color: #6044cb;" @tap="makeCall('021-20689958')">021-20689958</text>咨询
+            </view>
+        </block>
+        <view class="noData" wx:if="{{state == -1}}">
+            <image src="{{url_link?url_link + '/noData.png':''}}" mode="aspectFit"></image>
+            <view class="textInfo">您还没有申请记录哦</view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    import toastInfo from '../components/toastInfo';
+    export default class cardChange extends wepy.page{
+      config = {
+        navigationBarTitleText:'还款卡变更'
+      };
+      components = {
+        toastInfo: toastInfo
+      };
+      data = {
+        url_link: '',
+        state: -1,
+        parent_data: '',
+        createtime: '',// 申请时间
+        accepttime: '', // 后台接收时间
+        acceptedtime: '' // 已受理时间
+      };
+      methods = {
+        makeCall: function (phone) {
+          wx.makePhoneCall({
+            phoneNumber: phone
+          })
+        }
+      };
+      // 获取状态
+      getState() {
+        let that = this;
+        wx.request({
+          url: that.parent_data.json_link + '/api/wxapp/reapymentcard/getstart?access_token=' + that.parent_data.access_token,
+          data: {loginToken: that.parent_data.login_token},
+          success: function (res) {
+            if (res.data.code == 'A00006') {
+              that.state = res.data.data.start;
+              that.createtime = res.data.data.createtime? res.data.data.createtime.split(' ')[0]:'';
+              that.accepttime = res.data.data.accepttime?res.data.data.accepttime.split(' ')[0]:'';
+              that.acceptedtime = res.data.data.acceptedtime?res.data.data.acceptedtime.split(' ')[0]:'';
+              that.$apply();
+            } else {
+              that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.errmsg);
+              if (res.data.code == 'A00069' || res.data.code == 'A00070') {
+                that.$redirect('secLogin');
+              }
+            }
+          },
+          fail: function () {
+            console.log('获取状态失败了！')
+          }
+        })
+      }
+      onLoad() {
+        this.url_link = this.$parent.globalData.url_link;
+        this.parent_data = this.$parent.globalData;
+        this.getState();
+      }
+    }
+</script>

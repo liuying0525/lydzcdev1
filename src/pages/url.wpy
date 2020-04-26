@@ -1,0 +1,30 @@
+<style lang="less">
+
+</style>
+<template>
+     <web-view src="{{url}}"></web-view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class url extends wepy.page {
+  config = {
+    navigationBarTitleText: '搜索'
+  };
+  components = {
+  }; 
+  data = {
+    url:""
+  };
+
+  methods = {
+  };
+
+  onLoad(red) {
+      console.log(red.url)
+      this.url=red.url
+   
+  }
+
+  
+}
+</script>

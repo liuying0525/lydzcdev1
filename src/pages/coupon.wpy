@@ -1,0 +1,270 @@
+<style lang="less">
+  .nav {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 24rpx;
+    padding: 0 10%;
+  }
+
+  .defaulf {
+    width: 20%;
+    line-height: 70rpx;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .orange {
+    width: 20%;
+    line-height: 70rpx;
+    text-align: center;
+    border-bottom: 4rpx rgb(0, 199, 174) solid;
+    color: rgb(0, 199, 174);
+    font-weight: bold;
+  }
+  .coupons {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 50rpx;
+    background: #f0f1f5;
+  }
+  .coupon {
+    width: 100%;
+    height: 157rpx;
+    /*background: #fff;*/
+    /*background:pink;*/
+    margin-bottom: 30rpx;
+    -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+    -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+    box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+    display: flex;
+  }
+  .coupon1 {
+    background: url("https://webapi.dongzhengafc.com:9503/images/dhSec01.png") no-repeat center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+  }
+  .coupon2 {
+    background: url("https://webapi.dongzhengafc.com:9503/images/dhSec02.png") no-repeat center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+  }
+  .coupon3 {
+    background: url("https://webapi.dongzhengafc.com:9503/images/dhSec03.png") no-repeat center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+  }
+  .couponL {
+    flex: 8;
+    padding:12rpx 40rpx 12rpx 40rpx ;
+    background: url("https://webapi.dongzhengafc.com:9503/images/dhSec00.png") no-repeat center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    .title {
+      font-size: 28rpx;
+      color: #5c5c5c;
+    }
+    .time {
+      font-size: 18rpx;
+      color: #737373;
+      margin: 8rpx 0;
+    }
+    .limit {
+      font-size: 18rpx;
+      color: #a6a5a5;
+    }
+  }
+  .couponR {
+    flex: 4;
+    .money {
+      font-size: 42rpx;
+      color: #fff;
+      margin: 30rpx auto 16rpx;
+      text-align: center;
+    }
+    .btn {
+      font-size: 16rpx;
+      color: #f06464;
+      height: 30rpx;
+      line-height: 30rpx;
+      width: 126rpx;
+      background: #fff;
+      -webkit-border-radius: 10rpx;
+      -moz-border-radius: 10rpx;
+      border-radius: 10rpx;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+  .noData {
+    width: 500rpx;
+    margin: 300rpx auto;
+    image {
+      display: block;
+      height: 252rpx;
+      width: 309rpx;
+      margin: 0 auto;
+    }
+    .textInfo {
+      text-align: center;
+      font-size: 36rpx;
+      line-height: 120rpx;
+    }
+  }
+</style>
+<template>
+  <view>
+    <view class='nav'>
+      <view class="{{state===1?'orange':'defaulf'}}" @tap='changeState({{1}})'>未使用</view>
+      <view class="{{state===2?'orange':'defaulf'}}" @tap='changeState({{2}})'>已使用</view>
+      <view class="{{state===3?'orange':'defaulf'}}" @tap='changeState({{3}})'>已过期</view>
+    </view>
+    <view class="coupons" wx:if="{{!noData_show}}">
+      <view class="coupon" wx:for="{{list}}" @tap="goUse({{item.id}})">
+        <view class="couponL">
+          <view class="title">{{item.couponName}}</view>
+          <view class="time">使用期限：{{item.startDate}}-{{item.endDate}}</view>
+          <view class="limit">适用范围：在申请贷款的红旗店内,消费精品、工时费、延保、装潢等,均可抵扣{{item.couponAmount}}元.</view>
+        </view>
+        <view class="couponR {{'coupon'+state}}">
+          <view class="money">¥{{item.couponAmount}}</view>
+          <view class="btn" wx:if="{{state===1}}">立即使用</view>
+          <view class="btn" wx:if="{{state===2}}">已使用</view>
+        </view>
+      </view>
+    </view>
+    <view class="noData" wx:if="{{noData_show}}">
+      <image src="{{url_link?url_link + '/noData.png':''}}" mode="aspectFit"></image>
+      <view class="textInfo">您暂无优惠券哦</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  export default class coupon extends wepy.page {
+    config = {
+      navigationBarTitleText: '抵扣券'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      //卡券种类
+      state: 1,
+      // 资源地址
+      url_link: '',
+      parent_data: '',
+      currentNum: 1,
+      list: []
+    };
+    computed = {
+      // 缺省压面是否显示
+      noData_show: function () {
+        if (this.list.length == 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    };
+    methods = {
+      goUse: function (id) {
+        if(this.state === 1) {
+          this.$navigate('couponDetail',{id: id})
+        }
+      },
+      // 更改状态值
+      changeState: function(state) {
+        this.state = state;
+        this.list = [];
+        this.currentNum = 1;
+        this.getList();
+      },
+      // onShareAppMessage: function () {
+      //   return {
+      //     path: '/pages/index'
+      //   };
+      // },
+      // 使用门店
+      //点击生成二维码
+      save() {
+        wx.showActionSheet({
+          itemList: ['保存图片'],
+          success: function (res) {
+            if (res.tapIndex == 0) {
+              qrcode.exportImage(function (path) {
+                wx.saveImageToPhotosAlbum({
+                  filePath: path
+                });
+              });
+            }
+          }
+        });
+      }
+    };
+    getList () {
+      let that = this;
+      wx.showLoading({
+        title: '加载中',
+      })
+      wx.request({
+        url: that.parent_data.json_dhLink + '/coupon/user/list',
+        data: {
+          pageNum: that.currentNum,
+          pageSize: 10,
+          loginToken: that.parent_data.login_token,
+          userId: that.parent_data.login_userId,
+          status:that.state
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            wx.hideLoading();
+            if (res.data.data.list.length > 0) {
+              that.list = that.list .concat(res.data.data.list);
+              that.$apply();
+            } else {
+              if (that.currentNum == 1) {
+                that.list = res.data.data.list;
+                that.$apply();
+              } else {
+                that.currentNum = that.currentNum <= 1 ? 1: that.currentNum- 1;
+                wx.showToast({
+                  title: '加载全部',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+              return false;
+            }
+          } else {
+            wx.hideLoading();
+            that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+          }
+        }
+      })
+    }
+    onPullDownRefresh() {
+      this.list = [];
+      this.currentNum = 1;
+      this.getList();
+    }
+    onReachBottom() {
+      this.currentNum = this.currentNum + 1;
+      this.getList();
+    }
+    // 数据获取
+    onLoad() {
+    }
+    onShow() {
+      let that = this;
+      that.parent_data = this.$parent.globalData;
+      that.url_link = this.$parent.globalData.url_link;
+      that.list = [];
+      that.currentNum = 1;
+      that.getList();
+    }
+  }
+</script>

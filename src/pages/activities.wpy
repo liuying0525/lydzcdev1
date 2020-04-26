@@ -1,0 +1,514 @@
+<style lang="less">
+  .order-view2 {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+
+  .order-view2-view1 {
+    width: 32%;
+    text-align: center;
+  }
+
+  .order-view2-view1 image {
+    width: 100%;
+  }
+
+  .songchexiang {
+    width: 88%;
+    font-size: 24rpx;
+    margin: 0 auto;
+    lint-height: 38rpx;
+    border: 1rpx rgb(0, 199, 174) solid;
+    padding: 4rpx;
+    border-radius: 10rpx;
+    margin-top: 10rpx;
+  }
+
+  .order-view2-view2 {
+    width: 65%;
+    letter-spacing: 3rpx;
+  }
+
+  .order-view2-view4 {
+    font-size: 31rpx;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    padding-bottom: 20rpx;
+  }
+
+  .order-view2-view5 {
+    font-size: 28rpx;
+    color: rgb(68, 68, 68);
+  }
+
+  .zxkf {
+    width: 100%;
+    line-height: 100rpx;
+    background: rgb(92, 69, 195);
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    font-size: 34rpx;
+  }
+
+  .order-view2-view3 {
+    line-height: 30rpx;
+    margin: 20rpx 10rpx 40rpx 0rpx;
+  }
+
+  .order-view2 {
+    padding: 10rpx 0;
+  }
+
+  .order-view1-view3 {
+    font-size: 24rpx;
+    margin-top: 52rpx;
+  }
+
+  .order-view1-view3 text text {
+    color: red;
+  }
+
+  .jiage1 {
+    margin-left: 20rpx;
+  }
+
+  .daxiao1 {
+    color: rgb(0, 199, 174);
+    padding-right: 10rpx;
+    font-size: 24rpx;
+  }
+
+  .order-te1 {
+    border-top: 7rpx #eee solid;
+    padding: 0 5%;
+    padding-top: 30rpx;
+    margin-bottom: 50rpx;
+  }
+
+  .order-te2 {
+    line-height: 80rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+
+  .order-te2 image {
+    width: 40rpx;
+    margin-right: 20rpx;
+  }
+
+  .order-te4 {
+    font-size: 28rpx;
+    color: rgb(82, 82, 82);
+  }
+
+  .order-te5 {
+    font-size: 28rpx;
+    color: #000;
+    margin-left: -6.5%;
+    margin-top: 10rpx;
+    display: flex;
+  }
+
+  .order-te3 {
+    margin-left: 9%;
+    margin-top: 10rpx;
+  }
+
+  .daxiao3 {
+    font-size: 34rpx;
+    color: rgb(0, 199, 174);
+    margin-right: 7rpx;
+  }
+
+  .order-we1 {
+    border-top: 7rpx #eee solid;
+    padding: 0 5%;
+    padding-top: 15rpx;
+    margin-bottom: 50rpx;
+  }
+
+  .order-we2 {
+    line-height: 80rpx;
+    font-size: 34rpx;
+    font-weight: 700;
+  }
+
+  .order-we3 {
+    display: flex;
+    font-size: 34rpx;
+    line-height: 38rpx;
+    margin-top: 50rpx;
+    align-items: center;
+
+    vertical-align: middle;
+  }
+
+  .order-we3 image {
+    width: 40rpx;
+    margin-right: 20rpx;
+    font-size: 28rpx;
+  }
+
+  .index_ss {
+    background: #eee;
+    margin-left: 20rpx;
+    width: 69%;
+    padding-left: 20rpx;
+    height: 66rpx;
+  }
+
+  .placeholder {
+    font-size: 28rpx;
+  }
+
+  .index_sa {
+    margin-left: 55rpx;
+    height: 66rpx;
+  }
+
+  .order-we4 image {
+    width: 45rpx !important;
+  }
+
+  .daxiao4 {
+    width: 50rpx;
+    height: 20rpx;
+    position: absolute;
+    right: 10%;
+    text-align: center;
+    line-height: 120rpx;
+    transform: rotate(180deg);
+    font-size: 36rpx;
+  }
+
+  .nem {
+    width: 80%;
+  }
+</style>
+<template>
+  <view class="order-view1">
+    <view class="order-view2">
+      <view class="order-view2-view1">
+        <image src="{{img_url}}" mode="widthFix"></image>
+      </view>
+      <view class="order-view2-view2">
+        <view class="order-view2-view3">
+          <view class="order-view2-view4">
+            <text>{{cahg}}</text>
+          </view>
+          <view class="order-view2-view5">
+            <text>{{name}}</text>
+          </view>
+        </view>
+        <view class="order-view1-view3">
+          <text class="jiage">首付
+            <text>{{sf/10000}}</text>万</text>
+          <text class="jiage1">
+            <text>{{yg}}</text>元/月</text>
+        </view>
+      </view>
+    </view>
+    <view class="order-te1" @tap='toMendian({{wp}},{{wpid}})'>
+      <view class="order-te2">
+        <image src="image/dm@3x.png" mode="widthFix"></image>预约门店</view>
+      <view class="order-te3">
+        <view class="order-te4">{{md.business_partner_nme}}</view>
+        <view class="order-te5">
+          <text class="daxiao3 iconfont #icon-dingwei"></text>
+          <view class="nem">{{md.building_nme}}</view>
+        </view>
+      </view>
+      <view class="daxiao4  iconfont icon-jiantou"></view>
+    </view>
+    <view class="order-we1">
+      <view class="order-we2">预约信息</view>
+      <view class="order-we3">
+        <image src="image/xm@3x.png" mode="widthFix"></image>姓名
+        <input class="index_ss index_sa" bindinput="username" placeholder-class="placeholder" placeholder="请输入您的名字"
+        />
+      </view>
+      <view class="order-we3 order-we4">
+        <image src="image/sfz@3x.png" mode="widthFix"></image>身份证
+        <input class="index_ss" bindinput="usersfz" type="idcard" placeholder-class="placeholder" placeholder="请输入您的身份证号"
+        />
+      </view>
+    </view>
+    <view class="zxkf" @tap="click_">提交申请</view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+
+  export default class order extends wepy.page {
+    config = {
+      navigationBarTitleText: '预约确认'
+    };
+    data = {
+      // 门店信息
+      zhi: {},
+      // 图片地址
+      img_url: '',
+      name: '',
+      // 产品名
+      finan: '',
+      // 首付
+      sf: '',
+      // 月供
+      yg: '',
+      // 姓名
+      username: '',
+      // 身份证号
+      sfz: '',
+      cahg: '',
+      // 产品信息
+      wp: '',
+      // 产品id
+      wpid: '',
+      // 产品外部id
+      shuju: '',
+      // 门店
+      md: [],
+      disabled: false
+    };
+
+    methods = {
+      //  分享
+      onShareAppMessage() {
+        return {
+          path: '/pages/index'
+        };
+      },
+      // 预约门店跳转 ea产品关联id
+      toMendian(e, a) {
+        let this_ = this;
+        let json_link = this.$parent.globalData.json_link;
+        wx.navigateTo({
+          url: 'mendian?e=' + e + '&a=' + a + '&json_link=' + json_link
+        });
+      },
+      // 提交申请
+      click_() {
+        let this_ = this;
+        let res = this_.zhi;
+        let parent_data = this_.$parent.globalData;
+        if (this_.username != '' && this_.sfz != '') {
+          //   身份证验证
+          function IdentityCodeValid(code) {
+            var city = {
+              11: '北京',
+              12: '天津',
+              13: '河北',
+              14: '山西',
+              15: '内蒙古',
+              21: '辽宁',
+              22: '吉林',
+              23: '黑龙江 ',
+              31: '上海',
+              32: '江苏',
+              33: '浙江',
+              34: '安徽',
+              35: '福建',
+              36: '江西',
+              37: '山东',
+              41: '河南',
+              42: '湖北 ',
+              43: '湖南',
+              44: '广东',
+              45: '广西',
+              46: '海南',
+              50: '重庆',
+              51: '四川',
+              52: '贵州',
+              53: '云南',
+              54: '西藏 ',
+              61: '陕西',
+              62: '甘肃',
+              63: '青海',
+              64: '宁夏',
+              65: '新疆',
+              71: '台湾',
+              81: '香港',
+              82: '澳门',
+              91: '国外 '
+            };
+            var tip = '';
+            var pass = true;
+
+            if (!code ||
+              !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(
+                code
+              )
+            ) {
+              tip = '身份证号格式错误';
+              pass = false;
+            } else if (!city[code.substr(0, 2)]) {
+              tip = '身份证地址编码错误';
+              pass = false;
+            } else {
+              //18位身份证需要验证最后一位校验位
+              if (code.length == 18) {
+                code = code.split('');
+                //∑(ai×Wi)(mod 11)
+                //加权因子
+                var factor = [
+                  7,
+                  9,
+                  10,
+                  5,
+                  8,
+                  4,
+                  2,
+                  1,
+                  6,
+                  3,
+                  7,
+                  9,
+                  10,
+                  5,
+                  8,
+                  4,
+                  2
+                ];
+                //校验位
+                var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
+                var sum = 0;
+                var ai = 0;
+                var wi = 0;
+                for (var i = 0; i < 17; i++) {
+                  ai = code[i];
+                  wi = factor[i];
+                  sum += ai * wi;
+                }
+                var last = parity[sum % 11];
+                if (parity[sum % 11] != code[17]) {
+                  tip = '身份证校验位错误';
+                  pass = false;
+                }
+              }
+            }
+            if (!pass) {
+              wx.showToast({
+                title: tip,
+                icon: 'none',
+                duration: 2000
+              });
+            }
+            return pass;
+          }
+          var c = this_.sfz;
+          var leo = IdentityCodeValid(c);
+          if (leo) {
+            if ((this.disabled = false)) {
+              console.log(213);
+              return;
+            }
+            this.shengqin();
+          }
+        } else {
+          wx.showToast({
+            title: '请完善信息',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+      },
+      // 输入姓名
+      username(e) {
+        this.username = e.detail.value;
+      },
+      // 输入身份证号
+      usersfz(e) {
+        this.sfz = e.detail.value;
+      }
+    };
+
+    onLoad(e, res) {
+      // pvuv客户统计
+      this.PVUVfrom = e.PVUVfrom;
+      if (e.PVUVfrom === 'zhizu') {
+        this.$parent.PVUVstatistical('rentfillinorderpage');
+      }
+      let this_ = this;
+      this_.zhi = e;
+      this_.img_url = e.thumbnailimgurl;
+      this_.name = e.name;
+      this_.finan = e.financialproductName;
+      this_.shuju = res.from.zhi.productlist[0].financialproductid;
+      this_.wp = res.from.zhi.productlist[0].financial_product_id;
+      this_.wpid = e.asset_model_cde;
+      this_.sf = e.downpayment;
+      this_.yg = e.monthsuppert;
+      this_.cahg = e.carseriesname;
+      this_.md = res.from.zhi.productlist[0].businessinfoJO;
+      this_.$apply();
+    }
+    // 申请请求
+    shengqin() {
+      let this_ = this;
+      let json_link = this.$parent.globalData.json_link;
+      this.json_link = json_link;
+      let parent_data = this.$parent.globalData;
+      // 申请
+      wx.request({
+        url: parent_data.json_link +
+          '/api/wxapp/reservationorder/createorder?access_token=' +
+          parent_data.access_token,
+        data: {
+          carmodelid: this_.zhi.carmodelid,
+          financialproductid: this_.shuju,
+          downpaymentratio: 20,
+          businessid: this_.md.businessid,
+          term: 36,
+          tailmoney: 0,
+          downpaymentpara: this_.zhi.downpayment / 10000,
+          productpara: this_.zhi.financingamt,
+          finalpayment: 0,
+          monthlysupply: this_.zhi.monthsuppert,
+          username: this_.username,
+          idnumber: this_.sfz,
+          source: parent_data.source,
+          sourceid: parent_data.sourceid
+        },
+        success(data) {
+          this_.disabled = false;
+          this_.$apply();
+          this_.$parent.clicknumordernumstat(2);
+          this_.$parent.globalData.pageid = [];
+          this_.$parent.globalData.pagename = [];
+          data.data.orderinfo.from = 'details';
+          this_.$navigate('successfulorder', data.data.orderinfo);
+        },
+        fail() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+
+          setTimeout(function () {
+            wx.hideToast();
+          }, 2000);
+          return;
+        }
+      });
+    }
+    // 页面重新进入统计渲染
+    onShow() {
+      this.$parent.UVstatistical('loanproductdetail');
+      this.$parent.PVUVstatistical('loanproductdetail');
+      if (this.$parent.globalData.selectMendian.businessid) {
+        this.md = this.$parent.globalData.selectMendian;
+      }
+    }
+    onUnload() {
+      this.$parent.clicknumordernumstat(2);
+      this.$parent.globalData.pageid = [];
+      this.$parent.globalData.pagename = [];
+    }
+  }
+</script>

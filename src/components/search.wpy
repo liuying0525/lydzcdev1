@@ -1,0 +1,236 @@
+<style lang="less">
+  .index_ss_content {
+    display: block;
+    width: 90%;
+    padding: 0 5% 0 5%;
+    height: auto;
+    background-color: #6044ca;
+    overflow: hidden;
+    position: fixed;
+    z-index: 2;
+  }
+
+  .index_ss {
+    background-color: #4a31a4;
+    font-size: 28rpx;
+    height: 64rpx;
+    color: #ffffff;
+    border-radius: 8rpx;
+    width: 61%;
+    padding-left: 80rpx;
+    float: left;
+    line-height: 64rpx;
+  }
+
+  .index_input_ss {
+    position: absolute;
+    width: 30rpx;
+    height: 30rpx;
+    top: 42rpx;
+    left: 66rpx;
+  }
+
+  .index_gps {
+    display: inline-block;
+    width: auto;
+    height: 64rpx;
+    float: right;
+    font-size: 30rpx;
+    line-height: 64rpx;
+    text-align: right;
+    color: #fff;
+    position: relative;
+    padding-left: 55rpx;
+  }
+
+  .index_gps_img {
+    width: 38rpx;
+    height: 48rpx;
+    position: absolute;
+    top: 8rpx;
+    left: 10rpx;
+  }
+
+  .index_ss_header {
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    padding-top: 25rpx;
+    padding-bottom: 25rpx;
+  }
+</style>
+<template>
+  <!--搜索-->
+  <view class="index_ss_content">
+    <view class="index_ss_header">
+      <image class="index_input_ss" src="image/index_ss.png" mode="widthFix"></image>
+      <text class="index_ss" @tap="ss_btn" placeholder-class="placeholder" bindblur="ss_clear" placeholder="">请输入品牌或车型</text>
+      <view class="index_gps" @tap="dingwei">
+        <image class="index_gps_img" src="image/index_gps_icon.png" mode="widthFix"></image>
+        {{gps_wz}}
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  export default class Sousuo extends wepy.component {
+    data = {
+      gps_wz: '定位中...',
+      zt: true
+    };
+    props = {
+      title: String
+    };
+    methods = {
+      dingwei() {
+        let this_ = this;
+        wx.getSetting({
+          success: res => {
+            if (
+              res.authSetting['scope.userLocation'] != undefined &&
+              res.authSetting['scope.userLocation'] != true
+            ) {
+              //非初始化进入该页面,且未授权
+              wx.showModal({
+                title: '是否授权当前位置',
+                content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+                success: function (res) {
+                  if (res.cancel) {
+                    // console.info("1授权失败返回数据");
+                  } else if (res.confirm) {
+                    //village_LBS(that);
+                    wx.openSetting({
+                      success: function (data) {
+                        if (data.authSetting['scope.userLocation'] == true) {
+                          //                          再次授权，调用getLocationt的API
+                          wx.getLocation({
+                            type: 'wgs84',
+                            success: function (res) {
+                              // console.log(1111);
+                              wx.request({
+                                data: {},
+                                header: {
+                                  'Content-Type': 'application/json'
+                                },
+                                url: 'https://api.map.baidu.com/geocoder/v2/?ak=yonP0ZC9Gt9zrH5ig8xOUBhAxRZdvBDi&location=' +
+                                  res.latitude +
+                                  ',' +
+                                  res.longitude +
+                                  '&output=json',
+                                success: function (data) {
+                                  let zhi =
+                                    data.data.result.addressComponent.city;
+                                  this_.gps_wz = zhi;
+                                  this_.$apply();
+                                }
+                              });
+                            },
+                            fail: function (res) {
+                              wx.getLocation({
+                                type: 'wgs84',
+                                success: function (res) {
+                                  // console.log(1111);
+                                  wx.request({
+                                    data: {},
+                                    header: {
+                                      'Content-Type': 'application/json'
+                                    },
+                                    url: 'https://api.map.baidu.com/geocoder/v2/?ak=yonP0ZC9Gt9zrH5ig8xOUBhAxRZdvBDi&location=' +
+                                      res.latitude +
+                                      ',' +
+                                      res.longitude +
+                                      '&output=json',
+                                    success: function (data) {
+                                      let zhi =
+                                        data.data.result.addressComponent.city;
+                                      this_.gps_wz = zhi;
+                                      this_.$apply();
+                                    }
+                                  });
+                                },
+                                fail: function (res) {}
+                              });
+                            }
+                          });
+                        } else {
+                          wx.showToast({
+                            title: '授权失败',
+                            icon: 'success',
+                            duration: 5000
+                          });
+                        }
+                      }
+                    });
+                  }
+                }
+              });
+            } else if (
+              res.authSetting['scope.userLocation'] == undefined ||
+              res.authSetting['scope.userLocation'] == true
+            ) {
+              //初始化进入
+              wx.chooseLocation({
+                success: function (res) {
+                  wx.request({
+                    data: {},
+                    header: {
+                      'Content-Type': 'application/json'
+                    },
+                    url: 'https://api.map.baidu.com/geocoder/v2/?ak=yonP0ZC9Gt9zrH5ig8xOUBhAxRZdvBDi&location=' +
+                      res.latitude +
+                      ',' +
+                      res.longitude +
+                      '&output=json',
+                    success: function (data) {
+                      let zhi = data.data.result.addressComponent.city;
+                      this_.gps_wz = zhi;
+                      this_.$apply();
+                    }
+                  });
+                }
+              });
+            }
+          }
+        });
+      },
+      ss_btn() {
+        this.$emit('childFn', 'rent');
+      }
+    };
+    onLoad() {
+      let this_mo = this;
+      let parent = this.$parent.$parent.globalData;
+      wx.getLocation({
+        type: 'wgs84',
+        success: function (res) {
+          this_mo.$emit('childFn_jw', {
+            j: res.latitude,
+            w: res.longitude
+          });
+          wx.request({
+            data: {},
+            header: {
+              'Content-Type': 'application/json'
+            },
+            url: 'https://api.map.baidu.com/geocoder/v2/?ak=yonP0ZC9Gt9zrH5ig8xOUBhAxRZdvBDi&location=' +
+              res.latitude +
+              ',' +
+              res.longitude +
+              '&output=json',
+            success: function (data) {
+              let zhi = data.data.result.addressComponent.city;
+              // console.log(zhi);
+              this_mo.gps_wz = zhi;
+              parent.cityName = zhi;
+              this_mo.$emit('childFn_gps', {
+                gps: zhi
+              });
+              this_mo.$apply();
+            }
+          });
+        }
+      });
+    }
+  }
+</script>

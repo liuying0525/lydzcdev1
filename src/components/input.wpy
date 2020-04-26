@@ -1,0 +1,127 @@
+<style lang="less">
+  .index_ss_content {
+    display: block;
+    width: 96%;
+    padding: 0 2% 0 2%;
+    height: auto;
+    background-color: #6044ca;
+    overflow: hidden;
+    position: fixed;
+    z-index: 2;
+  }
+
+  .index_ss {
+    background-color: #fff;
+    font-size: 28rpx;
+    height: 64rpx;
+    color: rgb(116, 116, 116);
+    border-radius: 8rpx;
+    width: 89.5%;
+    padding-left: 75rpx;
+    float: left;
+  }
+
+  .placeholder {
+    color: rgb(116, 116, 116);
+  }
+
+  .index_input_ss {
+    position: absolute;
+    width: 30rpx;
+    top: 40rpx;
+    left: 45rpx;
+  }
+
+  .index_ss_header {
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    padding-top: 25rpx;
+    padding-bottom: 25rpx;
+  }
+
+  .select_one {
+    // text-align: center;
+    background-color: #fff;
+    width: 100%;
+    /* //脱离文档后元素width不能再用百分比。 */
+    height: 100rpx;
+    line-height: 100rpx; // margin:0 5%;
+    border-bottom: 2rpx solid #eee;
+    font-size: 24rpx;
+    padding-left: 50rpx;
+  }
+</style>
+<template>
+  <!--搜索-->
+  <view class="index_ss_content">
+    <view class="index_ss_header" bindsubmit="formSubmit">
+      <text class="index_input_ss iconfont icon-sousuo" bindtap="mySelecwtc"></text>
+      <input class="index_ss" type='hidden' name='key' placeholder-class="placeholder" placeholder="请输入品牌或车型" bindconfirm="my"  bindinput="userNameInput"
+        value="{{userName}}" />
+           <!-- <image class="{{isClearShow?'clearImgShow':'clearImgHide'}}" src='../pages/image/dingd.png' mode='widthFix'></image> -->
+    </view>
+  </view>
+</template>
+<script>
+  // 搜索组件
+  import wepy from 'wepy';
+  export default class input extends wepy.component {
+    data = {
+      // 搜索词
+      userName: '',
+        isClearShow: false,
+    };
+    props = {
+      title: String
+    };
+    methods = {
+      // 搜索
+      userNameInput(e) {
+        this.userName = e.detail.value;
+         this.$parent.$parent.globalData.value=e.detail.value;
+        this.$emit('childFn', this.userName);
+  let value = e.detail.value.trim();
+        if (value) {
+          var searchData = wx.getStorageSync('searchData') || [];
+          if (this.IsInArray(searchData, e.detail.value) == false) {
+            searchData.unshift(e.detail.value)
+            wx.setStorageSync('searchData', searchData)
+          }
+        }
+      },
+        
+      // 搜索确认
+      my(e) {
+        this.$emit('enter', e.detail.value);
+         this.$parent.$parent.globalData.value=e.detail.value;
+        let value = e.detail.value.trim();
+        if (value) {
+          var searchData = wx.getStorageSync('searchData') || [];
+          if (this.IsInArray(searchData, e.detail.value) == false) {
+            searchData.unshift(e.detail.value)
+            wx.setStorageSync('searchData', searchData)
+          }
+        }
+
+      },
+      initInput: function (a) {
+        this.userName = a;
+      },
+    
+       
+    }; 
+   
+    events={
+     
+    }
+    onLoad() {
+      this.userName = '';
+    }
+    // 判断数组中是否有某个值
+    IsInArray(arr, val) {　　
+      var testStr = ',' + arr.join(",") + ",";　　
+      return testStr.indexOf("," + val + ",") != -1;
+    }
+  }
+</script>

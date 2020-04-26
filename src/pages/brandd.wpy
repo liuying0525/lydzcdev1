@@ -1,0 +1,405 @@
+<style lang="less">
+  .phone_personal {
+    width: 100%;
+    color: #000;
+    font-size: 28rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background: #f0f1f5;
+  }
+
+  page {
+    width: 100%;
+    margin: 0 auto;
+    background: #eee;
+  }
+
+  .brand {
+    width: 100%;
+    background: rgb(92, 69, 195);
+    padding-top: 20rpx;
+    padding-bottom: 10rpx;
+    position: fixed;
+    top: 0;
+  }
+
+  .opinion-textarea {
+    width: 90%;
+    height: 29pt;
+    background: #fff;
+    border: 1px rgb(92, 69, 195) solid;
+    font-size: 12pt;
+    margin-bottom: 5rpx;
+    line-height: 20pt;
+    border-radius: 4pt;
+    margin: 0 auto;
+    padding-left: 20rpx;
+  }
+
+  .brand-list {
+    display: flex;
+    align-items: center;
+    padding: 28rpx;
+    background: #fff;
+    margin-bottom: 4rpx;
+  }
+
+  .brand-list-img {
+    width: 280rpx;
+    height: 165rpx;
+  }
+
+  .widget__arrow {
+    width: 100%;
+    height: 100%;
+  }
+
+  .widget__arrow img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .brand-list-details {
+    margin-left: 60rpx;
+  }
+
+  .brand-list-details1 {
+    font-size: 32rpx;
+  }
+
+  .brand-list-details2 {
+    font-size: 24rpx;
+    line-height: 40rpx;
+  }
+
+  .brand-list-details5 {
+    font-size: 20rpx;
+    line-height: 40rpx;
+  }
+
+  .brand-list-details3 {
+    font-size: 20rpx;
+    line-height: 40rpx;
+  }
+
+  .brand-list-details4 {
+    font-size: 20rpx;
+    line-height: 40rpx;
+  }
+
+  .brand-list-textone {
+    width: 110rpx;
+    background: #5c45c3;
+    display: inline-block;
+    text-align: center;
+    line-height: 35rpx;
+    border-radius: 8rpx;
+    color: #fff;
+  }
+
+  .brand-list-texttow {
+    width: 110rpx;
+    background: #00c7ae;
+    display: inline-block;
+    text-align: center;
+    line-height: 35rpx;
+    border-radius: 8rpx;
+    color: #fff;
+    margin-left: 15rpx;
+  }
+
+  .brand-list-three {
+    margin-left: 25rpx;
+  }
+
+  .brand-list-four {
+    color: red;
+    font-weight: 600;
+    font-size: 24rpx;
+  }
+
+  .brand-list-five {
+    color: red;
+    margin-left: 40rpx;
+  }
+
+  .barand-one {
+    background: #eee;
+  }
+
+  .img {
+    width: 20rpx;
+    height: 20rpx;
+    margin-left: 10rpx;
+  }
+
+  .add_citying {
+    color: #fff;
+    background: rgb(0, 199, 174);
+    border: 1px solid rgb(0, 199, 174);
+  }
+
+  .shosyi {
+    padding: 0 5% 6% 5%;
+    background: #f0f1f5;
+    margin-top: -75rpx;
+    margin-top: 150rpx;
+  }
+
+  .bt {
+    font-size: 24rpx;
+    line-height: 80rpx;
+    color: rgb(98, 98, 98);
+  }
+
+  .rs {
+    width: 100%;
+    font-size: 26rpx;
+    color: rgb(98, 98, 98);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .rs text {
+    background: #fff;
+    text-align: center;
+    line-height: -1rpx;
+    padding: 10rpx;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    border-radius: 10rpx;
+    white-space: nowrap;
+    display: block;
+    float: left;
+  }
+
+  .flo text {
+    display: block;
+    float: left;
+    line-height: 30rpx !important;
+  }
+
+  .ds {
+    margin-top: 134rpx;
+  }
+
+  .li {
+    padding: 0 5%;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    background: #fff;
+    margin-bottom: 2rpx;
+  }
+
+  .liq {
+    background: #f0f1f5;
+  }
+
+  .iost {
+    position: absolute;
+    right: 40rpx;
+  }
+
+  .kong {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 200rpx;
+  }
+
+  .kong-image1 {
+    margin-bottom: 30rpx;
+    width: 250rpx;
+    height: 40rpx;
+  }
+
+  .kong-text {
+    font-size: 32rpx;
+    color: #333;
+  }
+</style>
+<template>
+  <view class="testresult">
+    <view class="brand">
+      <inputd @childFn.user="my" @enter.user="enter" value=""></inputd>
+    </view>
+    <view class="shosyi" hidden="{{selectPersons}}">
+      <view class="bt" @tap="communicate">热搜</view>
+      <view class="rs">
+        <text wx:for="{{hotsear}}" wx:key="key" @tap="brasd('daikuan')" data-index="{{item.name}}" data-hotsearchwordid="{{item.hotsearchwordid}}"
+          id="{{item.name}}">{{item.name}}</text>
+      </view>
+      <view class="bt">历史记录
+        <text bindtap="deleteHistory" class="iost iconfont  #icon-shanchu"></text>
+      </view>
+      <view class="rs flo" hidden="{{sd}}">
+        <text wx:for="{{searchData}}" wx:key="key" @tap="brad" data-index="{{item}}" id="{{item}}">{{item}}</text>
+      </view>
+    </view>
+    <view class="ds" wx:if="{{textx.length > 0}}">
+      <view class='liq' wx:for="{{textx}}" wx:key="key">
+        <view class='li' @tap="brad" data-index="{{item}}" id="{{item}}">{{item}}</view>
+      </view>
+      <view wx:if="{{code=='A00006'?true:false}}">
+        <view class="kong" wx:if="{{textx.length=='0'?true:false}}">
+          <image class="kong-image1" src="image/kong.png" mode='widthFix'></image>
+          <text class="kong-text">抱歉，暂无相关品牌或车系</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import Input from '../components/input';
+  export default class brandd extends wepy.page {
+    config = {
+      navigationBarTitleText: '搜索'
+    };
+    components = {
+      inputd: Input
+    };
+    data = {
+      url_link: '',
+      selectPersons: false,
+      // 搜索出的车系列表
+      textx: [],
+      // 热搜
+      hotsear: '',
+      json_link: '',
+      // 历史记录
+      searchData: [],
+      // 历史记录元素隐藏
+      sd: false,
+      code: ''
+    };
+
+    methods = {
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/brandd'
+        };
+      },
+      // 跳转搜索结果页
+      brasd(value, e) {
+        if (value === 'daikuan') {
+          this.$parent.globalData.pageid = [e.currentTarget.dataset.hotsearchwordid];
+          this.$parent.globalData.pagename = [1];
+          this.$parent.clicknumordernumstat(1);
+        }
+        wx.navigateTo({
+          url: 'branddd?id=' + e.currentTarget.id
+        });
+        // 添加搜索记录
+        var searchData = wx.getStorageSync('searchData') || [];
+        if (this.IsInArray(searchData, e.currentTarget.id) == false) {
+          searchData.unshift(e.currentTarget.id)
+          wx.setStorageSync('searchData', searchData)
+        }
+      },
+      brad(e) {
+        wx.navigateTo({
+          url: 'branddd?id=' + e.currentTarget.id
+        });
+        // 添加搜索记录
+        var searchData = wx.getStorageSync('searchData') || [];
+        if (this.IsInArray(searchData, e.currentTarget.id) == false) {
+          searchData.unshift(e.currentTarget.id)
+          wx.setStorageSync('searchData', searchData)
+        }
+      },
+      // 模糊搜索
+      my(e) {
+        let json_link = this.json_link;
+        let are = this;
+        if (e != ' ') {
+          wx.request({
+            // url拼接
+            url: json_link + '/api/wxapp/search/fuzzysearch',
+            data: {
+              searchword: e
+            },
+            // 后台返回值
+            success: function (data) {
+              // 定义返回值的数据
+              are.textx = data.data.fuzzysearchJA;
+              are.code = data.data.code;
+              // 给数据进行绑定
+              are.$apply();
+            }
+          });
+          this.selectPersons = true;
+        }
+      },
+      // 手机键盘搜索
+      enter(e) {
+        wx.navigateTo({
+          url: 'branddd?id=' + e
+        });
+        this.textx = [];
+      },
+      // 清空历史记录
+      deleteHistory: function () {
+        var that = this;
+        wx.showModal({
+          title: '提示',
+          content: '是否删除历史搜索',
+          success: function (res) {
+            if (res.confirm) {
+              that.sd = true;
+              that.searchData = [''];
+              that.$apply();
+              wx.setStorageSync('searchData', []);
+              wx.switchTab({
+                url: '../pages/brandd'
+              });
+            }
+          }
+        });
+      }
+    };
+
+    onLoad() {
+      let are = this;
+      this.selectPersons = false;
+      // 定义url
+      let json_link = this.$parent.globalData.json_link;
+      are.json_link = json_link;
+      // 热搜词
+      wx.request({
+        // url拼接
+        url: json_link + '/api/wxapp/search/hotsearchword',
+        data: {
+          wordtype: 'newcar'
+        },
+        // 后台返回值
+        success: function (data) {
+          // 定义返回值的数据
+          are.hotsear = data.data.hotsearchwordJA;
+          // 给数据进行绑定
+          are.$apply();
+        }
+      });
+
+    };
+    // 判断数组里是否有某个值
+    IsInArray(arr, val) {　　
+      var testStr = ',' + arr.join(",") + ",";　　
+      return testStr.indexOf("," + val + ",") != -1;
+    }
+
+    // 初始化数据
+    onShow() {
+      this.textx = [];
+      console.log('首页')
+      var searchData = wx.getStorageSync('searchData') || [];
+      if (searchData.length > 10) searchData = searchData.slice(0, 10);
+      this.searchData = searchData;
+       this.sd = false;
+       this.$apply();
+      this.onLoad();
+    }
+  }
+</script>

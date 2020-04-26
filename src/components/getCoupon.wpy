@@ -1,0 +1,147 @@
+<style lang="less">
+    .getCoupon {
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+    .couponBox {
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-top: 57rpx;
+        width: 613rpx;
+        height: 495rpx;
+        -webkit-border-radius: 30rpx;
+        -moz-border-radius: 30rpx;
+        border-radius: 30rpx;
+        background: #f0f1f5;
+        margin: 270rpx auto 0;
+        .couponTitle {
+            font-size: 28rpx;
+            text-align: center;
+        }
+        .coupon {
+            width: 561rpx;
+            height: 180rpx;
+            /*background:pink;*/
+            margin: 30rpx auto 0;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .couponL {
+            flex: 6;
+            padding:12rpx 40rpx 12rpx 40rpx ;
+            background: url("https://webapi.dongzhengafc.com:9503/images/dhSec00.png") no-repeat center;
+            -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+            .title {
+                font-size: 28rpx;
+                color: #5c5c5c;
+            }
+            .time {
+                font-size: 18rpx;
+                color: #737373;
+                margin: 6rpx 0;
+            }
+            .limit {
+                font-size: 18rpx;
+                color: #a6a5a5;
+            }
+        }
+        .couponR {
+            flex: 4;
+            background: url("https://webapi.dongzhengafc.com:9503/images/dhSec01.png") no-repeat center;
+            -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+            .money {
+                font-size: 42rpx;
+                color: #fff;
+                line-height: 177rpx;
+                text-align: center;
+            }
+        }
+        .stateText {
+            font-size: 22rpx;
+            color: #7b7b7d;
+            text-align: center;
+            margin: 37rpx 0 46rpx;
+        }
+        .seeBtn {
+            width: 350rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            color: #fff;
+            font-size: 20rpx;
+            text-align: center;
+            margin: 0 auto;
+            background: #6044cb;
+            -webkit-border-radius: 4rpx;
+            -moz-border-radius: 4rpx;
+            border-radius: 4rpx;
+        }
+        .closeBtn{
+            height: 40rpx;
+            width: 40rpx;
+            position: absolute;
+            right: 10rpx;
+            top: 10rpx;
+            font-size: 50rpx;
+        }
+    }
+</style>
+<template>
+    <view class="getCoupon" wx:if="{{couponShow}}">
+        <view class="couponBox">
+            <view class="closeBtn" @tap="closeCoupon">×</view>
+            <view class="couponTitle">{{info.amount}}元专属抵扣券已到账</view>
+            <view class="coupon">
+                <view class="couponL">
+                    <view class="title">红旗享好礼抵扣券</view>
+                    <view class="time">使用期限：{{info.startDate }}-{{info.endDate}}</view>
+                    <view class="limit">适用范围：在申请贷款的红旗店内,消费精品、工时费、延保、装潢等,均可抵扣{{info.amount}}元</view>
+                </view>
+                <view class="couponR">
+                    <view class="money">¥{{info.amount}}</view>
+                </view>
+            </view>
+            <view class="stateText">已放入“我的-我的卡券”中</view>
+            <view class="seeBtn" @tap="goCoupons">立即查看</view>
+        </view>
+    </view>
+</template>
+<script>
+  // 获取手机号
+  import wepy from 'wepy';
+  export default class getCoupon extends wepy.component {
+    data = {
+      couponShow:false,
+      info: ''
+    };
+    events = {
+        'showCoupon': (info,$event) => {
+          this.info = info
+          if(this.info!==null) {
+            this.couponShow = !this.info.hidden;
+          }
+          console.log(info)
+        }
+    };
+    methods = {
+      closeCoupon() {
+        this.couponShow = false;
+      },
+      goCoupons() {
+        this.$parent.$navigate('coupon');
+      }
+    };
+    // 渲染页面
+    onLoad() {
+    }
+  }
+</script>

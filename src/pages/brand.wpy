@@ -1,0 +1,444 @@
+<style lang="less">
+  .pages {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .rmcx_top {
+    line-height: 70rpx;
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #000;
+    margin: 0 25rpx;
+  }
+
+  .rmcx_rxcx {
+    display: flex;
+    width: 90%;
+    padding: 0 30rpx;
+    flex-wrap: wrap;
+  }
+
+  .rmcx_rxcx_li {
+    width: 25%;
+    height: 200rpx;
+    font-size: 28rpx;
+  }
+
+  .rmcx_rxcx_li image {
+    width: 120rpx;
+    height: 90rpx;
+  }
+
+  .index_ss_content {
+    z-index: 99999999999999;
+  }
+
+  .list-right-wrapper {
+    position: fixed !important;
+    top: -243rpx;
+  }
+
+  .right_sidebar_xz_right_s {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 0;
+    right: 0;
+    width: 0;
+    z-index: 999999;
+  }
+
+  .right_sidebar_xz_right {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 0;
+    width: 70%;
+    z-index: 999999;
+    transition: all 0.5s;
+    -webkit-transition: width 0.5s;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sidebar_yinying {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    transition: all 0.2s;
+    -webkit-transition: opacity 0.2s;
+    opacity: 0;
+    z-index: 99999;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .sidebar_yinying2 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    transition: all 0.2s;
+    -webkit-transition: opacity 0.2s;
+    opacity: 0.4;
+    z-index: 99999;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .sidebar_right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    word-break: normal;
+    background-color: #ffffff;
+  }
+
+  .sidebar_bq {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 80rpx;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .sidebar_pp_logo {
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+  }
+
+  .sidebar_pp {
+    display: block; // width: 50%;
+    height: 80rpx;
+    color: #434343;
+    line-height: 82rpx;
+    font-size: 28rpx;
+    float: left;
+    text-indent: 22rpx;
+  }
+
+  .sidebar_hui {
+    width: clac(~'100% - 60rpx');
+    padding: 0 30rpx 0 30rpx;
+    background-color: #f0f1f5;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    color: #434343;
+  }
+
+  .sidebar_list {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 120rpx;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar_bq_ck {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 80rpx;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .sidebar_pp_logo {
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+  }
+
+  .sidebar_hui_ck {
+    width: clac(~'100% - 60rpx');
+    padding: 0 30rpx 0 30rpx;
+    background-color: #ffffff;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    color: #434343;
+  }
+
+  .sidebar_list_ck {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 120rpx;
+    background-color: #f0f1f5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .list_left {
+    width: 80%;
+  }
+
+  .sidebar_list_left_ck {
+    height: 80rpx;
+    padding: 20rpx 0 20rpx 0;
+    position: relative;
+    float: left;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .sidebar_list_title_ck {
+    font-size: 26rpx;
+    display: inline-block;
+  }
+
+  .sidebar_list_rmb_ck {
+    font-size: 26rpx;
+  }
+
+  .ck_list_right {
+    color: rgb(92, 69, 195);
+    font-size: 26rpx;
+    position: absolute;
+    top: 20rpx;
+    right: 0;
+  }
+
+  .sidebar_list_right {
+    width: 120rpx;
+    height: 120rpx;
+    float: right;
+  }
+
+  .list_che {
+    width: 120rpx;
+    height: 120rpx;
+  }
+
+  .right_sidebar_false .sidebar_yinying {
+    opacity: 0;
+  }
+
+  .right_sidebar .sidebar_yinying {
+    opacity: 0.4;
+  }
+
+  .ck_jiage {
+    line-height: 80rpx;
+  }
+
+  .ck_jiage .sidebar_list_title_ck {
+    font-size: 24rpx;
+    color: #727272;
+  }
+
+  .ck_jiage .ck_list_right {
+    font-size: 24rpx;
+  }
+
+  .icon-paixu {
+    font-size: 20rpx;
+    color: #000;
+    margin-left: 10rpx;
+  }
+</style>
+<template>
+  <view class="pages">
+    <view class="rmcx_top" wx:if="{{remenData.length > 0}}">
+      <text>热卖车型</text>
+    </view>
+    <view class="rmcx_rxcx">
+      <view class="rmcx_rxcx_li" wx:for="{{remenData}}" data-carseriesid="{{item.carseriesid}}" @tap="bindtaps" wx:key="key">
+        <image src="{{item.imgurl}}" mode="widthFix"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+    <view class='wrapper' style="height: calc(100vh - {{remenData.length === 0 ? '0' : (remenData.length <= 4 ? '270rpx' : '470rpx')}});"
+      wx:if="{{remenData.length > 0}}">
+      <list-html leotiancai="{{city}}" binddetail="bindtap" search="{{value}}"></list-html>
+    </view>
+    <view class='wrapper' style="height: 100vh;" wx:if="{{remenData.length === 0}}">
+      <list-html leotiancai="{{city}}" binddetail="bindtap" search="{{value}}"></list-html>
+    </view>
+    <view class="{{isSelectChexi ? 'right_sidebar_xz_right' : 'right_sidebar_xz_right_s'}}">
+      <view class="sidebar">
+        <scroll-view class="sidebar_right" scroll-y>
+          <view class="sidebar_bq_ck">
+            <image class="sidebar_pp_logo" src="{{res.carbrandJO.imgurl}}" mode="aspectFit"></image>
+            <text class="sidebar_pp">{{ck.carseriesname}}</text>
+          </view>
+          <block wx:for="{{ck.carmodelyearJA}}" wx:key="key">
+            <view class="sidebar_hui_ck">
+              <text>{{item.year}}</text>
+            </view>
+            <view class="sidebar_list_ck">
+              <view class="sidebar_list_left_ck ck_jiage">
+                <text class="list_left sidebar_list_title_ck">车款</text>
+              </view>
+            </view>
+            <block wx:for="{{item.carmodelJA}}" wx:key="key">
+              <view class="sidebar_list_ck">
+                <view class="sidebar_list_left_ck" @tap="ck_btn({{item.carmodelid}}, {{item.name}})">
+                  <text class="list_left sidebar_list_title_ck ck_leo_width">{{item.name}}</text>
+                  <text class="ck_list_right">{{item.price / 10000}}万</text>
+                </view>
+              </view>
+            </block>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class brand extends wepy.page {
+    config = {
+      navigationBarTitleText: '选择车型',
+      usingComponents: {
+        'list-html': '../components/wx-index-list/wx-index-list'
+      }
+    };
+    data = {
+      // 品牌列表
+      city: [],
+      carbrandgroupJA: [],
+      // 热卖车型列表
+      remenData: [],
+      ck: [],
+      // 选择车系
+      isSelectChexi: false
+    };
+    methods = {
+      // 分享
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/brand'
+        };
+      },
+      // 点击品牌
+      bindtap(e) {
+        let zhi = e.detail;
+        let carbrandid = zhi.carbrandid;
+        let this_ = this;
+        let jsonlink = this_.$parent.globalData.json_link;
+        this.$redirect('xz_che', {
+          carbrandid: carbrandid
+        });
+      },
+      // 点击热卖车型
+      bindtaps(e) {
+        if (this.isSelectChexi) {
+          this.isSelectChexi = false;
+          return false;
+        }
+        let carseriesid = e.currentTarget.dataset.carseriesid;
+
+        this.$parent.globalData.pageid = [carseriesid];
+        this.$parent.globalData.pagename = [2];
+        this.$parent.clicknumordernumstat(1);
+
+        wx.showLoading({
+          title: '加载中'
+        });
+        let json_link = this.$parent.globalData.json_link;
+        let this_ = this;
+        // 商品详情（车型列表）
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/listbycarseries',
+          data: {
+            carseriesid: carseriesid
+          },
+          success: function (data) {
+            this_.ck = data.data;
+            this_.isSelectChexi = true;
+            this_.$apply();
+            wx.hideLoading();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      },
+      // 选择车辆
+      ck_btn(carmodelid, name) {
+        wx.setStorageSync('chexing', {
+          carmodelid: carmodelid,
+          name: name
+        });
+        wx.navigateBack();
+        this.isSelectChexi = false;
+      }
+    };
+    onLoad() {
+      wx.showLoading({
+        title: '加载中'
+      });
+      let this_ = this;
+      let json_link = this.$parent.globalData.json_link;
+      // 选择品牌
+      wx.request({
+        url: json_link + '/api/wxapp/newcarloan/brand/brandlist',
+        data: {},
+        success(data) {
+          var zhi = data.data;
+          let City = [];
+          for (var i = 0; i < zhi.carbrandgroupJA.length; i++) {
+            City.push({
+              title: zhi.carbrandgroupJA[i].firstpinyin,
+              item: zhi.carbrandgroupJA[i].carbrandJA
+            });
+          }
+          this_.city = City;
+          this_.$apply();
+          wx.hideLoading();
+        },
+        fail() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+
+          setTimeout(function () {
+            wx.hideToast();
+          }, 2000);
+          return;
+        }
+      });
+      this.getRemai();
+    }
+
+    // 获取热卖车型
+    getRemai() {
+      let that = this;
+      let json_link = this.$parent.globalData.json_link;
+      wx.request({
+        url: json_link + '/api/wxapp/newcarloan/series/selectmodule',
+        success(res) {
+          that.remenData = res.data.hotsalecarseriesJA;
+          that.$apply();
+        }
+      });
+    }
+  }
+</script>

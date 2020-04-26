@@ -1,0 +1,130 @@
+<style lang="less">
+    .cardBook {
+        padding-top: 110rpx;
+        .bookBox {
+            height: 548rpx;
+            width: 647rpx;
+            margin: 0 auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 143rpx 57rpx;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        }
+        .bookTitle {
+            font-size: 28rpx;
+            color: #4b4b4b;
+            text-align: center;
+            margin-bottom: 51rpx;
+        }
+        .textWords {
+            font-size: 24rpx;
+            color: #4b4b4b;
+        }
+        .textInfo {
+            font-size: 22rpx;
+            color: #767373;
+            margin-top: 55rpx;
+        }
+        .nextBtn {
+            width: 545rpx;
+            height: 72rpx;
+            font-size: 28rpx;
+            line-height: 72rpx;
+            text-align: center;
+            background: #6044cb;
+            color: #fff;
+            -webkit-border-radius: 6rpx;
+            -moz-border-radius: 6rpx;
+            border-radius: 6rpx;
+            margin: 50rpx auto 0;
+        }
+        .emailInput {
+            width: 545rpx;
+            height: 72rpx;
+            font-size: 24rpx;
+            line-height: 72rpx;
+            text-align: center;
+            -webkit-border-radius: 6rpx;
+            -moz-border-radius: 6rpx;
+            border-radius: 6rpx;
+            margin: 50rpx auto 0;
+            background: #dce0eb;
+            color: #000;
+        }
+    }
+</style>
+<template>
+    <view class="cardBook">
+        <view class="bookBox">
+            <view class="textWords">若邮箱未收到授权书模板，可点击“重新发送”再
+                次获取。如由邮箱地址填写错误导致，请修改邮
+                箱地址后点击“重新发送”。</view>
+            <input type="text" class="emailInput" placeholder="请输入你的邮箱地址" data-name="email" value="{{email}}" @input="changeValue"/>
+        </view>
+        <view class="nextBtn" @tap="sendAgain">重新发送</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import toastInfo from '../components/toastInfo'
+  export default class CardGetAgain extends wepy.page{
+    config = {
+      navigationBarTitleText: '还款卡变更'
+    }
+    data = {
+      parent_data: '',
+      email: '',
+      recordId: '',
+      canClickAgin:true,
+    }
+    components = {
+      toastInfo: toastInfo
+    };
+    methods = {
+      changeValue: function (e) {
+        this[e.currentTarget.dataset.name] = e.detail.value;
+      },
+      sendAgain: function () {
+        let that = this;
+        if(!that.canClickAgin){
+          return false;
+        }
+         that.canClickAgin=false;
+        if(!that.$invoke('toastInfo', 'emailReg', that.email)){
+          that.$invoke('toastInfo', 'modelFunc', '000', '邮箱格式错误');
+          return false;
+        }
+        wx.request({
+          url: that.parent_data.json_dhLink + '/email/sendAuthorization',
+          data: {
+            userId: that.parent_data.login_userId,
+            loginToken: that.parent_data.login_token,
+            recordId: that.recordId,
+            email: that.email
+          },
+          method: 'get',
+          success: function(res) {
+            that.canClickAgin=true;
+            if (res.data.code == '10001') {
+              wx.navigateBack({
+                delta: 1
+              })
+            } else {
+              that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+            }
+          },
+          fail: function( ) {
+            console.log('邮件发送失败')
+          }
+        })
+      }
+    }
+    onLoad(options) {
+      this.parent_data = this.$parent.globalData;
+      this.recordId = options.id;
+    }
+  }
+</script>

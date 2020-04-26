@@ -1,0 +1,257 @@
+<style lang="less">
+    .secForget {
+        .header {
+            margin: 85rpx 0 85rpx;
+            image{
+                display: block;
+                height: 125rpx;
+                width: 125rpx;
+                margin: 0 auto;
+            }
+        }
+        .inputBox{
+            height: 70rpx;
+            width: 100%;
+            padding: 0 40rpx;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            position: relative;
+            margin-bottom: 68rpx;
+            .errorInfo{
+                position: absolute;
+                color: #ff0202;
+                font-size:22rpx;
+                text-align: right;
+                right: 40rpx;
+                bottom: -40rpx;
+            }
+            input {
+                display: block;
+                margin: 0 auto;
+                height: 68rpx;
+                border: 1px solid #5c45c3;
+                -webkit-border-radius: 10rpx;
+                -moz-border-radius: 10rpx;
+                border-radius: 10rpx;
+                padding: 0 30rpx;
+                font-size: 26rpx;
+            }
+            .codeInput{
+                display: block;
+                height: 68rpx;
+                border: 1px solid #5c45c3;
+                -webkit-border-radius: 10rpx;
+                -moz-border-radius: 10rpx;
+                border-radius: 10rpx;
+                padding: 0 30rpx;
+                font-size: 26rpx;
+                width: 328rpx;
+                float: left;
+            }
+            .codeBtn {
+                .codeInput;
+                float: right;
+                width: 230rpx;
+                color: #fff;
+                background: #5c45c3;
+                padding: 0;
+                line-height: 68rpx;
+                text-align: center;
+            }
+            .codeBtnNo {
+                background: #e5e5e5;
+                color: #000;
+            }
+            .button{
+                margin: 0 auto;
+                height: 68rpx;
+                line-height: 68rpx;
+                -webkit-border-radius: 10rpx;
+                -moz-border-radius: 10rpx;
+                border-radius: 10rpx;
+                background: #5c45c3;
+                color: #fff;
+                font-size: 28rpx;
+                text-align: center;
+            }
+        }
+        .forget{
+            float: left;
+            font-size: 26rpx;
+            color: #5c45c3;
+            border-bottom: 1px solid #5c45c3;
+        }
+        .register {
+            .forget;
+            float: right;
+        }
+    }
+</style>
+<template>
+    <view class="secForget">
+        <view class="header">
+            <image src="{{url_link?url_link+'/loginLogo.png': ''}}"></image>
+        </view>
+        <view class="inputBox">
+            <input type="number" placeholder="请输入手机号" data-name="phone" maxlength="11" value="{{phone}}" @input="changeValue"/>
+            <view class="errorInfo">*登录手机号须与贷款合同填写手机号保持一致</view>
+        </view>
+        <view class="inputBox">
+            <input type="text" class="codeInput" placeholder="请输入验证码" data-name="code" value="{{code}}" @input="changeValue"/>
+            <view class="codeBtn {{getCodeTime > 0 ? 'codeBtnNo' : ''}}" @tap="getCode">{{getCodeTime > 0 ? getCodeTime + 's后可重新获取' : '获取验证码'}}</view>
+        </view>
+        <view class="inputBox">
+            <input type="password" placeholder="请输入新密码" data-name="password1" value="{{password1}}" @input="changeValue"/>
+        </view>
+        <view class="inputBox">
+            <input type="password" placeholder="请确认新密码" data-name="password2" value="{{password2}}" @input="changeValue"/>
+        </view>
+        <view class="inputBox" style="margin-bottom: 26rpx;">
+            <view class="button" @tap="reset">重置密码</view>
+        </view>
+        <view class="inputBox">
+            <text class="forget" @tap="goRegister">立即注册</text>
+            <text class="register" @tap="goLogin">去登录</text>
+        </view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  import { hexMD5 } from '../mixins/md5.js'
+  export default class secForget extends wepy.page{
+    config = {
+      navigationBarTitleText: '重置密码'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      phone: '',
+      password1: '',
+      password2: '',
+      code: '',
+      getCodeTime: -1,
+      parent_data: ''
+    };
+    methods = {
+      changeValue: function (e) {
+        this[e.currentTarget.dataset.name] = e.detail.value;
+      },
+      getCode: function () {
+        let that = this;
+        if (that.getCodeTime > 0) {
+          return false;
+        }
+        if (that.phone == '') {
+          that.$invoke('toastInfo','modelFunc','000','请输入手机号');
+          return false;
+        }
+        if (!that.$invoke('toastInfo','phoneReg', that.phone)) {
+          that.$invoke('toastInfo','modelFunc','000','请输入正确的手机号');
+          return false;
+        }
+        that.getCodeFunc();
+      },
+      reset: function () {
+        let that = this;
+        if (that.phone != '' && that.password1 != '' && that.password2 != '' && that.code != '') {
+          if (!that.$invoke('toastInfo','phoneReg',that.phone)) {
+            that.$invoke('toastInfo', 'modelFunc', '000', '请输入正确的手机号');
+            return false;
+          }
+          if (that.password1 == that.password2) {
+            if (!that.$invoke('toastInfo','passwordReg',that.password1)) {
+              that.$invoke('toastInfo', 'modelFunc', '000', '请输入8到20位字母和数字组合的密码');
+              return false;
+            }
+          } else {
+            that.$invoke('toastInfo', 'modelFunc', '000', '确认新密码输入有误');
+            return false;
+          }
+
+        } else {
+          that.$invoke('toastInfo', 'modelFunc', '000', '请输入完整的信息');
+          return false;
+        }
+        wx.request({
+          url: that.parent_data.json_dhLink + '/user/resetPassword',
+          method: 'post',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          data:{
+            telephone: that.phone,
+            password: that.password1,//hexMD5(that.password1)
+            authenticationCode: that.code,
+            confirmPassword: that.password2
+          },
+          success: function (res) {
+            if (res.data.code == '10001') {
+              wx.showToast({
+                title: '密码修改成功',
+                icon: 'success',
+                duration: 2000,
+                success: function () {
+                  that.$redirect('secLogin',{backUrl: 'my'});
+                }
+              })
+            } else {
+              that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg)
+            }
+          }
+        })
+      },
+      goRegister: function () {
+      this.$redirect('secRegister');
+    },
+      goLogin: function () {
+        this.$redirect('secLogin');
+      }
+    };
+    // 定时器
+    timer(time, name) {
+      let that = this;
+      var timeInfo = time;
+      var timerFunc = setInterval(function() {
+        if (timeInfo >= 0) {
+          that[name] = timeInfo--;
+          that.$apply();
+        } else {
+          clearInterval(timerFunc);
+        }
+      }, 1000)
+    }
+    // 获取验证码
+    getCodeFunc() {
+      let that = this;
+      wx.request({
+        url: that.parent_data.json_dhLink  + '/sms/sendResetPassoword',
+        data: {
+          telephone : that.phone
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == '10001') {
+            that.getCodeTime = 60;
+            that.timer(59,'getCodeTime');
+          } else {
+            that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+          }
+        }
+      })
+    }
+    onLoad() {
+      this.url_link = this.$parent.globalData.url_link;
+      this.parent_data = this.$parent.globalData;
+      if (this.parent_data.login_phone != '') {
+        this.phone = this.parent_data.login_phone;
+      }
+    }
+  }
+</script>

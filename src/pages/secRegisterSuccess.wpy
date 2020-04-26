@@ -1,0 +1,85 @@
+<style lang="less">
+    .secRegisterSuccess{
+        padding: 110rpx 90rpx;
+        .successIcon{
+            height: 128rpx;
+            width: 128rpx;
+            margin: 0 auto;
+            image{
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .successTitle{
+            font-size: 34rpx;
+            color: #000;
+            text-align: center;
+            margin: 54rpx auto 90rpx;
+        }
+        .successInfo{
+            font-size: 26rpx;
+            line-height: 40rpx;
+        }
+        .earlyBtn{
+            width: 546rpx;
+            height: 74rpx;
+            line-height: 74rpx;
+            color: #fff;
+            background: rgb(96,68,203);
+            font-size: 30rpx;
+            -webkit-border-radius: 10rpx;
+            -moz-border-radius: 10rpx;
+            border-radius: 10rpx;
+            margin: 86rpx auto 0;
+            text-align: center;
+        }
+        .cancelBtn{
+            .earlyBtn;
+            font-size: 24rpx;
+            color: #6044cb;
+            background: #fff;
+            margin-top: 0;
+        }
+        .earlyInfo {
+            width: 546rpx;
+            margin: 30rpx auto 0;
+            font-size: 22rpx;
+            color: #595959;
+            line-height: 36rpx;
+        }
+    }
+</style>
+<template>
+    <view class="secRegisterSuccess">
+        <view class="successIcon">
+            <image src="{{url_link?url_link + '/cancelS.png' : ''}}"></image>
+        </view>
+        <view class="successTitle">注册成功!</view>
+        <view class="earlyBtn" @tap="goLogin">确定</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import toastInfo from '../components/toastInfo'
+  export default class secRegisterSuccess extends wepy.page {
+    config = {
+      navigationBarTitleText: '注册成功'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: ''
+    };
+    methods = {
+      // 去列表页面
+      goLogin: function () {
+        this.$redirect('secLogin');
+      }
+    }
+    onLoad(option) {
+      this.url_link = this.$parent.globalData.url_link;
+    }
+  }
+</script>

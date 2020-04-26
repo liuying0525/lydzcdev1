@@ -1,0 +1,316 @@
+<style lang="less">
+.sf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4%;
+  color: rgb(85, 85, 85);
+  line-height: 140rpx;
+  font-size: 28rpx;
+  background: #fff;
+  border-bottom: 1rpx #eee solid;
+  letter-spacing: 2rpx;
+}
+
+.zho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.joio-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+}
+.di {
+  transform: scale(-1, 1);
+  margin-left: 20rpx;
+  font-size: 40rpx;
+}
+.zxkf {
+  width: 90%;
+  line-height: 78rpx;
+  background: rgb(92, 69, 195);
+  color: #fff;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+  margin-top: 100rpx;
+}
+.info-cont {
+  border-top: solid 1px #f0f0f0;
+  padding-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+.infoMain {
+  border-bottom: solid 1px #f0f0f0;
+  display: flex;
+  background-color: #fff;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+}
+.info-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  border-top: solid 1px #f0f0f0;
+}
+.infotext {
+  display: flex;
+  align-items: center;
+}
+.tou {
+  width: 80rpx;
+  height: 80rpx;
+  // margin: 0 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  // margin: 0 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.info-motto {
+  margin: 0 20rpx;
+  color: #888;
+}
+.buttonExit {
+  margin: 0 40rpx;
+}
+</style>
+<template>
+        <view>
+          <!--  bindtap="setPhotoInfo" 切换头像按钮-->
+            <view class='sf '  bindtap="setPhotoInfo"><view>头像</view><view class="zho"><view class="infotext">
+            <image class="tou" src="{{avatarurl}}"></image>
+            </view>
+            <text class='di iconfont  #icon-jiantou'></text>
+            </view></view>
+            <view class='sf'><view>姓名</view><view>{{parent_data.login_name}}</view></view>
+            <view class='sf'><view>性别</view><view>{{sex==1?'男':'女'}}</view></view>
+            <view class='sf'><view>身份证</view><view>{{parent_data.login_idCard}}</view></view>
+            <!--<view class='sf' bindtap="change"><view>授权手机号</view><view class="zho">{{phoneHide}}<text class='di iconfont  #icon-jiantou'></text></view></view>-->
+            <view class='sf' bindtap="changeHt"><view>合同手机号</view><view class="zho">{{parent_data.login_phone}}<text class='di iconfont  #icon-jiantou'></text></view></view>
+          <view class='zxkf' @tap="logout"  wx:if="{{parent_data.login_token != ''}}">退出登录</view>
+        </view>           
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class myprofile extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的资料'
+  };
+  components = {};
+  data = {
+    parent_data:'',
+    url_link: '',
+    imgUrl: null,
+    index: 1,
+    selectPersons: false,
+    d: true,
+    text: '',
+    //合同手机号隐藏一部分显示
+    htPhoneHide: '',
+    // 手机号隐藏一部分显示
+    phoneHide: '',
+    // 身份证号隐藏一部分显示
+    cardHide: '',
+    avatarurl: '',
+    sex: '未知'
+  };
+  methods = {
+    onShareAppMessage() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    // 修改手机号
+    change(e) {
+      wx.navigateTo({
+        url: 'change?currentPhone=' + this.text.telnum
+      });
+    },
+    // 修改合同手机号
+    changeHt () {
+      if (this.$parent.globalData.login_token != '') {
+        this.$navigate('phonePerson', {type: true});
+      } else {
+        this.$navigate('secLogin', {backUrl: 'phonePerson'});
+      }
+    },
+    // 切换头像
+    setPhotoInfo(e) {
+      var that = this;
+      let json_link = this.$parent.globalData.json_link;
+      let access_token = that.$parent.globalData.access_token;
+      wx.chooseImage({
+        success: function(res) {
+          var tempFilePaths = res.tempFilePaths;
+          that.avatarurl = tempFilePaths;
+          wx.uploadFile({
+            url: json_link + '/m/mexpress/upload?access_token=' + access_token,
+            filePath: tempFilePaths[0],
+            name: 'upload',
+            success: function(res) {
+              let avatarurl = JSON.parse(res.data).imageurl;
+              that.avatarurl = avatarurl;
+              wx.request({
+                // 更换头像
+                url:
+                  json_link +
+                  '/api/wxapp/userinfo/heelchangeimage?access_token=' +
+                  access_token,
+                data: {
+                  image: avatarurl
+                },
+                // 后台返回值
+                success: function(data) {
+                  setTimeout(function() {
+                    wx.hideLoading();
+                  }, 0);
+                }
+              });
+              that.$apply();
+            },
+            fail: function(res) {
+              console.log('fail');
+            }
+          });
+        }
+      });
+    },
+    // 点击图片
+    clickImage() {
+      let that = this;
+      let access_token = that.$parent.globalData.access_token;
+      let url_link = that.url_link;
+      wx.chooseImage({
+        success: function(res) {
+          var tempFilePaths = res.tempFilePaths;
+          that.head_url = tempFilePaths[0];
+          wx.uploadFile({
+            url: url_link + '/account/upload?access_token=' + access_token,
+            filePath: tempFilePaths[0],
+            name: 'upload',
+            success: function(res) {
+              that.head_url = JSON.parse(res.data).imageurl;
+              that.$apply();
+            }
+          });
+        }
+      });
+    },
+    // 退出登录
+    logout() {
+      let json_link = this.$parent.globalData.json_link;
+      let parent_data = this.$parent.globalData;
+      let optionid = this.$parent.globalData.optionid;
+      this.$parent.globalData.access_token = '';
+      let that = this;
+      wx.request({
+        url: parent_data.json_dhLink + '/user/logout',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        data: {
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token
+        },
+        success(res) {
+          if(res.data.code == '10001') {
+           that.$parent.globalData.login_userId = '';
+            that.$parent.globalData.login_token = '';
+            that.$parent.globalData.login_idCard = '';
+            that.$parent.globalData.login_name = '';
+            that.$parent.globalData.login_phone = '';
+            wx.reLaunch({
+              url: 'my'
+            });
+          }
+        }
+      });
+    }
+  };
+
+  onShow() {
+    let this_ = this;
+    let json_link = this.$parent.globalData.json_link;
+    this.parent_data = this.$parent.globalData;
+    wx.getSetting({
+      success: function(data) {
+        console.log('获取setting信息，看是否授权userinfo');
+        if (data.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function(datas) {
+              this_.avatarurl = datas.userInfo.avatarUrl;
+              this_.sex = datas.userInfo.gender;
+              this_.loginData = true;
+              this_.$apply();
+            }
+          });
+        } else {
+          this_.$invoke('userinfo_alert', 'chufa', true);
+        }
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+
+        setTimeout(function() {
+          wx.hideToast();
+        }, 2000);
+        return;
+      }
+    });
+    // 用户信息
+    // wx.request({
+    //   url:
+    //     parent_data.json_link +
+    //     '/api/wxapp/userinfo/detail?access_token=' +
+    //     parent_data.access_token,
+    //   data: {},
+    //   success(data) {
+    //     setTimeout(function() {
+    //       wx.hideLoading();
+    //     }, 0);
+    //     this_.text = data.data.data;
+    //     this_.avatarurl = data.data.data.avatarurl;
+    //     this_.phoneHide =
+    //       this_.text.telnum.slice(0, 3) +
+    //       '****' +
+    //       this_.text.telnum.slice(7, 11);
+    //     this_.htPhoneHide =
+    //       this_.$parent.globalData.login_phone.slice(0, 3) +
+    //       '****' +
+    //       this_.$parent.globalData.login_phone.slice(7, 11);
+    //     this_.cardHide =
+    //       this_.text.idnumber.slice(0, 6) +
+    //       '*****' +
+    //       this_.text.idnumber.slice(15, 18);
+    //     if (data.data.data.sex == 1) {
+    //       this_.sex = '男';
+    //     } else if (data.data.data.sex == 2) {
+    //       this_.sex = '女';
+    //     } else {
+    //       this_.sex = '未知';
+    //     }
+    //     // 给数据进行绑定
+    //     this_.$apply();
+    //   }
+    // });
+  }
+}
+</script>

@@ -1,0 +1,488 @@
+<style lang="less">
+.brand {
+  width: 100%;
+  background: rgb(92, 69, 195);
+  padding-top: 20rpx;
+  padding-bottom: 10rpx;
+  position: fixed;
+  top: 0;
+}
+.leave {
+  width: 100%;
+  height: 120rpx;
+}
+.opinion-textarea {
+  width: 90%;
+  height: 29pt;
+  background: #fff;
+  border: 1px rgb(92, 69, 195) solid;
+  font-size: 12pt;
+  margin-bottom: 5rpx;
+  line-height: 20pt;
+  border-radius: 4pt;
+  margin: 0 auto;
+  padding-left: 20rpx;
+}
+
+.brand-list {
+  display: flex;
+  padding: 4%;
+  background: #fff;
+  margin-bottom: 14rpx;
+}
+.brand-list-img {
+  width: 250rpx;
+  height: 194rpx;
+}
+.widget__arrow {
+  width: 100%;
+  height: 150rpx;
+}
+.widget__arrow img {
+  width: 100%;
+  height: 100%;
+}
+.brand-list-details {
+  margin-left: 40rpx;
+  margin-top: 10rpx;
+  line-height: 60rpx;
+}
+.brand-list-details1 {
+  font-size: 34rpx;
+  font-weight: 700;
+  word-break: break-all;
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: 40rpx;
+}
+.brand-list-details2 {
+  font-size: 34rpx;
+  font-weight: 900;
+}
+.brand-list-details2,
+.brand-list-details3,
+.brand-list-details4,
+.brand-list-details5 {
+  font-size: 24rpx;
+  line-height: 45rpx;
+}
+.brand-list-textone {
+  width: 110rpx;
+  background: #5c45c3;
+  display: inline-block;
+  text-align: center;
+  line-height: 28rpx;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 24rpx;
+}
+.brand-list-texttow {
+  width: 110rpx;
+  background: #00c7ae;
+  display: inline-block;
+  text-align: center;
+  line-height: 28rpx;
+  border-radius: 8rpx;
+  color: #fff;
+  margin-left: 15rpx;
+  font-size: 24rpx;
+}
+.brand-list-three {
+  margin-left: 25rpx;
+}
+.brand-list-four {
+  font-weight: 900;
+  font-size: 22rpx;
+}
+.brand-list-four text {
+  color: red;
+}
+.brand-list-five {
+  color: red;
+  margin-left: 40rpx;
+}
+.barand-one {
+  background: #eee;
+}
+.img {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+.brand-list-textone1 {
+  font-size: 24rpx;
+  width: 110rpx;
+  text-align: center;
+  line-height: 28rpx;
+  border: 2rpx #00c7ae solid;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+}
+.chou {
+  font-size: 24rpx;
+  width: 110rpx;
+  text-align: center;
+  line-height: 28rpx;
+  border: 2rpx #00c7ae solid;
+  border-radius: 8rpx;
+}
+.successfulorder-danhao {
+  font-size: 20rpx;
+  display: flex;
+  padding: 20rpx 4%;
+  border-top: 2rpx #eee solid;
+  align-items: center;
+  color: rgb(85, 85, 85);
+  background: #fff;
+  border-bottom: 10rpx #eee solid;
+}
+.successfulorder-anniu {
+  font-size: 24rpx;
+  color: rgb(92, 69, 195);
+  position: absolute;
+  right: 40rpx;
+}
+.successfulorder-danhaos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(55, 55, 55);
+}
+.successfulorder {
+  background: #fff;
+  color: rgb(85, 85, 85);
+  font-size: 28rpx;
+  line-height: 55rpx;
+}
+.successfulorder {
+  padding: 2% 7%;
+}
+.successfulorderc {
+  padding: 2% 4%;
+  line-height: 40rpx;
+  background: #fff;
+}
+.daxiao3 {
+  font-size: 30rpx;
+  color: #00c7ae;
+  margin-right: 10rpx;
+}
+.changp {
+  font-size: 20rpx;
+  display: flex;
+  line-height: 40rpx;
+  padding: 0 4%;
+  border-top: 2rpx #eee solid;
+  align-items: center;
+  color: rgb(85, 85, 85);
+  background: #eee;
+}
+.sf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4%;
+  color: rgb(85, 85, 85);
+  line-height: 70rpx;
+  font-size: 26rpx;
+  background: #fff;
+  border-bottom: 1rpx #eee solid;
+  letter-spacing: 2rpx;
+}
+.sf text {
+  color: red;
+}
+.successfulorder-danhaoc {
+  color: #000;
+  font-size: 20rpx;
+}
+.anniu {
+  border: 1rpx rgb(212, 212, 212) solid;
+  width: 150rpx;
+  font-size: 28rpx;
+  line-height: 45rpx;
+  display: flex;
+  justify-content: center;
+  border-radius: 8rpx;
+}
+.brand-list-details4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35rpx;
+}
+.left {
+  position: absolute;
+  left: 50%;
+}
+.rig {
+  position: absolute;
+  right: 5%;
+}
+.songchexiang {
+  width: 180rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 38rpx;
+  border-radius: 8rpx;
+  border: 2rpx #00c7ae solid;
+  margin-left: 10rpx;
+}
+.daxiao1 {
+  color: rgb(0, 199, 174);
+  font-size: 32rpx;
+  margin-right: 5rpx;
+}
+button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  flex: 5;
+  text-align: center;
+  border-radius: 0rpx;
+  align-items: center;
+  text-align: center;
+}
+</style>
+
+<template>
+    <view>
+      <view class='successfulorder-danhao'>
+        <view class=''>订单状态</view>
+        <view class='successfulorder-anniu'>{{orderstatue}}</view>
+      </view>
+      <view class='successfulorder'>
+        <view class='successfulorder-danhaos'>
+          <view class=''>预约人：{{res.userName}}</view>
+          <view class='successfulorder-annius'>{{ res.telNum }}</view>
+        </view>
+        <view class='successfulorder-danhaob'>预约地点：<text></text></view>
+        <view class="order-te5"><text class="daxiao3 iconfont #icon-dingwei"></text>{{res.buildingname}}</view>
+      </view>     
+      <view class='changp'>产品信息</view>
+      <view class='barand-one'>
+        <view class='brand-list' @tap='toDetails'>
+          <view class='brand-list-img'>
+            <image class="widget__arrow" src="{{res.carModelImgUrl}}" mode='aspectFill'></image>
+          </view>
+          <view class='brand-list-details'>
+              <view class='brand-list-details1'>{{res.carModelName}}</view>
+              <view class='brand-list-details2'>金融方案:<text>{{res.financialproductName}}</text></view>
+              <view class='brand-list-details4'><text class='brand-list-four'>新车指导价<text>{{res.carprice/10000}}</text>万</text></view>
+          </view>
+        </view>
+      </view>
+      <view class='changp'>购车明细(仅供参考)</view>
+      <view class='sf'><view>首付</view><view><text>{{ res.downpaymentPara }}</text>万</view></view>
+      <view class='sf'><view>分期额度</view><view><text>{{ res.productpara }}</text>万</view></view>
+      <view class='sf'><view>月供</view><view><text>{{res.monthlySupply}}</text>元<text>{{ res.term }}</text>期</view></view>
+      <view class='sf'  wx:if="{{finalPayment}}"><view>尾款</view><view><text>{{ finalPayment }}</text>万</view></view>
+      <view class='changp'>订单信息</view>
+      <view class='successfulorderc'>
+        <view class='successfulorder-danhaoc'>订单号：<text>{{res.ordernumber}}</text></view>
+        <view class='successfulorder-danhaoc'>下单时间：<text>{{res.createtime}}</text></view>
+      </view>
+      <view>
+        <view class='anniu left' @tap="tap_tel">联系我们</view>
+        <!-- <form  class="details_xf_5" wx:if="{{orderstatue === '已取消'}}" report-submit @submit="bindsubmit">
+            <button  class='anniu rig' hover-class="none" formType="submit">删除订单</button>
+        </form> -->
+        <!-- <view class='anniu rig' @tap="quxiao_btn" wx:else>取消订单</view> -->
+        <view class='anniu rig' @tap="quxiao_btn" wx:if="{{orderstatue != '已取消'}}" >取消订单</view>
+      </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class ddxq extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单详情'
+  };
+  data = {
+    // 订单数据
+    res: [],
+    // 订单id
+    orderid: '',
+    // 订单类型
+    ordertype: '',
+    // 订单状态
+    orderstatue: '',
+    finalPayment:''
+  };
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    // 取消订单
+    quxiao_btn() {
+      let this_ = this;
+      let access_token = this.$parent.globalData.access_token;
+      let json_link = this.$parent.globalData.json_link;
+      let orderid = this.orderid;
+
+      wx.showModal({
+        title: '提示',
+        content: '确认取消？',
+        success: function(res) {
+          if (res.confirm) {
+            wx.request({
+              url:
+                json_link +
+                '/api/wxapp/reservationorder/cancelorder?access_token=' +
+                access_token,
+              data: {
+                orderid: orderid
+              },
+              success: function(data) {
+                if (data.data.code == 'A00006') {
+                  wx.showToast({
+                    title: '取消订单成功',
+                    icon: 'success',
+                    duration: 2000
+                  }),
+                    (this_.orderstatue = '已取消');
+                  this_.$apply();
+                }
+              },
+              fail: function() {
+                wx.showToast({
+                  title: '网络异常',
+                  icon: 'none'
+                });
+
+                setTimeout(function() {
+                  wx.hideToast();
+                }, 2000);
+                return;
+              }
+            });
+          } else if (res.cancel) {
+          }
+        }
+      });
+    },
+    // 删除订单
+    // bindsubmit(e) {
+    //   wx.showLoading({
+    //     title: '删除中'
+    //   });
+    //   let this_ = this;
+    //   let json_link = this.$parent.globalData.json_link;
+    //   let parent_data = this.$parent.globalData;
+    //   wx.request({
+    //     url:
+    //       parent_data.json_link +
+    //       '/api/wxapp/reservationorder/removeorder?access_token=' +
+    //       parent_data.access_token,
+    //     data: {
+    //       orderid: this_.orderid,
+    //       formid: e.detail.formId
+    //     },
+    //     success(data) {
+    //       if (data.data.code === 'A00006') {
+    //         wx.showToast({
+    //           title: '删除订单成功',
+    //           icon: 'success'
+    //         });
+
+    //         setTimeout(() => {
+    //           wx.navigateBack();
+    //         }, 1500);
+    //       }
+    //     }
+    //   });
+    // },
+    // 联系我们
+    tap_tel() {
+      wx.makePhoneCall({
+        phoneNumber: '021-20689938' //仅为示例，并非真实的电话号码
+      });
+    },
+    // 跳转到金融商品详情页或直租页
+    toDetails() {
+      this.$parent.globalData.UVselectType = -1;
+      let carmodelid = this.data.res.carmodelid;
+      if (this.ordertype == 0) {
+        // 贷款
+        wx.navigateTo({
+          url: 'commodity_details?carmodelid=' + carmodelid
+        });
+      } else {
+        // 直租
+        wx.navigateTo({
+          url:
+            'straight_detail?carmodelid=' +
+            carmodelid +
+            '&financialid=' +
+            this.res.financialproductid
+        });
+      }
+
+      this.$parent.globalData.pageid = [carmodelid];
+      this.$parent.globalData.pagename = [3];
+      this.$parent.clicknumordernumstat(1);
+    }
+  };
+  onLoad(res) {
+    // 请求订单详情的数据
+    let orderid = res.orderid ? res.orderid : this.orderid;
+    let json_link = this.$parent.globalData.json_link;
+    let access_token = this.$parent.globalData.access_token;
+    let this_ = this;
+    this.ordertype = res.ordertype;
+    this.orderstatue = res.orderstatue;
+    wx.request({
+      url:
+        json_link +
+        '/api/wxapp/reservationorder/orderdetails?access_token=' +
+        access_token,
+      data: {
+        orderid: orderid
+      },
+      success(data) {
+        let orderM = data.data.data;
+        orderM.downpaymentPara = orderM.downpaymentPara.toFixed(2);
+        orderM.productpara = orderM.productpara.toFixed(2);
+        orderM.monthlySupply = orderM.monthlySupply.toFixed(2);
+        orderM.finalPayment = orderM.finalPayment.toFixed(2);
+        orderM.createtime = this_.js_date_time(orderM.createtime);
+        this_.res = orderM;
+        this_.finalPayment=this_.res.finalPayment;
+       
+        this_.orderid = orderM.orderid;
+        this_.$apply();
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+
+        setTimeout(function() {
+          wx.hideToast();
+        }, 2000);
+        return;
+      }
+    });
+  }
+  // 格式化时间
+  js_date_time(timestamp) {
+    var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear() + '-';
+    var M =
+      (date.getMonth() + 1 < 10
+        ? '0' + (date.getMonth() + 1)
+        : date.getMonth() + 1) + '-';
+    var D = date.getDate() + ' ';
+    var h = date.getHours() + ':';
+    var m = date.getMinutes() + ':';
+    var s = date.getSeconds();
+    return Y + M + D + h + m + s;
+  }
+}
+</script>

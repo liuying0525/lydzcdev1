@@ -1,0 +1,988 @@
+<style lang="less">
+  .container {
+    padding-bottom: 140rpx;
+  }
+
+  .index_lb {
+    width: 100%;
+    padding-top: 110rpx;
+  }
+  .slide-image {
+    width: 100%;
+    height: 150px;
+  }
+  .index_tjxc_tj {
+    font-size: 32rpx;
+  }
+  .index_list_left {
+    // float: left;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .index_list_right {
+    float: right;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .index_jt_img {
+    width: 20rpx;
+    height: 32rpx;
+    float: right;
+
+    margin-left: 26rpx;
+  }
+  .index_sx {
+    width: 100%;
+    position: relative;
+    background-color: rgb(240, 241, 245);
+    padding-top: 28rpx;
+  }
+  .index_sx_content {
+    display: flex;
+    width: 94%;
+    padding: 0 3% 0 3%;
+    margin: 0 auto;
+    margin-bottom: 24rpx;
+  }
+  .index_sx_list {
+    flex: 1;
+    font-size: 24rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    text-align: center;
+    color: rgb(77, 77, 77);
+  }
+  .index_sx_content .index_sx_list:nth-child(1) {
+    flex: 0.6;
+    color: #000;
+    font-size: 30rpx;
+    text-align: left;
+  }
+  .index_hd_bt {
+    width: 94%;
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 62rpx;
+    display: flex;
+    // justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    line-height: 62rpx;
+    background-color: #6044ca;
+  }
+  .index_zy_left {
+    height: 100%;
+    padding-left: 0rpx;
+  }
+  .index_zy_text {
+    height: 100%;
+    font-size: 26rpx;
+    color: #ffffff;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .index_zy_textpot {
+    width: 90%;
+    height: 100%;
+    font-size: 26rpx;
+    color: #ffffff;
+  }
+  .index_zy_img {
+    width: 36rpx;
+    height: 36rpx;
+    left: 0;
+    margin-left: 0;
+    margin-right: 20rpx;
+  }
+  .index_zy_right {
+    position: relative;
+    right: -220rpx;
+  }
+
+  .index_zy_right_img {
+    width: 18rpx;
+    height: 30rpx;
+  }
+  .index_hd_bt {
+    margin-bottom: 10rpx;
+  }
+  .index_heng {
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .index_heng_list {
+    position: relative;
+    flex: 0 0 calc(~'33.23% - 6.66666rpx');
+    display: inline-block;
+    // margin-right: 10rpx;
+    overflow: hidden;
+    margin-bottom: 10rpx;
+  }
+  .index_heng_list_img {
+    width: 100%;
+    height: 100%;
+  }
+  .index_heng_content {
+    width: 96%;
+    margin: 0 auto;
+    margin-top: 10rpx;
+  }
+  .index_heng_list_bq {
+    font-size: 20rpx;
+    color: #ffffff;
+    height: 30rpx;
+    line-height: 30rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    padding: 0 10rpx 0 20rpx;
+    position: absolute;
+    left: -10rpx;
+    top: 10rpx;
+    background-color: rgba(96, 68, 202, 0.59);
+  }
+  .index_heng .index_heng_list:nth-child(3n + 0) {
+    margin-right: 0;
+  }
+  .index_heng_text {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 30rpx;
+    line-height: 30rpx;
+    display: flex;
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .index_heng_text_nr {
+    flex: 1;
+    font-size: 14rpx;
+    background-color: rgba(0, 0, 0, 0.52);
+    color: #ffffff;
+    text-indent: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .index_rm_img {
+    height: 130rpx;
+    display: block;
+  }
+  .index_rm_list {
+    height: auto;
+  }
+  .index_rm_zi {
+    display: block;
+    width: 100%;
+    font-size: 24rpx;
+    text-align: center;
+    margin-top: 14rpx;
+    margin-bottom: 30rpx;
+    color: #000000;
+  }
+  .index_tjxc_gd {
+    font-size: 26rpx;
+  }
+  .w_login_rm {
+    width: 100%;
+    display: flex;
+    height: 200rpx;
+    position: relative;
+    margin-bottom: 20rpx;
+    background-color: #ffffff;
+  }
+  .w_login_rm_list {
+    flex: 1;
+    position: relative;
+  }
+  .rm_logo {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 34rpx;
+    left: calc(~'50% - 30rpx');
+    image {
+      width: 60rpx;
+      height: 60rpx;
+    }
+  }
+  .rm_name {
+    font-size: 26rpx;
+    color: #000;
+    text-align: center;
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 34rpx;
+    left: 0;
+  }
+  .cd_lc_div {
+    background-color: #ffffff;
+    height: auto;
+  }
+  .cd_lc_icon {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+  .cd_lc_icon_jt {
+    width: 36%;
+    position: absolute;
+    right: -20%;
+    top: 40%;
+  }
+  .cd_lc_div .w_login_rm_list:last-child .cd_lc_icon_jt {
+    display: none;
+  }
+  .straight-liucheng_center {
+    width: 100%;
+    padding-bottom: 40rpx;
+    left: 0rpx;
+    background-color: #ffffff;
+    padding-top: 20rpx;
+  }
+  .straight-liucheng {
+    width: 96%;
+    margin: 0 auto;
+    margin-top: 10rpx;
+    margin-bottom: 40rpx;
+  }
+  .straight-bchengxu {
+    display: flex;
+  }
+  .straight-li {
+    width: 15%;
+    text-align: center;
+  }
+  .straight-li view {
+    font-size: 20rpx;
+    color: #000;
+  }
+  .joio-img1 {
+    width: 80%;
+    height: 80rpx;
+  }
+  .straight-li2 {
+    width: 8%;
+    line-height: 62rpx;
+  }
+  .straight-li2 .joio-img1 {
+    width: 100%;
+    height: 12rpx;
+  }
+  .straight-liucheng {
+    width: 96%;
+    margin: 0 auto;
+  }
+  .joio-c {
+    position: absolute;
+    margin-left: 10rpx;
+  }
+  .joio-v {
+    margin-left: 10rpx;
+  }
+  .bzzx-lxwm {
+    width: 100%;
+    position: fixed;
+    bottom: 250rpx;
+  }
+  .bzzx-lxwm-yuan {
+    width: 68rpx;
+    height: 68rpx;
+    text-align: center;
+    background: #00c7ae;
+    font-size: 24rpx;
+    padding: 13rpx;
+    position: absolute;
+    left: 88%;
+    color: #fff;
+  }
+  .bzzx-lxwm-yuan-2 {
+    width: 68rpx;
+  }
+  .rm {
+    border-top: 5.5rpx #f0f1f5 solid;
+    border-bottom: 5.5rpx #f0f1f5 solid;
+  }
+  .mi {
+    border-top: 5.5rpx #f0f1f5 solid;
+  }
+  .xuanfu {
+    position: fixed;
+    right: 30rpx;
+    bottom: 200rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 100rpx;
+    font-size: 28rpx;
+    color: #fff;
+    border-radius: 50%;
+    background-color: rgb(92, 69, 195);
+    overflow: hidden;
+  }
+  .contentView {
+    width: 100%;
+    // position: fixed;
+    // bottom: 0;
+    // left: 0;
+    background-color: #ffffff;
+  }
+  .btu {
+    width: 100%;
+    background-color: #3d97f2;
+    color: #fff;
+    font-size: 30rpx;
+  }
+  .swiper_piti {
+    width: 100%;
+    height: 400rpx;
+  }
+
+  .swiper_item_piti image {
+    width: 100%;
+    height: 100%;
+  }
+  .index_list_zhong {
+    // float: left;
+    width: 70%;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .cshang {
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .index_list_rights {
+    font-size: 28rpx;
+    color: #fff;
+  }
+</style>
+<template>
+  <view>
+    <userinfo_alert @childFn.user="alert_userinfo" text_zhi="东正金融请求授权登录"></userinfo_alert>
+    <alert_l @childFn.user="alert_tel" text_zhi="东正金融请求授权手机号"></alert_l>
+    <view class="container" @tap="ss_clear">
+      <sousuo @childFn.user="linkTo2" @childFn_jw.user="jw"  @childFn_gps.user="gps_ff"></sousuo>
+      <view class="index_lb">
+        <swiper indicator-dots="{{indicator}}" autoplay="{{autoplay}}" interval="3000" duration="500">
+          <block wx:for="{{imgUrls}}" wx:key="key">
+            <swiper-item>
+              <image src="{{item.imgurl}}" class="slide-image" data-adtype="{{item.adtype}}" data-activityJO="{{item.activityJO}}" data-advid="{{item.advid}}" data-url="{{item.url}}" @tap="tiaozhuan" mode="aspectFill"/>
+            </swiper-item>
+            <!-- <swiper-item wx:if='{{item.adtype!=url}}'>2
+              <image src="{{item.imgurl}}" class="slide-image" @tap="tiaourl({{item.url}})" mode="aspectFill"/>
+            </swiper-item> -->
+          </block>
+        </swiper>
+      </view>
+      <!--条件选车-->
+      <bq1 text_="条件选车" right_text="筛选更多"  @childFn.user="tjxc_btn" img_url="image/index_tjxc_icon.png"></bq1>
+      <view class="index_sx">
+        <view class="index_sx_content">
+          <view class="index_sx_list">车价</view>
+          <view class="index_sx_list"  data-id="1" @tap="tjxc_cj">30万以下</view>
+          <view class="index_sx_list" data-id="2"  @tap="tjxc_cj">30-40万</view>
+          <view class="index_sx_list"  data-id="3" @tap="tjxc_cj">40-50万</view>
+          <view class="index_sx_list"  data-id="4" @tap="tjxc_cj">50-60万</view>
+          <view class="index_sx_list"  data-id="5" @tap="tjxc_cj">60万以上</view>
+        </view>
+        <view class="index_sx_content">
+          <view class="index_sx_list" >首付</view>
+          <view class="index_sx_list" data-id="1" @tap="tjxc_sf">8万以下</view>
+          <view class="index_sx_list" data-id="2" @tap="tjxc_sf">8-12万</view>
+          <view class="index_sx_list" data-id="3"  @tap="tjxc_sf">12-16万</view>
+          <view class="index_sx_list" data-id="4" @tap="tjxc_sf">16-20万</view>
+          <view class="index_sx_list" data-id="5" @tap="tjxc_sf">20万以上</view>
+        </view>
+        <view class="index_sx_content">
+          <view class="index_sx_list">月供</view>
+          <view class="index_sx_list" data-id="1" @tap="tjxc_yg">0.6万以下</view>
+          <view class="index_sx_list" data-id="2" @tap="tjxc_yg">0.6-0.8万</view>
+          <view class="index_sx_list" data-id="3" @tap="tjxc_yg">0.8-1万</view>
+          <view class="index_sx_list" data-id="4" @tap="tjxc_yg">1-1.2万</view>
+          <view class="index_sx_list" data-id="5" @tap="tjxc_yg">1-2万以上</view>
+        </view>
+      </view>
+      <view class="index_hd_bt" @tap="shouquan" wx:if="{{inde!=''?false:true}}">
+        <view class="index_list_left index_zy_left">
+          <image class="index_jt_img index_zy_img" src="image/index_zy.png" mode="widthFix"></image>
+          <text class="index_tjxc_tj index_zy_text" wx:if="{{login_wz==''?false:true}}">{{login_wz}}</text>
+        </view>
+        <!--  -->
+        <view class="index_list_zhong" wx:if="{{!login_wz}}">
+          <swiper class=" index_zy_textpot"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" vertical="{{true}}" duration="{{duration}}" circular='true'>
+            <block wx:for="{{posert}}">
+              <swiper-item  class="swiper_item_piti" catchtouchmove="stopSwiper">
+                {{item}}
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+        <view class="index_list_right index_zy_right" wx:if="{{login_jt_zt}}">
+          <image class="index_jt_img index_zy_right_img" src="image/index_jt_fff.png" mode="widthFix"></image>
+        </view>
+      </view>
+      <view class="index_hd_bt" @tap="dingd" wx:if="{{inde==''?false:true}}">
+        <view class="index_list_left index_zy_left">
+          <image class="index_jt_img index_zy_img" src="image/index_zy.png" mode="widthFix"></image>
+          <text class="index_tjxc_tj index_zy_text" >{{inde.carModelName}}</text>
+        </view>
+        <view class="index_list_rights ">
+          {{inde.orderstatue}}
+        </view>
+      </view>
+      <!--贴息专区-->
+      <bq2 @childFn.user="linkTo3" text_="贴息专区" right_text="查看更多" img_url="image/index_tiexi_icon.png"></bq2>
+
+      <view class="index_heng_content">
+        <view class="index_heng">
+          <view class="index_heng_list" wx:for="{{tiexi}}" wx:key="key">
+            <image class="index_heng_list_img" src="{{item.interestdiscountimgurl}}" @tap="rxhc_btn({{item.carmodelid}}, 'tiexi')" mode="widthFix"></image>
+          </view>
+        </view>
+      </view>
+      <!--热销好车-->
+      <bq3 @childFn.user="linkTo3" text_="热销好车" right_text="查看更多" img_url="image/index_rx.png"></bq3>
+      <view class="index_heng_content">
+        <view class="index_heng">
+          <view class="index_heng_list index_rm_list" wx:for="{{rx_imgurl}}" wx:key="key">
+            <image class="index_heng_list_img index_rm_img" @tap="rxhc_btn({{item.carmodelid}}, 'rexiao')" src="{{item.imgurl}}" mode="aspectFill"></image>
+            <text class="index_rm_zi">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+      <bq4 class="rm" @childFn.user="linkTo3" text_="热门品牌" right_text="查看更多" img_url="image/index_rm_pp.png"></bq4>
+      <view class="w_login_rm">
+        <view class="w_login_rm_list" wx:for="{{rm_che}}" wx:key="key">
+          <view class="rm_logo">
+            <image src="{{item.imgurl}}" @tap="xz_pp({{item.carbrandid}})" style="width: 60rpx;height: 60rpx;" mode="aspectFit"></image>
+          </view>
+          <text class="rm_name">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="index_list_table mi">
+        <view class="index_list_left">
+          <image class="index_tjxc_img" src="image/index_lc.png" mode="widthFix"></image>
+          <text class="index_tjxc_tj">车贷流程</text>
+        </view>
+      </view>
+      <view class="w_login_rm cd_lc_div" @tap="xz_cx">
+        <view class="straight-liucheng_center">
+          <view class='straight-liucheng'>
+            <view class='straight-bchengxu'>
+              <view class='straight-li'>
+                <image class='joio-img1' src="image/sq.png" mode='widthFix'></image>
+                <view class='joio-c'>线上申请</view>
+              </view>
+              <view class='straight-li2'>
+                <image class='joio-img1' src="image/jiantou.png" mode='widthFix'></image>
+              </view>
+              <view class='straight-li'>
+                <image class='joio-img1' src="image/goutong.png" mode='widthFix'></image>
+                <view class='joio-c'>顾问沟通</view>
+              </view>
+              <view class='straight-li2'>
+                <image class='joio-img1' src="image/jiantou.png" mode='widthFix'></image>
+              </view>
+              <view class='straight-li'>
+                <image class='joio-img1' src="image/xin.png" mode='widthFix'></image>
+                <view class='joio-c'>信用评估</view>
+              </view>
+              <view class='straight-li2'>
+                <image class='joio-img1' src="image/jiantou.png" mode='widthFix'></image>
+              </view>
+              <view class='straight-li'>
+                <image class='joio-img1' src="image/zhifu.png" mode='widthFix'></image>
+                <view class='joio-c joio-v'>支付首付</view>
+              </view>
+              <view class='straight-li2'>
+                <image class='joio-img1' src="image/jiantou.png" mode='widthFix'></image>
+              </view>
+              <view class='straight-li'>
+                <image class='joio-img1' src="image/guoqi.png" mode='widthFix'></image>
+                <view class='joio-c'>到店提车</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <sidebar @childFn.user="linkTo2"></sidebar>
+    </view>
+    <!-- 帮您贷款悬浮窗 -->
+    <view class="xuanfu" @tap="borrow">
+      <text>帮您</text>
+      <text>贷款</text>
+    </view>
+    <leotable @childFn.user="linkTo" che_="image/index_btm_che1.png" ys_="image/index_btm_ys0.png" my_="image/index_btm_my0.png"></leotable>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import Leotable from '../components/leotable';
+  import Sousuo from '../components/sousuo';
+  import Bq from '../components/bq';
+  import Sidebar from '../components/sidebar';
+  import Userinfo_alert from '../components/userinfo_alert';
+  import Alert from '../components/alert';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '东正金融',
+      enablePullDownRefresh: true,
+      backgroundTextStyle: 'dark'
+    };
+    data = {
+      // 回调函数
+      request_cs: function() {},
+      login_wz: '登录最高可领取500万元车贷额度',
+      // 是否登陆
+      login_jt_zt: true,
+      // 热门品牌
+      rm_che: [],
+      // 定位
+      gps_city: '',
+      // 轮播图点
+      indicator: false,
+      // 自动轮播
+      autoplay: true,
+      json_link: '',
+      // 广告
+      imgUrls: [],
+      // 贴息
+      tiexi: [],
+      // 热销
+      rx_imgurl: [],
+      posert: [
+        '张先生 贷款50.72万 宝马七系...',
+        '白小姐 贷款60.32万 沃尔沃...',
+        '刘先生 贷款54.22万 保时捷...',
+        '吴小姐 贷款70.72万 奔驰...',
+        '王先生 贷款63.57万 路虎...',
+        '范先生 贷款68.72万 捷豹...',
+        '郭先生 贷款68.72万 路虎...',
+        '齐小姐 贷款48.98万 保时捷...',
+        '张小姐 贷款40.02万 沃尔沃...',
+        '杨先生 贷款50.82万 捷豹...',
+        '刘先生 贷款60.92万 奥迪...',
+        '张先生 贷款58.72万 宝马...',
+        '张先生 贷款49.72万 宝马...'
+      ],
+      autoplay: true, //是否自动切换
+      interval: 3000, //自动切换时间间隔,3s
+      duration: 1000, //  滑动动画时长1s
+      // 有订单
+      inde: '',
+      adtype:''
+    };
+    components = {
+      leotable: Leotable,
+      sousuo: Sousuo,
+      bq1: Bq,
+      bq2: Bq,
+      bq3: Bq,
+      bq4: Bq,
+      sidebar: Sidebar,
+      userinfo_alert: Userinfo_alert,
+      alert_l: Alert
+    };
+    methods = {
+      onShareAppMessage: function() {
+        let userid = this.$parent.globalData.userid;
+        console.log(userid)
+        return {
+          path: '/pages/index?userid='+userid
+        };
+      },
+      dingd() {
+        wx.navigateTo({
+          url: 'myorder'
+        });
+      },
+      // 条件选车
+      tjxc_cj(e) {
+        let sfje = e.target.dataset.id;
+        wx.navigateTo({
+          url:
+            'sousuo?carpricesection=' +
+            sfje +
+            '&downpaymentsection=' +
+            '0' +
+            '&monthlysupplysection=' +
+            '0'
+        });
+      },
+      tjxc_sf(e) {
+        let sfje = e.target.dataset.id;
+        wx.navigateTo({
+          url:
+            'sousuo?downpaymentsection=' +
+            sfje +
+            '&carpricesection=' +
+            '0' +
+            '&monthlysupplysection=' +
+            '0'
+        });
+      },
+      tjxc_yg(e) {
+        let sfje = e.target.dataset.id;
+        wx.navigateTo({
+          url:
+            'sousuo?monthlysupplysection=' +
+            sfje +
+            '&downpaymentsection=' +
+            '0' +
+            '&carpricesection=' +
+            '0'
+        });
+      },
+      // 帮您贷款
+      borrow() {
+        wx.navigateTo({
+          url: 'choose'
+        });
+      },
+      // 登录授权请求
+      shouquan() {
+        let zhi = this.$parent.globalData;
+        let this_ = this;
+        if (!zhi.access_token) {
+          this_.$invoke('alert_l', 'chufa', true);
+          this_.request_cs = function(access_token) {
+            this_.getCardList();
+            this_.login_wz = '';
+            this_.login_jt_zt = false;
+            this_.$apply();
+          };
+        }
+      },
+      alert_tel(res) {
+        let this_ = this;
+        let zhi = this.$parent.globalData;
+        this_.$invoke('alert_l', 'chufa', false);
+        if (res.iv == undefined) return false;
+        zhi.login_telnum_iv = res.iv;
+        zhi.login_telnum_miyao = res.miyao;
+        // 查看是否授权
+        wx.getSetting({
+          success: function(res) {
+            if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+              wx.getUserInfo({
+                success: function(res) {
+                  zhi.java_login(res, this_.request_cs);
+                }
+              });
+            } else {
+              this_.$invoke('alert_l', 'chufa', false);
+              this_.$invoke('userinfo_alert', 'chufa', true);
+            }
+          }
+        });
+      },
+      alert_userinfo(e) {
+        let this_ = this;
+        let zhi = this.$parent.globalData;
+        this_.$invoke('userinfo_alert', 'chufa', false);
+        zhi.java_login(e.detail, this_.request_cs);
+      },
+      // 搜索
+      gps_ff(res) {
+        let zhi = this.$parent.globalData;
+        zhi.gps_dw = res.gps;
+      },
+      jw(res) {
+        let zhi = this.$parent.globalData;
+        zhi.login_lat = res.j;
+        zhi.login_lng = res.w;
+      },
+      // 子页面跳转方法
+      linkTo(url, evt) {
+        this.$redirect(url);
+      },
+      linkTo2(url, evt) {
+        this.$navigate(url, { carseriesid: evt });
+      },
+      // 跳转贴息、热销好车
+      linkTo3(url, evt) {
+        if (evt.zhi == '贴息专区') {
+          this.$navigate('tiexi', { name: '贴息专区' });
+        } else if (evt.zhi == '热销好车') {
+          this.$navigate('products');
+        } else {
+          this.$navigate(url, evt);
+        }
+      },
+      // 贴息专区/热销好车
+      rxhc_btn(e, from) {
+        if (from === 'tiexi') {
+          this.$parent.globalData.UVselectType = 2;
+          this.$parent.globalData.source = 1;
+          this.$parent.globalData.sourceid = e;
+
+          this.$parent.globalData.pageid = [e];
+          this.$parent.globalData.pagename = [4];
+          this.$parent.clicknumordernumstat(1);
+        } else if (from === 'rexiao') {
+          this.$parent.globalData.UVselectType = 3;
+        }
+        this.$parent.UVstatistical('choosecarpage');
+        this.$navigate('commodity_details', { carmodelid: e });
+      },
+      // 条件选车
+      tjxc_btn() {
+        wx.navigateTo({
+          url:
+            'sousuo?carpricesection=' +
+            '0' +
+            '&downpaymentsection=' +
+            '0' +
+            '&monthlysupplysection=' +
+            '0'
+        });
+      },
+      // 搜索
+      ss_clear: function() {},
+      // 轮播跳转
+      tiaourl(a){
+
+
+      },
+      tiaozhuan(e) {
+        console.log(e)
+        let activityjo=e.currentTarget.dataset.activityjo
+        let adtype=e.currentTarget.dataset.adtype
+        let advid=e.currentTarget.dataset.advid
+        let url=e.currentTarget.dataset.url
+        if(adtype=="none"){
+          return
+        }
+        if(adtype=="url"){
+          console.log(url)
+          this.$navigate({
+            url:'url?url='+url
+          });
+        }else if(adtype=="activity"){
+          this.$parent.globalData.source = 2;
+          this.$parent.globalData.sourceid = activityjo.activityid;
+          if (activityjo.template == 1 && activityjo.columnshowtype == 1) {
+            this.$navigate({
+              url: 'midautumn?activityid=' + activityjo.activityid
+            });
+          }
+          if (activityjo.template == 1 && activityjo.columnshowtype == 2) {
+            this.$navigate({
+              url: 'midautumnn?activityid=' + activityjo.activityid
+            });
+          }
+          if (activityjo.template == 2 && activityjo.columnshowtype == 1) {
+            this.$navigate({
+              url: 'midautumnone?activityid=' + activityjo.activityid
+            });
+          }
+          if (activityjo.template == 2 && activityjo.columnshowtype == 2) {
+            this.$navigate({
+              url: 'midautumnonee?activityid=' +activityjo.activityid
+            });
+          }
+
+          this.$parent.globalData.pageid = [advid, activityjo.activityid];
+          this.$parent.globalData.pagename = [5, 6];
+          this.$parent.clicknumordernumstat(1);
+        }
+
+      },
+
+      //      侧滑
+      xz_pp(a) {
+        this.$invoke('sidebar', 'someMethod', { carbrandid: a });
+      }
+    };
+    onLoad(options) {
+         if(JSON.stringify(options) != "{}" &&!!options){
+      if(options.userid!=undefined && options.userid!= ''){
+        console.log('进去了')
+        this.$parent.globalData.userid=options.userid;
+      }else{
+        console.log('没进去了')
+      }
+         }
+
+      // 保存login需要的参数
+      let parent_data = this.$parent.globalData;
+      let json_link = this.$parent.globalData.json_link;
+      // 微信接口获取jscode
+      wx.login({
+        success: function(res) {
+          wx.request({
+            url: json_link + '/api/wxa/sessionkey?mpid=DZ2018',
+            data: {
+              jscode: res.code
+            },
+            success(data) {}
+          });
+        }
+      });
+      wx.getNetworkType({
+        success: function(res) {
+          // 返回网络类型, 有效值：
+          // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+          var networkType = res.networkType;
+          parent_data.login_network = networkType;
+        }
+      });
+      var res = wx.getSystemInfoSync();
+      console.log(res)
+      parent_data.login_phonebrand = res.brand;
+      parent_data.login_phonemodel = res.model;
+      parent_data.login_system = res.system;
+      parent_data.login_platform = res.platform;
+
+      //      页面代码
+      let this_ = this;
+      if (
+        parent_data.access_token != '' &&
+        parent_data.access_token != undefined
+      ) {
+        this_.login_wz = '';
+        this_.login_jt_zt = false;
+      }
+      // 新车贷款首页
+      wx.request({
+        url: json_link + '/api/wxapp/newcarloan/index',
+        success: function(data) {
+          this_.imgUrls = data.data.advinfoJA;
+          this_.tiexi = data.data.carinterestdiscountspecialareaJA;
+          this_.rx_imgurl = data.data.carshotsalepecialareaJA;
+          this_.rm_che = data.data.carbrandJA;
+          this_.$apply();
+        },
+        fail: function() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+
+          setTimeout(function() {
+            wx.hideToast();
+          }, 2000);
+          return;
+        }
+      });
+      this.getCardList();
+    }
+    // 刷新页面
+    onShow() {
+      this.$invoke('sidebar', 'clear_yy');
+      // 统计
+      this.$parent.globalData.UVselectType = 0;
+      this.$parent.UVstatistical('newcarhomepage');
+      this.$parent.PVUVstatistical('newcarhomepage');
+      this.getCardList();
+      let parent_data = this.$parent.globalData;
+
+      let this_ = this;
+      if(!parent_data.access_token){
+        console.log(' 重新登录')
+        this_. onLoad()
+      }
+    }
+    // 下拉刷新
+    onPullDownRefresh() {
+      wx.showLoading({
+        title: '加载中'
+      });
+      // 保存login需要的参数
+      let parent_data = this.$parent.globalData;
+      wx.getNetworkType({
+        success: function(res) {
+          // 返回网络类型, 有效值：
+          // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+          var networkType = res.networkType;
+          parent_data.login_network = networkType;
+        }
+      });
+      var res = wx.getSystemInfoSync();
+      parent_data.login_phonebrand = res.brand;
+      parent_data.login_phonemodel = res.model;
+      parent_data.login_system = res.system;
+      parent_data.login_platform = res.platform;
+
+      // 页面代码
+      let this_ = this;
+      if (
+        parent_data.access_token != '' &&
+        parent_data.access_token != undefined
+      ) {
+        this_.login_wz = '';
+        this_.login_jt_zt = false;
+      }
+      let json_link = this.$parent.globalData.json_link;
+      this_.json_link = json_link;
+      // 新车贷款首页
+      wx.request({
+        url: json_link + '/api/wxapp/newcarloan/index',
+        success: function(data) {
+          this_.imgUrls = data.data.advinfoJA;
+          this_.adtype = data.data.advinfoJA.adtype;
+          this_.tiexi = data.data.carinterestdiscountspecialareaJA;
+          this_.rx_imgurl = data.data.carshotsalepecialareaJA;
+          this_.rm_che = data.data.carbrandJA;
+          wx.stopPullDownRefresh();
+          wx.hideLoading();
+          this_.$apply();
+        },
+        fail: function() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+
+          setTimeout(function() {
+            wx.hideToast();
+          }, 2000);
+          return;
+        }
+      });
+    }
+    // 登录后查看是否有订单
+    getCardList() {
+      let parent_data = this.$parent.globalData;
+      let this_ = this;
+      if (parent_data.access_token != '') {
+        wx.request({
+          url:
+            parent_data.json_link +
+            '/api/wxapp/reservationorder/orderlist?access_token=' +
+            parent_data.access_token,
+          data: {
+            isindex: 1
+          },
+          success: function(data) {
+            this_.inde = data.data.data[0];
+            this_.$apply();
+          }
+        });
+      } else {
+        return;
+      }
+    }
+  }
+</script>

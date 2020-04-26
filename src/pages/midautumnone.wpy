@@ -1,0 +1,321 @@
+<style lang="less">
+/**index.wxss**/
+page {
+  width: 100%;
+  margin: 0 auto;
+  //
+}
+.brand {
+  width: 100%;
+  background: rgb(92, 69, 195);
+  padding-top: 20rpx;
+  padding-bottom: 10rpx;
+  position: fixed;
+  top: 0;
+}
+.leave {
+  width: 100%;
+  height: 120rpx;
+}
+.opinion-textarea {
+  width: 90%;
+  height: 29pt;
+  background: #fff;
+  border: 1px rgb(92, 69, 195) solid;
+  font-size: 12pt;
+  margin-bottom: 5rpx;
+  line-height: 20pt;
+  border-radius: 4pt;
+  margin: 0 auto;
+  padding-left: 20rpx;
+}
+
+.widget__arrow {
+  width: 100%;
+  height: 100%;
+}
+.widget__arrow img {
+  width: 100%;
+  height: 100%;
+}
+.one {
+  width: 100%;
+  height: 200rpx;
+  margin-bottom: 28rpx;
+  background: #eee;
+}
+.yew {
+  width: 100%;
+  height: 200rpx;
+  background: #eee;
+}
+.join-top {
+  width: 100%;
+  line-height: 60rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.join-img {
+  width: 90rpx;
+  height: 1rpx;
+  line-height: 54rpx;
+}
+.join-img2 {
+  width: 17rpx;
+  margin-left: 2rpx;
+}
+.join-top-rx {
+  /* width: 50%; */
+  display: flex;
+  font-size: 28rpx;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rxcx {
+  margin: 0 20rpx;
+}
+.join-top-gd {
+  color: rgb(110, 110, 110);
+  display: flex;
+  font-size: 28rpx;
+  line-height: 54rpx;
+  /* float: right */
+  position: absolute;
+  right: 18rpx;
+  display: flex;
+  /* justify-content: space-around; */
+  justify-content: center;
+  align-items: center;
+}
+.joio-div {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  // justify-content: space-around;
+}
+.joio-li-kuang:nth-of-type(odd) {
+  border-right: 2rpx #eee solid;
+  border-top: 2rpx #eee solid;
+}
+.joio-li-kuang:nth-of-type(even) {
+  border-left: 2rpx #eee solid;
+  border-top: 2rpx #eee solid;
+}
+.joio-li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #eeeeee;
+  /* border:12rpx #999 solid; */
+  /* border-top:6rpx #999 solid;     */
+}
+.joio-img {
+  width: 80%;
+  height: 100%;
+}
+.joio-three {
+  font-size: 24rpx;
+  line-height: 145rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.joio-four {
+  font-size: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  color: red;
+}
+.joio-one {
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 60rpx;
+}
+.joio-li-kuang {
+  width: calc(~'100% - 90rpx');
+  background: #fff;
+  padding: 20rpx 45rpx;
+  display: flex;
+  overflow: hidden;
+}
+.joio-tow {
+  height: 150rpx;
+}
+.di {
+  transform: scale(-1, 1);
+  margin-left: 10rpx;
+  font-size: 28rpx;
+}
+.zx {
+  width: 100%;
+  position: fixed;
+  bottom: 86rpx;
+  background: #fff;
+}
+.gengd {
+  // width: 100%;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  border: 1rpx #eee solid;
+}
+.join-su {
+  width: 50%;
+}
+.zxs {
+  width: 100%;
+  height: 87rpx;
+}
+</style>
+<template>
+        <view>
+            <view class='one'>
+              <image class="widget__arrow" src="{{topimgurl}}" mode='aspectFill' ></image>
+            </view>
+            <view class='join-top' wx:if="{{floorName==''?false:true}}">
+                <view class='join-top-rx'>
+                <image class='join-img' src="image/tiao@2x.png" ></image>
+                <text class='rxcx'>{{floorName}}</text>
+                  <image class='join-img'  src="image/tiao@2x.png" ></image>
+                </view>
+            </view>
+           <view class='joio-div'>
+              <view class='joio-li-kuang' wx:for="{{carmodel}}" wx:key="key" data-carmodelid="{{item.carmodelid}}" @tap="toChanpinDetail">
+                <view class='join-su'>
+                      <view class='joio-one'>{{item.carseriesname}}</view>
+                      <view class='joio-tow'>
+                        <image class='joio-img' src="{{item.thumbnailimgurl}}" mode='aspectFill' ></image>
+                      </view> 
+                </view>
+              <view class='join-su'>
+                <view class='joio-three'>{{item.name}}</view>
+                    <view class='joio-four'>
+                      <text>首付{{item.downpayment/10000}}万</text><text>月供{{item.monthsuppert}}元</text>
+                    </view>
+              </view>
+              </view>
+            </view>
+            <view class="zxs">
+                <view class="zxkf"></view>
+            </view>
+            <view class="zx" wx:if="{{lookatmore=='0'?false:true}}" @tap="gengd({{cartype}})">
+              <view class="gengd">查看更多</view>
+            </view>
+        </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class midautumnonee extends wepy.page {
+  config = {
+    navigationBarTitleText: ''
+  };
+  components = {};
+
+  data = {
+    selectPerson: true,
+    // 活动数据
+    carmodel: '',
+    // 顶部图片
+    topimgurl: '',
+    // 页面标题
+    name: '',
+    // 楼层名称
+    floorName: '',
+    // 是否查看更多
+    lookatmore: '',
+    // 查看更多要跳转的页面
+    cartype: ''
+  };
+
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/midautumnonee?activityid=' + this.activityid
+      };
+    },
+    // 查看更多判断
+    gengd(e) {
+      if (e == 0) {
+        this.$navigate({
+          url:
+            'sousuo?carpricesection=' +
+            '0' +
+            '&downpaymentsection=' +
+            '0' +
+            '&monthlysupplysection=' +
+            '0'
+        });
+      }
+      if (e == 1) {
+        this.$navigate({
+          url: 'tiexi'
+        });
+      }
+      if (e == 2) {
+        this.$navigate({
+          url: 'products'
+        });
+      }
+      if (e == 3) {
+        this.$navigate({
+          url: 'straight'
+        });
+      }
+    },
+    // 数据获取跳转—产品列表页
+    toChanpinDetail(e) {
+      let carmodelid = e.currentTarget.dataset.carmodelid;
+      wx.navigateTo({
+        url: 'commodity_details?carmodelid=' + carmodelid
+      });
+    }
+  };
+  onLoad(res) {
+    wx.showLoading({
+      title: '加载中'
+    });
+    let activityid = res.activityid;
+    this.activityid = activityid;
+    let are = this;
+    // 定义url
+    let json_link = this.$parent.globalData.json_link;
+    are.json_link = json_link;
+    wx.request({
+      // 活动模板
+      url: json_link + '/api/wxapp/activity/template',
+      data: {
+        activityid: activityid
+      },
+      // 后台返回值
+      success: function(data) {
+        wx.hideLoading();
+        // 定义返回值的数据
+        are.carmodel = data.data.data.carlist;
+        are.topimgurl = data.data.data.topimgurl;
+        are.name = data.data.data.name;
+        are.lookatmore = data.data.data.lookatmore;
+        are.floorName = data.data.data.floorname;
+        are.cartype = data.data.data.cartype;
+        wx.setNavigationBarTitle({
+          title: are.name //页面标题为路由参数
+        });
+        // 给数据进行绑定
+        are.$apply();
+      }
+    });
+  }
+  onUnload() {
+    // 清掉贷款提交订单接口两个参数的值
+    this.$parent.globalData.source = 0;
+    this.$parent.globalData.sourceid = '';
+  }
+}
+</script>

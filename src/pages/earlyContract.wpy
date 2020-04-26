@@ -1,0 +1,306 @@
+<style lang="less">
+    .earlyContractS {
+        view,input{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        padding: 46rpx 50rpx;
+        .earlyContractSt{
+            padding: 0 58rpx 30rpx;
+            margin-bottom: 54rpx;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            .title{
+                height: 100rpx;
+                line-height: 100rpx;
+                font-size: 30rpx;
+                color: #000;
+                text-align: center;
+                margin-bottom: 10rpx;
+            }
+            .textItem{
+                position: relative;
+                width: 100%;
+                height: 56rpx;
+                font-size: 26rpx;
+                margin-bottom: 44rpx;
+                text{
+                    float: left;
+                    line-height: 56rpx;
+                }
+                .early{
+                    color: rgb(96,68,203);
+                    position: relative;
+                }
+                .earlyHelp{
+                    position: absolute;
+                    display: block;
+                    right: -30rpx;
+                    top: -10rpx;
+                    line-height: 26rpx;
+                    width: 26rpx;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                    text-align: center;
+                    border: 1px solid rgb(96,68,203);
+                    font-size: 20rpx;
+                }
+                .earlyTime{
+                    height: 56rpx;
+                    padding:0 20rpx;
+                    margin-left: 40rpx;
+                }
+                input{
+                    float: right;
+                    height: 56rpx;
+                    border: 1px solid #ddd;
+                    width: 330rpx;
+                    padding-left: 30rpx;
+                    font-size: 24rpx;
+                }
+                .errorInfo{
+                    position: absolute;
+                    right: 20rpx;
+                    top: 66rpx;
+                    font-size: 22rpx;
+                    color: rgb(96,68,203);
+                    text-align: right;
+                    border-bottom: 1px solid  rgb(96,68,203);
+                }
+            }
+            .textItemInfos {
+                position: absolute;
+                line-height: 56rpx;
+                border: 1px solid #e5e5e5;
+                border-bottom: none;
+                border-top: none;
+                width: 370rpx;
+                font-size: 24rpx;
+                right: 0;
+                top: 56rpx;
+                z-index: 100;
+                .textItemInfo{
+                    height: 56rpx;
+                    border-bottom: 1px solid #e5e5e5;
+                    font-size: 20rpx;
+                    color: #393939;
+                    background: #fff;
+                    text-align: center;
+                }
+            }
+        }
+        .earlyBtn{
+            width: 546rpx;
+            height: 74rpx;
+            line-height: 74rpx;
+            color: #fff;
+            background: rgb(96,68,203);
+            font-size: 30rpx;
+            -webkit-border-radius: 10rpx;
+            -moz-border-radius: 10rpx;
+            border-radius: 10rpx;
+            margin: 86rpx auto 0;
+            text-align: center;
+        }
+        .earlyNoBtn{
+            .earlyBtn;
+            background: #e5e5e5;
+            color: #000;
+        }
+        .earlyInfo {
+            float: right;
+            width: 330rpx;
+            font-size: 22rpx;
+            color: #595959;
+        }
+        .getDetail {
+            height: 50rpx;
+            line-height: 50rpx;
+            font-size: 24rpx;
+            color: #6044cb;
+            text-align: center;
+        }
+    }
+</style>
+<template>
+    <view class="earlyContractS">
+        <view class="earlyContractSt">
+            <view class="title">合同信息</view>
+            <view class="textItem">
+                <text>客户名称</text><input value="{{parent_data.login_name}}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>合同号</text><input value="{{contractData.contractNo}}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>合同开始日期</text><input value="{{contractData.contractStartDate}}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>合同结束日期</text><input value="{{contractData.contractEndDate}}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>合同期数</text><input value="{{contractData.totalPeriods}}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>剩余期数</text><input value="{{contractData.surplusPeriods }}" type="text" disabled/>
+            </view>
+            <view class="textItem">
+                <text>还款频率</text><input value="{{contractData.payRate}}" type="text" disabled/>
+            </view>
+        </view>
+        <view class="earlyContractSt">
+            <view class="title">提前还款明细</view>
+            <view class="textItem" style="margin-bottom: 64rpx;">
+                <text>提前还款时间</text>
+                <!--<picker  value="{{currentTime}}" range="{{timeList}}" bindchange="timeChange">-->
+                    <view class="picker">
+                        <input type="text" class="early" disabled value="{{contractData.paymentDate}}"/>
+                    </view>
+                <!--</picker>-->
+                <view class="errorInfo" @tap="goBack">修改</view>
+            </view>
+            <block wx:if="{{showDetail}}">
+                <view class="textItem">
+                    <text>未还本金(元)</text><input type="number" disabled value="{{contractData.principalOutstanding }}"/>
+                </view>
+                <view class="textItem">
+                    <text>当还利息(元)</text><input type="number" disabled value="{{contractData.currentInterest}}"/>
+                </view>
+                <view class="textItem">
+                    <text>逾期租金(元)</text><input type="number" disabled value="{{contractData.overdueRent}}"/>
+                </view>
+                <view class="textItem">
+                    <text>罚息(元)</text><input type="number" disabled value="{{contractData.defautInterest}}"/>
+                </view>
+                <view class="textItem">
+                    <text>违约金(元)</text><input type="number" disabled value="{{contractData.penalSum}}"/>
+                </view>
+            </block>
+            <view class="textItem" style="margin-bottom: 26rpx;">
+                <text class="early">提前还款金额(元)</text><input type="number" disabled value="{{contractData.paymentAmount }}"/>
+            </view>
+            <view class="getDetail" wx:if="{{!showDetail}}" @tap="getDetail">查看详情 ▼</view>
+            <view class="textItem" wx:if="{{showDetail}}">
+                <view class="earlyInfo">*试算金额仅供参考</view>
+            </view>
+        </view>
+        <view class="earlyBtn" @tap="submit">申请提前还款</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  export default class earlyContract extends wepy.page {
+    config = {
+      navigationBarTitleText: '提前还款'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      parent_data: '',
+      timeList:[],
+      currentTime: '',
+      contractData: '',
+      submitInfo: '',
+      showDetail: false
+    }
+    methods = {
+      getDetail: function () {
+        this.showDetail = true;
+      },
+      timeChange: function (val) {
+        this.currentTime = this.timeList[val.detail.value]
+      },
+      goBack: function() {
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      submit: function () {
+        let that = this;
+        wx.request({
+          url: that.parent_data.json_dhLink + '/repayment/apply',
+          data: that.submitInfo,
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            if (res.data.code == '10001') {
+              that.$redirect('earlySubmit', {id: res.data.data.repaymentId})
+            } else {
+              that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+            }
+          }
+        })
+      }
+    };
+    timeReg (num) {
+      let date = new Date(num * 1000);
+      let Y = date.getFullYear() + '-';
+      let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+      let D = date.getDate() < 10? ('0'+ (date.getDate()) + ' ') : (date.getDate() + ' ');
+      let h = date.getHours() < 10 ? (('0' + date.getHours()) + ':') : (date.getHours() + ':');
+      let m = date.getMinutes() < 10 ? (('0' + date.getMinutes()) + ':') : (date.getMinutes() + ':');
+      let s = date.getSeconds()< 10 ? ('0' + date.getSeconds()) : date.getSeconds();
+      return Y+M+D+h+m+s;
+    }
+    onLoad(options) {
+      let that = this;
+      that.parent_data = that.$parent.globalData;
+      that.url_link = that.$parent.globalData.url_link;
+      wx.request({
+        url: that.parent_data.json_dhLink + '/repayment/trial',
+        data: options,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            res.data.data.paymentDate = that.timeReg(res.data.data.paymentDate).split(' ')[0];
+            res.data.data.contractStartDate = that.timeReg(res.data.data.contractStartDate).split(' ')[0];
+            res.data.data.contractEndDate = that.timeReg(res.data.data.contractEndDate).split(' ')[0];
+            that.contractData = res.data.data;
+            let timeStr = new Date(res.data.data.paymentDate).getTime()/1000;
+            that.submitInfo = {
+              userId: that.parent_data.login_userId,
+              contractNo: that.contractData.contractNo,
+              payDate: timeStr,
+              loginToken: that.parent_data.login_token,
+              repaymentAmount: that.contractData.paymentAmount
+            }
+            wx.getStorage({
+              key: 'contract_id',
+              success (res) {
+                if (res.data) {
+                  that.submitInfo.repaymentId = res.data;
+                  console.log('id的值为：' + res.data)
+                }
+              }
+            })
+            that.$apply();
+          } else {
+            that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+            if (res.data.code == '10017') {
+              that.$redirect('secLogin');
+            }
+          }
+        }
+      })
+    }
+    onShow() {
+      this.parent_data = this.$parent.globalData;
+      this.url_link = this.$parent.globalData.url_link;
+      this.showDetail = false;
+    }
+  }
+</script>

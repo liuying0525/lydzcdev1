@@ -1,0 +1,92 @@
+<style lang="less">
+  .index_list_table {
+    width: 94%;
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 92rpx;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .index_list_left {
+    float: left;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .index_tjxc_img {
+    width: 56rpx;
+    height: 56rpx;
+    margin-right: 30rpx;
+  }
+
+  .index_tjxc_tj {
+    font-size: 32rpx;
+  }
+
+  .index_list_right {
+    float: right;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .index_tjxc_gd {
+    font-size: 26rpx;
+    color: rgb(102, 102, 102);
+    float: right;
+  }
+
+  .index_jt_img {
+    width: 20rpx;
+    float: right;
+    margin-left: 26rpx;
+  }
+</style>
+<template>
+  <!--标签-->
+  <view class="index_list_table" @tap="click_">
+    <view class="index_list_left">
+      <image class="index_tjxc_img" src="{{img_link}}" mode="widthFix"></image>
+      <text class="index_tjxc_tj">{{text_zhi}}</text>
+    </view>
+    <view class="index_list_right">
+      <text class="index_tjxc_tj index_tjxc_gd">{{right_zhi}}</text>
+      <image class="index_jt_img" src="image/index_jt.png" mode="widthFix"></image>
+    </view>
+  </view>
+</template>
+<script>
+// 首页
+  import wepy from 'wepy'
+  export default class Bq extends wepy.component {
+    data = {
+      right_zhi: '',
+      // 文本信息
+      text_zhi: '',
+      // 图片地址
+      img_link: ''
+    };
+    props = {
+      text_: String,
+      img_url: String,
+      right_text: String
+    };
+    methods = {
+      click_() {
+        this.$emit('childFn', 'pinpai', {
+          'zhi': this.text_zhi
+        });
+      }
+    };
+    // 初始化
+    onLoad() {
+      this.text_zhi = this.text_;
+      this.img_link = this.img_url;
+      this.right_zhi = this.right_text;
+    }
+  }
+</script>

@@ -1,0 +1,693 @@
+<style lang="less">
+.right_sidebar {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: 0;
+  width: 70%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.right_sidebar_false {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -100%;
+  width: 100%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.sidebar {
+  width: 100%;
+  height: 100%;
+}
+.sidebar_yinying {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_yinying2 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0.4;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  word-break: normal;
+  background-color: #ffffff;
+}
+.sidebar_bq {
+  width: clac(~'100% - 80rpx');
+  padding: 0 40rpx 0 40rpx;
+  height: 80rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.sidebar_pp {
+  height: 80rpx;
+  font-size: 32rpx;
+}
+.sidebar_pp_logo {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+}
+.sidebar_pp {
+  display: block;
+  width: 50%;
+  height: 80rpx;
+  color: #434343;
+  line-height: 82rpx;
+  font-size: 28rpx;
+  float: left;
+  text-indent: 22rpx;
+}
+.sidebar_hui {
+  width: clac(~'100% - 60rpx');
+  padding: 0 30rpx 0 30rpx;
+  background-color: #f0f1f5;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #434343;
+}
+.sidebar_list {
+  width: clac(~'100% - 80rpx');
+  padding: 0 40rpx 0 40rpx;
+  height: 120rpx;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+  position: relative;
+  overflow: hidden;
+}
+.list_left {
+  // width: 100%;
+}
+.sidebar_list_left {
+  height: 80rpx;
+  padding: 20rpx 0 20rpx 0;
+  position: relative;
+  float: left;
+  width: 50%;
+  flex-wrap: wrap;
+  display: flex;
+}
+.sidebar_list_title {
+  font-size: 28rpx;
+}
+.sidebar_list_rmb {
+  font-size: 22rpx;
+  color: rgb(92, 69, 195);
+}
+.sidebar_list_right {
+  width: 120rpx;
+  height: 120rpx;
+  float: right;
+}
+.list_che {
+  width: 120rpx;
+  height: 120rpx;
+}
+.right_sidebar_false .sidebar_yinying {
+  opacity: 0;
+}
+.right_sidebar .sidebar_yinying {
+  opacity: 0.4;
+}
+.right_sidebar {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: 0;
+  width: 70%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.right_sidebar_false {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -100%;
+  width: 100%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.sidebar {
+  width: 100%;
+  height: 100%;
+}
+.sidebar_yinying {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_yinying2 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0.4;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  word-break: normal;
+  background-color: #ffffff;
+}
+.sidebar_bq_ck {
+  width: clac(~'100% - 80rpx');
+  padding: 0 40rpx 0 40rpx;
+  height: 80rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.sidebar_pp {
+  height: 80rpx;
+  font-size: 32rpx;
+}
+.sidebar_pp_logo {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+}
+.sidebar_pp {
+  display: block;
+  width: 50%;
+  height: 80rpx;
+  color: #434343;
+  line-height: 82rpx;
+  font-size: 28rpx;
+  float: left;
+  text-indent: 22rpx;
+}
+.sidebar_hui_ck {
+  width: clac(~'100% - 60rpx');
+  padding: 0 30rpx 0 30rpx;
+  background-color: #ffffff;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #434343;
+}
+.sidebar_list_ck {
+  width: clac(~'100% - 80rpx');
+  padding: 0 40rpx 0 40rpx;
+  height: 120rpx;
+  background-color: #f0f1f5;
+  position: relative;
+  overflow: hidden;
+}
+.sidebar_list_left_ck {
+  height: 80rpx;
+  padding: 20rpx 0 20rpx 0;
+  position: relative;
+  float: left;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+}
+.sidebar_list_title_ck {
+  font-size: 26rpx;
+  display: inline-block;
+}
+.sidebar_list_rmb_ck {
+  font-size: 26rpx;
+}
+.ck_list_right {
+  color: rgb(92, 69, 195);
+  font-size: 26rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 0;
+}
+.sidebar_list_right {
+  width: 120rpx;
+  height: 120rpx;
+  float: right;
+}
+.list_che {
+  width: 120rpx;
+  height: 120rpx;
+}
+.right_sidebar_false .sidebar_yinying {
+  opacity: 0;
+}
+.right_sidebar .sidebar_yinying {
+  opacity: 0.4;
+}
+.ck_jiage {
+  line-height: 80rpx;
+}
+.ck_jiage .sidebar_list_title_ck {
+  font-size: 24rpx;
+  color: #727272;
+}
+.ck_jiage .ck_list_right {
+  font-size: 24rpx;
+}
+.icon-paixu {
+  font-size: 20rpx;
+  color: #000;
+  margin-left: 10rpx;
+}
+.right_sidebar_xz {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.right_sidebar_false {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -100%;
+  width: 100%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.sidebar {
+  width: 100%;
+  height: 100%;
+}
+.sidebar_yinying {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_yinying2 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  transition: all 0.2s;
+  -webkit-transition: opacity 0.2s;
+  opacity: 0.4;
+  z-index: 99999;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.sidebar_right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  word-break: normal;
+  background-color: #f0f1f5;
+}
+.sidebar_bq_xz {
+  width: clac(~'100% - 40rpx');
+  padding: 0 20rpx 0 20rpx;
+  height: 80rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.sidebar_pp {
+  height: 80rpx;
+}
+.sidebar_pp_logo {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+}
+.sidebar_pp_xz {
+  display: block;
+  width: 50%;
+  height: 80rpx;
+  color: #434343;
+  line-height: 82rpx;
+  font-size: 28rpx;
+  float: left;
+  text-indent: 10rpx;
+}
+.sidebar_hui_xz {
+  width: clac(~'100% - 20rpx');
+  padding: 0 10rpx 0 10rpx;
+  background-color: #f0f1f5;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #434343;
+}
+.sidebar_list_xz {
+  display: flex;
+  height: 120rpx;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+.sidebar_right_image {
+  width: 100rpx;
+  height: 75rpx;
+}
+.sidebar_list_left_xz {
+  flex: 2;
+  height: 80rpx;
+  padding: 20rpx 0 20rpx 0;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+}
+.sidebar_list_title {
+  font-size: 28rpx;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sidebar_list_rmb {
+  font-size: 22rpx;
+  color: rgb(92, 69, 195);
+}
+.sidebar_list_right {
+  width: 120rpx;
+  height: 120rpx;
+  float: right;
+}
+.list_che {
+  width: 120rpx;
+  height: 120rpx;
+}
+.right_sidebar_false .sidebar_yinying {
+  opacity: 0;
+}
+.right_sidebar .sidebar_yinying {
+  opacity: 0.4;
+}
+.xz_cx {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  right: 0;
+}
+.xz_cx_false {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  right: -100%;
+}
+.right_sidebar_xz_right {
+  display: block;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  right: 0;
+  width: 0;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  &.right_sidebar_xz_right_touch {
+    width: 70%;
+  }
+}
+.ck_leo_width {
+  width: 77%;
+  word-wrap: break-word;
+}
+.leo_tc .sidebar_list_title {
+  color: red;
+}
+.leo_tc .sidebar_list_rmb {
+  color: red;
+}
+.sidebar_right_image_cont {
+  flex: 1;
+}
+</style>
+<template>
+    <view>
+      <view class="right_sidebar_xz">
+        <view class="sidebar">
+          <scroll-view class="sidebar_right" scroll-y>
+            <view class="sidebar_bq_xz">
+              <image class="sidebar_pp_logo" src="{{res.carbrandJO.imgurl}}" mode="aspectFit"></image>
+              <text class="sidebar_pp_xz">{{res.carbrandJO.name}}</text>
+            </view>
+            <block wx:for="{{res.carseriesJA}}" wx:for-index="index1"  wx:key="key">
+              <view class="sidebar_hui_xz">
+                <text>{{item.name}}</text>
+              </view>
+              <block wx:for="{{item.cmfcarseriesJA}}"  wx:key="key">
+                <view class="sidebar_list_xz" @tap="click_cx({{item.carseriesid}})">
+                  <view class="sidebar_list_left_xz {{ indexwai == index1 ? (xz_zt==index?'leo_tc':'') : ''}}" @tap="click_zt({{index1}}, {{index}})">
+                    <text class="list_left sidebar_list_title">{{item.name}}</text>
+                    <text class="list_left sidebar_list_rmb">{{item.minprice / 10000}}万-{{item.maxprice / 10000}}万</text>
+                  </view>
+                  <view class="sidebar_right_image_cont">
+                    <image src="{{item.imgurl}}" mode="widthFix" class="sidebar_right_image"></image>
+                  </view>
+                </view>
+              </block>
+            </block>
+
+          </scroll-view>
+        </view>
+      </view>
+
+    <view class="right_sidebar_xz_right {{isTouch ? 'right_sidebar_xz_right_touch' : ''}}">
+      <view class="sidebar">
+        <scroll-view class="sidebar_right" scroll-y>
+          <view class="sidebar_bq_ck">
+            <image class="sidebar_pp_logo" src="{{res.carbrandJO.imgurl}}" mode="aspectFit"></image>
+            <text class="sidebar_pp">{{ck.carseriesname}}</text>
+          </view>
+          <block wx:for="{{ck.carmodelyearJA}}"  wx:key="key">
+            <view class="sidebar_hui_ck">
+              <text>{{item.year}}</text>
+            </view>
+            <view class="sidebar_list_ck">
+              <view class="sidebar_list_left_ck ck_jiage">
+                <text class="list_left sidebar_list_title_ck">车款</text>
+              </view>
+            </view>
+            <block wx:for="{{item.carmodelJA}}"  wx:key="key">
+              <view class="sidebar_list_ck">
+                <view class="sidebar_list_left_ck" @tap="ck_btn({{item.carmodelid}}, {{item.name}})">
+                  <text class="list_left sidebar_list_title_ck ck_leo_width">{{item.name}}</text>
+                  <text class="ck_list_right">{{item.price / 10000}}万</text>
+                </view>
+              </view>
+            </block>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class xz_che extends wepy.page {
+  config = {
+    navigationBarTitleText: '选择车型'
+  };
+  data = {
+    // 显示slider
+    sidebar_: false,
+    // 车系数据
+    res: [],
+    ck: [],
+    // 车系index
+    indexwai: 0,
+    xz_zt: 0,
+    // 控制车型列表的滑动
+    isTouch: false
+  };
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    click_zt(index1, index2) {
+      if (this.isTouch) {
+        return false;
+      }
+      this.indexwai = index1;
+      this.xz_zt = index2;
+      this.$apply();
+    },
+    // 点击车系
+    click_cx(e) {
+      this.ck = {};
+      if (this.isTouch) {
+        this.isTouch = false;
+        this.ck.carmodelyearJA = [];
+        return false;
+      }
+      wx.showLoading({
+        title: '加载中'
+      });
+      var json_link = this.$parent.globalData.json_link;
+      let this_ = this;
+      wx.request({
+        url: json_link + '/api/wxapp/newcarloan/carmodel/listbycarseries',
+        data: {
+          carseriesid: e
+        },
+        success(data) {
+          this_.isTouch = true;
+          this_.ck = data.data;
+          this_.$apply();
+          wx.hideLoading();
+        },
+        fail() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+
+          setTimeout(function() {
+            wx.hideToast();
+          }, 2000);
+          return;
+        }
+      });
+    },
+    //      点击车型
+    ck_btn(e, name) {
+      this.isTouch = false;
+      wx.setStorageSync('chexing', {
+        carmodelid: e,
+        name: name
+      });
+      wx.navigateBack();
+    }
+  };
+  onLoad(res) {
+    this.isTouch = false;
+    wx.showLoading({
+      title: '加载中'
+    });
+    var json_link = this.$parent.globalData.json_link;
+    let this_ = this;
+    wx.request({
+      url: json_link + '/api/wxapp/newcarloan/series/carserieslist',
+      data: {
+        carbrandid: res.carbrandid
+      },
+      success: function(data) {
+        this_.res = data.data;
+       
+      
+         if(!data.data.carseriesJA[0].cmfcarseriesJA.length){
+            this_.res = data.data;
+             this_.$apply();
+            wx.hideLoading();
+            console.log(data.data.carbrandJO.name)
+            return
+        }
+         this_.res = data.data;
+          let carseriesid =this_.res.carseriesJA[0].cmfcarseriesJA[0].carseriesid;
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/listbycarseries',
+          data: {
+            carseriesid: carseriesid
+          },
+          success: function(data) {
+            this_.ck = data.data;
+            this_.$apply();
+            wx.hideLoading();
+          },
+          fail: function() {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function() {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+
+        setTimeout(function() {
+          wx.hideToast();
+        }, 2000);
+        return;
+      }
+    });
+  }
+
+  onUnload() {
+    this.isTouch = false;
+    this.indexwai = 0;
+  }
+}
+</script>

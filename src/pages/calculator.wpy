@@ -1,0 +1,1194 @@
+<style lang="less">
+  .container {}
+
+  .calculator_bt {
+    width: calc(~'100% - 110rpx');
+    padding: 0 20rpx 0 70rpx;
+    height: 76rpx;
+    background-color: #eeeeee;
+    font-size: 26rpx;
+    line-height: 76rpx;
+    color: rgb(27, 27, 27);
+  }
+
+  .calculator_nr {
+    width: 100%;
+    background-color: #ffffff;
+  }
+
+  .calculator_input {
+    width: calc(~'100% - 100rpx');
+    padding: 0 50rpx 0 50rpx;
+    overflow: hidden;
+    display: flex;
+    height: 66rpx;
+    margin-top: 50rpx;
+  }
+
+  .calculator_input_text {
+    flex: 2;
+    font-size: 26rpx;
+    line-height: 66rpx;
+  }
+
+  .calculator_input_input {
+    flex: 8;
+  }
+
+  .calculator_sr {
+    width: calc(~'100% - 60rpx');
+    height: 100%;
+    border-radius: 8rpx;
+    background-color: #eeeeee;
+    font-size: 26rpx;
+    text-align: right;
+    padding-right: 30rpx;
+  }
+
+  .calculator_hua {
+    display: block;
+    width: calc(~'100% - 100rpx');
+    padding: 40rpx 50rpx 40rpx 50rpx;
+  }
+
+  .xian {
+    width: 100%;
+    height: 1rpx;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 40rpx;
+  }
+
+  .calculator_hua_title {
+    font-size: 26rpx;
+    color: #000;
+    text-align: left;
+    width: 100%;
+  }
+
+  .section_gap_bc {
+    width: 100%;
+    display: flex;
+  }
+
+  .section_gap_bc_list {
+    flex: 1;
+    font-size: 22rpx;
+    color: rgb(80, 63, 160);
+    text-align: left;
+    text-indent: 18rpx;
+  }
+
+  .slider_kuai {
+    margin-top: 60rpx;
+  }
+
+  .container .calculator_hua:last-child {
+    padding-bottom: 106rpx;
+  }
+
+  .calculator_huafei {
+    width: calc(~'100% - 40rpx');
+    padding: 0 20rpx 0 20rpx;
+    background-color: #fff;
+    overflow: hidden;
+    height: 96rpx;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.13);
+  }
+
+  .calculator_huafei_da {
+    float: left;
+    font-size: 28rpx;
+    height: 100%;
+    line-height: 96rpx;
+  }
+
+  .calculator_huafei_xiao {
+    float: left;
+    font-size: 22rpx;
+    color: rgb(129, 129, 129);
+    height: 100%;
+    line-height: 96rpx;
+    margin-left: 20rpx;
+  }
+
+  .calculator_huafei_right_sq {
+    float: right;
+    font-size: 24rpx;
+    color: rgb(129, 129, 129);
+    height: 100%;
+    line-height: 96rpx;
+    padding-right: 50rpx;
+    position: relative;
+  }
+
+  .calculator_huafei_right_jg {
+    float: right;
+    font-size: 34rpx;
+    color: rgb(80, 63, 160);
+    height: 100%;
+    line-height: 96rpx;
+    margin-right: 20rpx;
+  }
+
+  .slide_nr {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    transition: all 0.5s;
+    max-height: 1000px;
+  }
+
+  .slide_nr_block {
+    max-height: 0;
+  }
+
+  .slide_list_toggle {
+    width: calc(~'100% - 100rpx');
+    padding: 0rpx 50rpx 0rpx 50rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    background-color: #f0f1f5;
+    overflow: hidden;
+  }
+
+  .slide_list_gzr {
+    float: left;
+    font-size: 28rpx;
+    color: rgb(82, 82, 82);
+    height: 96rpx;
+    line-height: 96rpx;
+  }
+
+  .slide_list_jg {
+    float: right;
+    font-size: 24rpx;
+    color: rgb(82, 82, 82);
+    height: 96rpx;
+    line-height: 96rpx;
+    padding-right: 50rpx;
+    position: relative;
+  }
+
+  .calculator_bt_icon {
+    display: block;
+    width: 50rpx;
+    height: 76rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 0;
+    color: red;
+    text-align: left;
+    line-height: 76rpx;
+    font-size: 32rpx;
+  }
+
+  .slide_list_jg_jt {
+    width: 50rpx;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    line-height: 96rpx;
+    transition: all 0.5s;
+  }
+
+  .icon-jiantou {
+    transform: rotate(180deg);
+    line-height: 94rpx;
+  }
+
+  /*
+  */
+
+  .calculator_nr {
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .calculator_input {
+    width: calc(~'100% - 100rpx');
+    padding: 0 50rpx 0 50rpx;
+    overflow: hidden;
+    display: flex;
+    height: 66rpx;
+    margin-top: 50rpx;
+  }
+
+  .calculator_input_text {
+    flex: 2;
+    font-size: 26rpx;
+    line-height: 66rpx;
+  }
+
+  .calculator_input_input {
+    flex: 8;
+  }
+
+  .calculator_hua {
+    display: block;
+    width: calc(~'100% - 100rpx');
+    padding: 40rpx 50rpx 40rpx 50rpx;
+  }
+
+  .xian {
+    width: 100%;
+    height: 1rpx;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 40rpx;
+  }
+
+  .calculator_hua_title {
+    font-size: 26rpx;
+    color: #000;
+    text-align: left;
+    width: 100%;
+  }
+
+  .section_gap_bc {
+    width: 100%;
+    display: flex;
+  }
+
+  .section_gap_bc_list {
+    flex: 1;
+    font-size: 22rpx;
+    color: rgb(80, 63, 160);
+    text-align: left;
+    text-indent: 18rpx;
+  }
+
+  .slider_kuai {
+    margin-top: 60rpx;
+  }
+
+  .container .calculator_hua:last-child {
+    padding-bottom: 106rpx;
+  }
+
+  .calculator_huafei {
+    width: calc(~'100% - 40rpx');
+    padding: 0 20rpx 0 20rpx;
+    background-color: #fff;
+    overflow: hidden;
+    height: 96rpx;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.13);
+  }
+
+  .calculator_huafei_da {
+    float: left;
+    font-size: 28rpx;
+    height: 100%;
+    line-height: 96rpx;
+  }
+
+  .calculator_huafei_xiao {
+    float: left;
+    font-size: 22rpx;
+    color: rgb(129, 129, 129);
+    height: 100%;
+    line-height: 96rpx;
+    margin-left: 20rpx;
+  }
+
+  .calculator_huafei_right_sq {
+    float: right;
+    font-size: 24rpx;
+    color: rgb(129, 129, 129);
+    height: 100%;
+    line-height: 96rpx;
+    padding-right: 50rpx;
+  }
+
+  .calculator_huafei_right_jg {
+    float: right;
+    font-size: 34rpx;
+    color: rgb(80, 63, 160);
+    height: 100%;
+    line-height: 96rpx;
+    margin-right: 20rpx;
+  }
+
+  .slide_nr {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .slide_list_toggle {
+    width: calc(~'100% - 100rpx');
+    padding: 0rpx 50rpx 0rpx 50rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    background-color: #f0f1f5;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .slide_list_gzr {
+    float: left;
+    font-size: 28rpx;
+    color: rgb(82, 82, 82);
+    height: 96rpx;
+    line-height: 96rpx;
+  }
+
+  .slide_list_jg {
+    float: right;
+    font-size: 24rpx;
+    color: rgb(82, 82, 82);
+    height: 96rpx;
+    line-height: 96rpx;
+    padding-right: 50rpx;
+  }
+
+  .checkbox {
+    display: inline-block;
+    width: 50rpx;
+    line-height: 96rpx;
+    height: 100%;
+    color: #00c7ae;
+  }
+
+  checkbox .wx-checkbox-input {
+    border-radius: 50%;
+    /* 圆角 */
+    width: 30rpx;
+    /* 背景的宽 */
+    height: 30rpx;
+    /* 背景的高 */
+    border: 1px solid #00c7ae;
+    margin-top: -3rpx;
+  }
+
+  .calculator_btn {
+    width: 50%;
+    margin: 0 auto;
+    height: 66rpx;
+    line-height: 66rpx;
+    background-color: #00c7ae;
+    border-radius: 8rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #ffffff;
+    margin-top: 60rpx;
+  }
+
+  .calculator_jg {
+    width: calc(~'100% - 120rpx');
+    padding: 40rpx 60rpx 40rpx 60rpx;
+    background-color: #f0f1f5;
+    margin-top: 45rpx;
+  }
+
+  .calculator_jg_bq {
+    width: 100%;
+    height: auto;
+    display: flex;
+  }
+
+  .calculator_jg_bq_list {
+    flex: 1;
+    font-size: 28rpx;
+    text-align: center;
+    color: rgb(82, 82, 82);
+  }
+
+  .text_left {
+    text-align: left;
+    padding-left: 20rpx;
+  }
+
+  .text_right {
+    text-align: right;
+    padding-right: 20rpx;
+  }
+
+  .calculator_jg_bq_tiao {
+    width: 100%;
+    border-radius: 8rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    display: flex;
+    background-color: #ffffff;
+    margin-top: 30rpx;
+    margin-bottom: 60rpx;
+  }
+
+  .calculator_jg_bq_tiao .calculator_jg_bq_list {
+    color: rgb(92, 69, 195);
+  }
+
+  .edu_text {
+    background-color: #ffffff;
+    border-radius: 6rpx;
+    color: rgb(92, 69, 195);
+    padding: 0 10rpx 0 10rpx;
+  }
+
+  .cal_btn_content {
+    float: right;
+    width: auto;
+    padding: 0 20rpx 0 20rpx;
+    height: 46rpx;
+    background-color: rgb(92, 69, 195);
+    text-align: center;
+    line-height: 46rpx;
+    font-size: 28rpx;
+    color: #ffffff;
+    border-radius: 6rpx;
+    margin-right: 50rpx;
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+  }
+
+  .list_1 {
+    padding: 0 20rpx 0 90rpx;
+  }
+
+  .rotate_90 {
+    transform: rotate(-90deg);
+  }
+
+  .byhf_kuai {
+    width: 100%;
+    max-height: 1000px;
+    transition: all 0.5s;
+  }
+
+  .byhf_none {
+    max-height: 0;
+  }
+
+  checkbox-group {}
+
+  .houzi_w {
+    display: inline-block;
+    font-size: 28rpx;
+    line-height: 64rpx;
+  }
+
+  #hongse {
+    background: #ccc;
+  }
+
+  #huise {
+    background-color: #00c7ae;
+  }
+
+  .greenSelect {
+    color: rgb(0, 199, 174);
+  }
+
+  checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+    border-radius: 50%;
+    /* 圆角 */
+    width: 40rpx;
+    /* 选中后对勾大小，不要超过背景的尺寸 */
+    height: 40rpx;
+    /* 选中后对勾大小，不要超过背景的尺寸 */
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 30rpx;
+    /* 对勾大小 30rpx */
+    color: #00c7ae;
+    /* 对勾颜色 白色 */
+    background: transparent;
+    transform: translate(-50%, -50%) scale(1);
+    -webkit-transform: translate(-50%, -50%) scale(1);
+  }
+</style>
+<template>
+  <view>
+    <view class="container">
+      <view class="calculator_bt list_1">
+        <text class="calculator_bt_icon iconfont icon-careful"></text>
+        此结果仅供参考，实际缴费以当地为准
+      </view>
+      <view class="calculator_nr">
+        <view class="calculator_input">
+          <view class="calculator_input_text">裸车价格</view>
+          <view class="calculator_input_input">
+            <input type="digit" maxlength="6" class="calculator_sr" bindinput="lcjg" placeholder="35.6" value="{{input_jg}}" />
+          </view>
+          <text class="houzi_w">万</text>
+        </view>
+        <view class="calculator_input">
+          <view class="calculator_input_text">客户利率</view>
+          <view class="calculator_input_input">
+            <input type="digit" maxlength="6" class="calculator_sr" bindinput="khll" placeholder="9.98" value="{{input_ll}}" />
+          </view>
+          <text class="houzi_w">%</text>
+        </view>
+        <view class="xian"></view>
+        <view class="calculator_hua">
+          <view class="calculator_hua_title">首付(%)</view>
+          <view class="section section_gap">
+            <view class="body-view">
+              <slider class="slider_kuai" bindchange="slider4change" block-size="22" step="10" show-value selected-color="#00c7ae" min="20"
+                max="60" />
+              <view class="section_gap_bc">
+                <view class="section_gap_bc_list">20</view>
+                <view class="section_gap_bc_list">30</view>
+                <view class="section_gap_bc_list">40</view>
+                <view class="section_gap_bc_list">50</view>
+                <view class="section_gap_bc_list">60</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="calculator_hua">
+          <view class="calculator_hua_title">期限(月)</view>
+          <view class="section section_gap">
+            <view class="body-view">
+              <slider class="slider_kuai" bindchange="slider5change" block-size="22" step="12" show-value selected-color="#00c7ae" min="12"
+                max="60" />
+              <view class="section_gap_bc">
+                <view class="section_gap_bc_list">12</view>
+                <view class="section_gap_bc_list">24</view>
+                <view class="section_gap_bc_list">36</view>
+                <view class="section_gap_bc_list">48</view>
+                <view class="section_gap_bc_list">60</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="calculator_huafei" @tap="bixu_btn({{byhf_zt}})">
+          <view class="calculator_huafei_da">必要花费</view>
+          <view class="calculator_huafei_xiao">购置税，交强险等</view>
+          <view class="calculator_huafei_right_sq">
+            {{firstP}}
+            <view class="slide_list_jg_jt iconfont icon-jiantou {{byhf_zt == 1?'rotate_90':'rotate_0'}}"></view>
+          </view>
+          <view class="calculator_huafei_right_jg">
+            {{byhf}}万
+          </view>
+        </view>
+        <view class="byhf_kuai {{byhf_zt == 1?'':'byhf_none'}}">
+          <view class="slide_nr">
+            <view class="slide_list_toggle">
+              <view class="slide_list_gzr">购置税</view>
+              <view class="slide_list_jg">
+                {{gzs}}元
+              </view>
+            </view>
+          </view>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="slide_nr">
+              <view class="slide_list_toggle">
+                <view class="slide_list_gzr">{{array[index]}}</view>
+                <view class="slide_list_jg">
+                  <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                  {{array_rmb}}元
+                </view>
+              </view>
+            </view>
+          </picker>
+          <picker bindchange="bindPickerChange_cc" value="{{cc_index}}" range="{{chechuan}}">
+            <view class="slide_nr">
+              <view class="slide_list_toggle">
+                <view class="slide_list_gzr">车船使用税（{{chechuan[cc_index]}}）</view>
+                <view class="slide_list_jg">
+                  <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                  {{chechuan_rmb[cc_index]}}元
+                </view>
+              </view>
+            </view>
+          </picker>
+
+          <view class="slide_nr">
+            <view class="slide_list_toggle">
+              <view class="slide_list_gzr">上牌费用</view>
+              <view class="slide_list_jg">
+                500元
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="calculator_nr">
+      <view class="calculator_huafei" @tap="bx_btn({{bx_zt}})">
+        <view class="calculator_huafei_da">商业保险</view>
+        <view class="calculator_huafei_xiao">车辆损失险，责任险等</view>
+        <view class="calculator_huafei_right_sq">
+          {{firstPres}}
+          <view class="slide_list_jg_jt iconfont icon-jiantou {{bx_zt == 1?'rotate_90':'rotate_0'}}"></view>
+        </view>
+        <view class="calculator_huafei_right_jg">
+          {{bxze_rmb}}万
+        </view>
+      </view>
+      <view class="slide_nr {{bx_zt == 1?'':'slide_nr_block'}}">
+        <checkbox-group bindchange="checkboxChange">
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{array_bx_rmb[array_bx_index]}}" />
+              </label>
+              第三方责任险
+              <text class="greenSelect">（{{array_bx[array_bx_index]}}）</text>
+            </view>
+            <picker bindchange="bindPickerChange_zr" value="{{array_bx_index}}" range="{{array_bx}}">
+              <view class="slide_list_jg">
+                <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                {{array_bx_rmb[array_bx_index]}}元
+              </view>
+            </picker>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{ssbx}}" />
+              </label>
+              车辆损失险
+            </view>
+            <view class="slide_list_jg">{{ssbx}}元</view>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{qcdqx}}" />
+              </label>
+              全车盗抢险
+            </view>
+            <view class="slide_list_jg">{{qcdqx}}元</view>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{array_bx_rmb2[array_bx_index2]}}" />
+              </label>
+              玻璃单独破碎险
+              <text class="greenSelect">({{array_bx2[array_bx_index2]}})</text>
+            </view>
+            <picker bindchange="bindPickerChange_zr2" value="{{array_bx_index2}}" range="{{array_bx2}}">
+              <view class="slide_list_jg">
+                <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                {{array_bx_rmb2[array_bx_index2]}}元
+              </view>
+            </picker>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{zrssx}}" />
+              </label>
+              自燃损失险
+            </view>
+            <view class="slide_list_jg">{{zrssx}}元</view>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{bjmptyx}}" />
+              </label>
+              不计免赔特约险
+            </view>
+            <view class="slide_list_jg">{{bjmptyx}}元</view>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{wgzrx}}" />
+              </label>
+              无过责任险
+            </view>
+            <view class="slide_list_jg">{{wgzrx}}元</view>
+          </view>
+          <view class="slide_list_toggle" wx:if="{{array_rmb=='1100'?false:true}}">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{array_bx3[array_bx_index3] * 50}}" />
+              </label>
+              车上人员责任险
+              <text class="greenSelect">({{array_bx3[array_bx_index3]}})人</text>
+            </view>
+
+            <picker bindchange="bindPickerChange_zr3" value="{{array_bx_index3}}" range="{{array_bx3}}">
+              <view class="slide_list_jg">
+                <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                {{array_bx3[array_bx_index3] * 50}}元
+              </view>
+            </picker>
+          </view>
+          <view class="slide_list_toggle" wx:if="{{array_rmb=='1100'?true:false}}">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{array_bx31[array_bx_index31] * 50}}" />
+              </label>
+              车上人员责任险
+              <text class="greenSelect">({{array_bx31[array_bx_index31]}})人</text>
+            </view>
+
+            <picker bindchange="bindPickerChange_zr31" value="{{array_bx_index31}}" range="{{array_bx31}}">
+              <view class="slide_list_jg">
+                <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                {{array_bx31[array_bx_index31] * 50}}元
+              </view>
+            </picker>
+          </view>
+          <view class="slide_list_toggle">
+            <view class="slide_list_gzr">
+              <label class="checkbox">
+                <checkbox value="{{array_bx_jg4}}" />
+              </label>
+              车身划痕险
+              <text class="greenSelect">(赔付{{array_bx4[array_bx_index4]}})</text>
+            </view>
+            <picker bindchange="bindPickerChange_zr4" value="{{array_bx_index4}}" range="{{array_bx4}}">
+              <view class="slide_list_jg">
+                <view class="slide_list_jg_jt iconfont icon-jiantou"></view>
+                {{array_bx_jg4}}元
+              </view>
+            </picker>
+          </view>
+        </checkbox-group>
+
+      </view>
+
+      <view class="calculator_btn" id="{{yanse}}" @tap="cal_js">{{ jisuanTxt }}</view>
+      <view class="calculator_jg" wx:if="{{jsjg_zt}}">
+        <view class="calculator_jg_bq">
+          <view class="calculator_jg_bq_list text_left">首次支付</view>
+          <view class="calculator_jg_bq_list">分期额度</view>
+          <view class="calculator_jg_bq_list text_right">月供({{qx}}月)</view>
+        </view>
+        <view class="calculator_jg_bq_tiao">
+          <view class="calculator_jg_bq_list text_left">{{jsjg.downpayment}}万元</view>
+          <view class="calculator_jg_bq_list">{{jsjg.loanamount}}万元</view>
+          <view class="calculator_jg_bq_list text_right">{{jsjg.monthlysupply}}元</view>
+        </view>
+        <view class="calculator_jg_bq">
+          <view class="calculator_jg_bq_list text_left">总价</view>
+          <view class="calculator_jg_bq_list"></view>
+          <view class="calculator_jg_bq_list text_right">
+            <text class="edu_text">{{jsjg.totalprice}}万元</text>
+          </view>
+        </view>
+      </view>
+      <view class="cal_btn_content" @tap="ckfhcx">
+        查看符合条件车型
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '贷款计算器'
+    };
+    data = {
+      // 按钮颜色
+      yanse: 'huise',
+      // 按钮文本
+      jisuanTxt: '开始计算',
+      // 计算结果区域隐藏
+      jsjg_zt: false,
+      // 裸车价格默认值
+      input_jg: 35.6,
+      // 客户利率默认值
+      input_ll: 9.98,
+      firstP: '展开',
+      firstPres: '展开',
+      // 首付比例
+      sf: 20,
+      // 期限比例
+      qx: 12,
+      // 必要花费下拉列表状态
+      byhf_zt: 0,
+      // 商业保险下拉列表状态
+      bx_zt: 0,
+      index: 0,
+      array: ['交强险(6座以下)', '交强险(6座以上)'],
+      array_rmb: 950,
+      cc_index: 0,
+      chechuan: [
+        '1.0L(含)以下',
+        '1.0-1.6L(含)',
+        ' 1.6-2.0L(含)',
+        '2.0-2.5L(含)',
+        '2.5-3.0L(含)',
+        '3.0-4.0L(含)',
+        '4.0L以上'
+      ],
+      chechuan_rmb: [300, 420, 480, 900, 1920, 3480, 5280],
+      chechuan_rmb_sj: 300,
+      //      保险
+      array_bx_index: 0,
+      array_bx: ['5万', '10万', '20万', '50万', '100万'],
+      array_bx_rmb: [516, 746, 924, 1252, 1630],
+      array_bx_jg: 516,
+      //      保险2（玻璃单独破碎险）
+      array_bx_index2: 0,
+      array_bx2: ['进口', '国产'],
+      array_bx_rmb2: [],
+      array_bx_jg2: 516,
+      //      保险3（车上人员责任险）
+      array_bx_index3: 0,
+      array_bx_index31: 0,
+      array_bx3: [1, 2, 3, 4, 5, 6],
+      array_bx31: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      array_bx_jg3: 0,
+      //      保险4（车身划痕险）
+      array_bx_index4: 0,
+      array_bx4: ['2千', '5千', '1万', '2万'],
+      array_bx4_rmb: [400, 570, 760, 1140],
+      array_bx_jg4: 400,
+      //      购置税
+      gzs: 0,
+      //      必要花费
+      byhf: 0,
+      //      车辆损失保险
+      ssbx: 0,
+      //      全车盗抢险
+      qcdqx: 0,
+      //      自燃损失险
+      zrssx: 0,
+      //      不计免赔特约险
+      bjmptyx: 0,
+      //      无过责任险
+      wgzrx: 0,
+      //      保险总额
+      bxze_rmb: 0,
+      //      计算结果
+      jsjg: []
+    };
+
+    methods = {
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/calculator'
+        };
+      },
+      // 开始计算
+      cal_js() {
+        let json_link = this.$parent.globalData.json_link;
+        let this_ = this;
+        // 按钮置灰
+        this_.yanse = 'hongse';
+        this_.jisuanTxt = '计算结果';
+        // 贷款计算器
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/loan/calculator',
+          data: {
+            price: parseInt(this_.input_jg * 10000),
+            interestratepercent: this_.input_ll,
+            downpaymentpercent: this_.sf,
+            loanterm: this_.qx,
+            necessarycost: this_.byhf * 10000,
+            commercialinsurance: this_.bxze_rmb * 10000
+          },
+          success: function (data) {
+            this_.jsjg = data.data;
+            this_.jsjg_zt = true;
+            this_.$apply();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      },
+      // 裸车价格输入
+      lcjg(e) {
+        this.input_jg = e.detail.value;
+        let this_ = this;
+        // 按钮高亮
+        this_.yanse = 'huise';
+        this_.jisuanTxt = '开始计算';
+        //      玻璃保险价格运算
+        this_.array_bx_rmb2 = [
+          parseInt(this_.input_jg * 10000 * 0.0025),
+          parseInt(this_.input_jg * 10000 * 0.0015)
+        ];
+        //      购置税
+        let gzs = this_.input_jg * 10000 / 1.17 * 0.075;
+        this_.gzs = gzs.toFixed(2);
+        //      必要花费
+        this_.byhf = (
+          (parseInt(this_.gzs) + this_.array_rmb + this_.chechuan_rmb_sj + 500) /
+          10000
+        ).toFixed(2);
+        //      全车盗抢险
+        if (this_.array_rmb == 950) {
+          this_.qcdqx = parseInt(285 + this_.input_jg * 10000 * 0.0095);
+          //      车辆损失保险
+          this_.ssbx = parseInt(285 + this_.input_jg * 10000 * 0.01088);
+        } else {
+          this_.qcdqx = parseInt(342 + this_.input_jg * 10000 * 0.009);
+          this_.ssbx = parseInt(342 + this_.input_jg * 10000 * 0.01088);
+        }
+        //      自燃损失险
+        this_.zrssx = this_.input_jg * 10000 * 0.0015;
+        //      不计免赔特约险
+        this_.bjmptyx = (this_.ssbx + this_.array_bx_jg) * 0.2;
+        //      无过责任险
+        this_.wgzrx = parseInt(this_.array_bx_jg * 0.2);
+      },
+      // 客户利率输入
+      khll(e) {
+        this.input_ll = e.detail.value;
+        // 按钮高亮
+        this.yanse = 'huise';
+        this.jisuanTxt = '开始计算';
+      },
+
+      // 列表项选择
+      bindPickerChange(e) {
+        let this_ = this;
+        // 按钮高亮
+        this_.yanse = 'huise';
+        this_.jisuanTxt = '开始计算';
+        this.index = e.detail.value;
+        if (this_.index == 0) {
+          this_.array_rmb = 950;
+        } else {
+          this_.array_rmb = 1100;
+        }
+        //      必要花费
+        this_.byhf =
+          (parseInt(this_.gzs) + this_.array_rmb + this_.chechuan_rmb_sj + 500) /
+          10000;
+
+        //      全车盗抢险
+        if (this_.array_rmb == 950) {
+          this_.qcdqx = parseInt(285 + this_.input_jg * 10000 * 0.0095);
+          //      车辆损失保险
+          this_.ssbx = parseInt((285 + this_.input_jg * 10000) * 0.01088);
+        } else {
+          this_.qcdqx = parseInt(342 + this_.input_jg * 10000 * 0.009);
+          this_.ssbx = parseInt((342 + this_.input_jg * 10000) * 0.01088);
+        }
+      },
+      // 车船使用税
+      bindPickerChange_cc(e) {
+        let this_ = this;
+        this_.cc_index = e.detail.value;
+        this_.chechuan_rmb_sj = this_.chechuan_rmb[e.detail.value];
+        //      必要花费
+        this_.byhf =
+          (parseInt(this_.gzs) + this_.array_rmb + this_.chechuan_rmb_sj + 500) /
+          10000;
+      },
+      // 第三方责任险
+      bindPickerChange_zr(e) {
+        let this_ = this;
+        this_.array_bx_index = e.detail.value;
+        this_.array_bx_jg = this_.array_bx_rmb[e.detail.value];
+      },
+      // 玻璃单独破碎险
+      bindPickerChange_zr2(e) {
+        let this_ = this;
+        this_.array_bx_index2 = e.detail.value;
+        this_.array_bx_jg2 = this_.array_bx_rmb2[e.detail.value];
+      },
+      // 车上人员责任险
+      bindPickerChange_zr3(e) {
+        let this_ = this;
+        this_.array_bx_index3 = e.detail.value;
+      },
+      bindPickerChange_zr31(e) {
+        let this_ = this;
+        this_.array_bx_index31 = e.detail.value;
+      },
+      // 车身划痕险
+      bindPickerChange_zr4(e) {
+        let this_ = this;
+        this_.array_bx_index4 = e.detail.value;
+        this_.array_bx_jg4 = this_.array_bx4_rmb[e.detail.value];
+      },
+
+      // 首付滑动
+      slider4change(e) {
+        this.sf = e.detail.value;
+        // 按钮高亮
+        this.yanse = 'huise';
+        this.jisuanTxt = '开始计算';
+        this.$apply();
+      },
+      // 期限滑动
+      slider5change(e) {
+        this.qx = e.detail.value;
+        // 按钮高亮
+        this.yanse = 'huise';
+        this.jisuanTxt = '开始计算';
+        this.$apply();
+      },
+      // 必要花费
+      bixu_btn(e) {
+        let this_ = this;
+        if (e == '1') {
+          this_.byhf_zt = 0;
+          this.firstP = '展开';
+        } else {
+          this_.byhf_zt = 1;
+          this.firstP = '收起';
+        }
+      },
+      // 商业保险
+      bx_btn(e) {
+        let this_ = this;
+        if (e == '1') {
+          this_.bx_zt = 0;
+          this.firstPres = '展开';
+        } else {
+          this_.bx_zt = 1;
+          this.firstPres = '收起';
+        }
+      },
+      // 第三方责任险
+      checkboxChange(e) {
+        let zhi = e.detail.value;
+        let this_ = this;
+        this_.yanse = 'huise';
+        this_.jisuanTxt = '开始计算';
+        let shu = 0;
+        for (var i = 0; i < zhi.length; i++) {
+          shu += parseInt(zhi[i]);
+        }
+        this_.bxze_rmb = (shu / 10000).toFixed(2);
+      },
+      // 查看符合条件车型
+      ckfhcx() {
+        let zhi = 0;
+        if (this.input_jg <= 30) {
+          zhi = 1;
+        } else if (this.input_jg <= 40 && this.input_jg > 30) {
+          zhi = 2;
+        } else if (this.input_jg <= 50 && this.input_jg > 40) {
+          zhi = 3;
+        } else if (this.input_jg <= 60 && this.input_jg > 50) {
+          zhi = 4;
+        } else if (this.input_jg > 60) {
+          zhi = 5;
+        }
+   
+        wx.navigateTo({
+        url:
+          'sousuo?carpricesection=' +
+          zhi +
+          '&downpaymentsection=' +
+          '0' +
+          '&monthlysupplysection=' +
+          '0'
+      });
+      }
+    };
+    onLoad() {
+      let this_ = this;
+      //      玻璃保险价格运算
+      this_.array_bx_rmb2 = [
+        parseInt(this_.input_jg * 10000 * 0.0025),
+        parseInt(this_.input_jg * 10000 * 0.0015)
+      ];
+      //      购置税
+      let gzs = this_.input_jg * 10000 / 1.17 * 0.075;
+      this_.gzs = gzs.toFixed(2);
+      //      必要花费
+      let xz_byhf =
+        (parseInt(this_.gzs) + this_.array_rmb + this_.chechuan_rmb_sj + 500) /
+        10000;
+      this_.byhf = xz_byhf.toFixed(2);
+
+      //      全车盗抢险
+      if (this_.array_rmb == 950) {
+        this_.qcdqx = parseInt(285 + this_.input_jg * 10000 * 0.0095);
+        //      车辆损失保险
+        this_.ssbx = parseInt((285 + this_.input_jg * 10000) * 0.01088);
+      } else {
+        this_.qcdqx = parseInt(342 + this_.input_jg * 10000 * 0.009);
+        this_.ssbx = parseInt((342 + this_.input_jg * 10000) * 0.01088);
+      }
+      //      自燃损失险
+      this_.zrssx = this_.input_jg * 10000 * 0.0015;
+      //      不计免赔特约险
+      this_.bjmptyx = (this_.ssbx + this_.array_bx_jg) / 5;
+      //      无过责任险
+      this_.wgzrx = parseInt(this_.array_bx_jg * 0.2);
+      console.log(this_.wgzrx, parseInt(this_.array_bx_jg * 0.2))
+      this_.$apply();
+    }
+    // 初始化
+    onUnload() {
+      this.$parent.PVUVstatistical('loancalculator');
+      this.yanse = 'huise',
+      this.jisuanTxt = '开始计算',
+      this.jsjg_zt = false,
+      this.input_jg = 35.6,
+      this.input_ll = 9.98,
+      this.firstP = '展开',
+      this.firstPres = '展开',
+      this.sf = 20,
+      this.qx = 12,
+      this.byhf_zt = 0,
+      this.bx_zt = 0,
+      this.index = 0,
+      this.array = ['交强险(6座以下)', '交强险(6座以上)'],
+      this.arra_rmb = 950,
+      this.cc_index = 0,
+      this.chechuan = [
+        '1.0L(含)以下',
+        '1.0-1.6L(含)',
+        ' 1.6-2.0L(含)',
+        '2.0-2.5L(含)',
+        '2.5-3.0L(含)',
+        '3.0-4.0L(含)',
+        '4.0L以上'
+      ],
+      this.chechuan_rmb = [300, 420, 480, 900, 1920, 3480, 5280],
+      this.chechuan_rmb_sj = 300,
+      //      保险
+      this.array_bx_index = 0,
+      this.array_bx = ['5万', '10万', '20万', '50万', '100万'],
+      this.array_bx_rmb = [516, 746, 924, 1252, 1630],
+      this.array_bx_jg = 516,
+      //      保险2（玻璃单独破碎险）
+      this.array_bx_index2 = 0,
+      this.array_bx2 = ['进口', '国产'],
+      this.array_bx_rmb2 = [],
+      this.array_bx_jg2 = 516,
+      //      保险3（车上人员责任险）
+      this.array_bx_index3 = 0,
+      this.array_bx_index31 = 0,
+      this.array_bx3 = [1, 2, 3, 4, 5, 6],
+      this.array_bx31 = [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      this.array_bx_jg3 = 0,
+      //      保险4（车身划痕险）
+      this.array_bx_index4 = 0,
+      this.array_bx4 = ['2千', '5千', '1万', '2万'],
+      this.array_bx4_rmb = [400, 570, 760, 1140],
+      this.array_bx_jg4 = 400,
+      //      购置税
+      this.gzs = 0,
+      //      必要花费
+      this.byhf = 0.175,
+      //      车辆损失保险
+      this.ssbx = 0,
+      //      全车盗抢险
+      this.qcdqx = 0,
+      //      自燃损失险
+      this.zrssx = 0,
+      //      不计免赔特约险
+      this.bjmptyx = 0,
+      //      无过责任险
+      // this.wgzrx = 0,
+      //      保险总额
+      this.bxze_rmb = 0,
+      //      计算结果
+      this.jsjg = [],
+      this.$apply();
+    }
+  }
+</script>

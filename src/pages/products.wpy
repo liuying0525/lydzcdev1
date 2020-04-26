@@ -1,0 +1,1087 @@
+<style lang="less">
+/**index.wxss**/
+page {
+  width: 100%;
+  margin: 0 auto;
+  background: #eee;
+}
+.brand {
+  width: 100%;
+  background: rgb(92, 69, 195);
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  position: fixed;
+  top: 0;
+}
+.leave {
+  width: 100%;
+  height: 113rpx;
+}
+.opinion-textarea {
+  width: 90%;
+  height: 29pt;
+  background: #fff;
+  border: 1px rgb(92, 69, 195) solid;
+  font-size: 12pt;
+  margin-bottom: 5rpx;
+  line-height: 20pt;
+  border-radius: 4pt;
+  margin: 0 auto;
+  padding-left: 20rpx;
+}
+
+.brand-list {
+  display: flex;
+  padding: 28rpx;
+  background: #fff;
+  margin-bottom: 6rpx;
+}
+.brand-list-img {
+  width: 320rpx;
+  height: 214rpx;
+  margin-top: 15rpx;
+}
+.widget__arrow {
+  width: 100%;
+  height: 100%;
+}
+.widget__arrow img {
+  width: 100%;
+  height: 100%;
+}
+.brand-list-details {
+  margin-left: 40rpx;
+  width: 47%;
+  margin-top: 26rpx;
+}
+.brand-list-details1 {
+  font-size: 34rpx;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand-list-details2 {
+  font-size: 32rpx;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand-list-details2,
+.brand-list-details3,
+.brand-list-details4,
+.brand-list-details5 {
+  font-size: 24rpx;
+  line-height: 45rpx;
+}
+.brand-list-textone {
+  width: 110rpx;
+  background: #5c45c3;
+  display: inline-block;
+  text-align: center;
+  line-height: 35rpx;
+  border-radius: 8rpx;
+  color: #fff;
+}
+.brand-list-texttow {
+  width: 110rpx;
+  background: #00c7ae;
+  display: inline-block;
+  text-align: center;
+  line-height: 35rpx;
+  border-radius: 8rpx;
+  color: #fff;
+  margin-left: 15rpx;
+}
+.brand-list-three {
+  margin-left: 25rpx;
+}
+.brand-list-four {
+  color: red;
+  font-weight: 900;
+  font-size: 28rpx;
+}
+.brand-list-five {
+  color: red;
+  margin-left: 26rpx;
+}
+.barand-one {
+  position: absolute;
+  top: 530rpx;
+  width: 100%;
+  background: #eee;
+  transition: all 0.4s linear;
+  &.hideBrandOne {
+    top: 200rpx;
+  }
+  .barand-one-scroll {
+    width: 100%;
+  }
+}
+.img {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+.products-lunbo {
+  width: 610rpx !important;
+  min-width: 500rpx !important;
+  height: 290rpx !important;
+  text-align: center;
+  background: #fff;
+  border-radius: 8rpx;
+  margin-left: 30rpx;
+}
+swiper-item {
+  width: 640rpx !important;
+  min-width: 530rpx !important;
+  height: 290rpx !important;
+  text-align: center;
+  border-radius: 8rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+.xiao {
+  width: 238rpx;
+  height: 135rpx;
+}
+.products-lunbo-kuang {
+  background: #6044ca;
+  width: 100%;
+  height: 315rpx;
+  padding-top: 10rpx;
+  display: flex;
+  position: fixed;
+  top: 116rpx;
+  transition: all 0.4s linear;
+  &.hideReTui {
+    height: 0;
+    padding-top: 0;
+  }
+}
+
+.phone_personal {
+  width: 100%;
+  color: #000;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.phone_one {
+  display: flex;
+  /* //用flex布局更方便。 */
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(239, 239, 239);
+  width: 25%;
+  height: 90rpx;
+}
+.person_box {
+  position: fixed;
+  width: 100%;
+  margin: 0 auto;
+  top: 526rpx;
+  z-index: 99;
+}
+
+.phone_select {
+  margin-top: 0;
+  z-index: 99;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: #fff;
+  transition: all 0.4s linear;
+  &.phone_select2 {
+    top: -340rpx;
+  }
+}
+
+.phone_selectb {
+  margin-top: 0;
+  margin-left: 175rpx;
+  z-index: 999;
+  position: absolute;
+}
+.phone_selectc {
+  margin-top: 0;
+  margin-left: 365rpx;
+  z-index: 999;
+  position: absolute;
+}
+.phone_selectd {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: calc(~'100% - 535rpx');
+  z-index: 9999999999;
+  position: fixed;
+  background-color: #ffffff;
+  padding-top: 5rpx;
+  overflow-y: auto;
+  &.phone_selectd2 {
+    top: 200rpx;
+    height: auto;
+  }
+}
+.select_one {
+  background-color: #fff;
+  width: 93%;
+  height: 66rpx;
+  line-height: 66rpx;
+  border-bottom: 2rpx solid #eee;
+  font-size: 24rpx;
+  padding-left: 50rpx;
+}
+.personal_image {
+  z-index: 100;
+  position: absolute;
+  right: 2.5%;
+  top: 42%;
+  width: 20rpx;
+  height: 15rpx;
+  transition: transform 0.4s ease;
+  -webkit-transition: -webkit-transform 0.4s ease;
+}
+.rotateRight {
+  transform: rotate(180deg);
+}
+.phone_one:nth-child(3) .personal_image {
+  right: 16.5%;
+}
+.phone_one:nth-child(4) .personal_image {
+  right: 16.5%;
+}
+.opg {
+  display: flex;
+  padding-right: 5%;
+  background: #efefef;
+  position: fixed;
+  left: 0;
+  top: 440rpx;
+  width: 100%;
+  transition: all 0.4s linear;
+  &.hideOpg {
+    top: 102rpx;
+  }
+}
+.phone_selectd_nr {
+  width: calc(~'100% - 80rpx');
+  padding: 20rpx 40rpx 20rpx 40rpx;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.phone_selectd_nr_bq {
+  width: 100%;
+  font-size: 24rpx;
+  color: #4c4c4c;
+  margin-bottom: 20rpx;
+}
+
+.phone_selectd_nr_list {
+  display: block;
+  width: calc(~'(96.2% / 3) - 26rpx');
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #000;
+  border-radius: 8rpx;
+  border: 1px solid #a5a5a5;
+  margin-bottom: 36rpx;
+  margin-right: 40rpx;
+  float: left;
+}
+.phone_selectd_nr_list:nth-child(3n + 1) {
+  margin-right: 0;
+}
+.straight-liucheng_center {
+  width: 100%;
+  position: fixed;
+  top: 110rpx;
+  padding-bottom: 40rpx;
+  left: 0rpx;
+  background-color: #ffffff;
+  padding-top: 20rpx;
+}
+.d {
+  width: 100%;
+  display: flex;
+  line-height: 70rpx;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  position: fixed;
+  bottom: 0%;
+}
+.xia {
+  margin-bottom: 70rpx;
+}
+.cz {
+  width: 35%;
+  background: #eee;
+  color: rgb(58, 58, 58);
+  text-align: center;
+}
+.qd {
+  width: 65%;
+  background: rgb(92, 69, 195);
+  color: #fff;
+  text-align: center;
+}
+.onet {
+  line-height: 36rpx;
+}
+.add_citying {
+  color: #fff;
+  background: rgb(0, 199, 174);
+  border: 1px solid rgb(0, 199, 174);
+}
+.add_cit {
+  color: rgb(0, 199, 174);
+}
+.asda {
+  color: #000;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  background: #f0f1f5;
+  overflow: hidden;
+  width: 55rpx;
+
+  white-space: nowrap;
+}
+.sadas {
+  display: block;
+  position: fixed;
+  height: 57%;
+  overflow-y: auto;
+  &.sadas2 {
+    top: 200rpx;
+    height: auto;
+  }
+}
+.kong {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.kong-image1 {
+  position: absolute;
+  left: 50%;
+  top: 100rpx;
+  margin-left: -116rpx;
+  width: 250rpx;
+  height: 202rpx;
+}
+.kongzi {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  // left: 7%;
+  top: 350rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+.complete {
+  width: 100%;
+  color: #4c4c4c;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 53rpx;
+}
+</style>
+<template>
+  <view class="{{!selectPersond ? 'noscroll' : ''}}">
+     <view class="testresult">
+         <view class='leave'></view>
+      <swiper  class="products-lunbo-kuang {{hideReTui ? 'hideReTui' : ''}}" current="2">
+        <block wx:for="{{carmodeltopja}}"  wx:key="key">
+          <swiper-item    @tap="xz_pp({{item.carmodelid}})" >
+              <view class='products-lunbo'>
+              <image src="{{item.thumbnailimgurl}}"  class="widget__arrow xiao" mode="aspectFill"/>
+              <view class='brand-list-details1 onet'>{{item.carseriesname}}</view>
+              <view class='brand-list-details2 onet'>{{item.name}}</view>
+              <view class='brand-list-details5 onet'><text>厂家指导价<text class='brand-list-three'>{{item.price/10000}}</text>万</text></view>
+              <view class='brand-list-details4 onet'><text class='brand-list-four'>首付<text>{{item.downpayment/10000}}</text>万</text><text class='brand-list-five'>月供<text>{{item.monthlysupply|Int}}</text>元</text></view>
+              </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    <view class="brand">
+    <Input  @childFn.user="my"></Input>
+    </view>
+      <view class="opg {{hideReTui ? 'hideOpg' : ''}}">
+        <view class="phone_one" bindtap="clickPersona">
+        <view class="phone_personal">{{firstPerson}}</view>
+        <image src="image/xila.png" class="personal_image {{selectArea ? 'rotateRight' :''}}" mode="widthFix"></image>
+        </view>
+        <view class="phone_one" bindtap="clickPersonb">
+        <view class="phone_personal">{{firstPersonb}}</view>
+        <image src="image/xila.png" class="personal_image {{selectAreb ? 'rotateRight' :''}}" mode="widthFix"></image>
+        </view>
+        <view class="phone_one" bindtap="clickPersonc">
+        <view class="phone_personal">{{firstPersonc}}</view>
+        <image src="image/xila.png" class="personal_image {{selectArec ? 'rotateRight' :''}}" mode="widthFix"></image>
+        </view>
+        <view class="phone_one" bindtap="clickPersond">
+        <view class="phone_personal">{{firstPersond}}</view>
+        <image src="image/xila.png" class="personal_image {{selectAred ? 'rotateRight' :''}}" mode="widthFix"></image>
+        </view>
+ </view>
+  <view class="person_box">
+    <view class="phone_select {{hideReTui ? 'phone_select2' : ''}}" hidden="{{selectPerson}}">
+    <view class="select_one {{_numm == 0?'add_cit':' '}}" bindtap="mySelect" data-id="0"  data-num = "0" data-me="默认排序">默认排序</view>
+    <view class="select_one {{_numm == 2?'add_cit':' '}}" bindtap="mySelect" data-id="1"  data-num = "2" data-me="车价最低">车价最低</view>
+    <view class="select_one {{_numm == 3?'add_cit':' '}}" bindtap="mySelect" data-id="2"  data-num = "3" data-me="首付最低">首付最低</view>
+    <view class="select_one {{_numm == 4?'add_cit':' '}}" bindtap="mySelect" data-id="3"  data-num = "4" data-me="月供最低">月供最低</view>
+  </view>
+  <view class="phone_select {{hideReTui ? 'phone_select2' : ''}}" hidden="{{selectPersonb}}">
+    <view class="phone_selectd_nr">
+      <view class="phone_selectd_nr_bq"></view>
+      <view class="phone_selectd_nr_list {{_num == 0?'add_citying':' '}}" data-id="0" data-num = "0" bindtap="clickNumt">不限</view>
+      <view class="phone_selectd_nr_list {{_num == 2?'add_citying':''}}" data-id="1" data-num = "2" bindtap="clickNumt">30万以下</view>
+      <view class="phone_selectd_nr_list {{_num == 3?'add_citying':''}}" data-id="2" data-num = "3" bindtap="clickNumt">30-40万</view>
+      <view class="phone_selectd_nr_list {{_num == 4?'add_citying':''}}" data-id="3" data-num = "4" bindtap="clickNumt">40-50万</view>
+      <view class="phone_selectd_nr_list {{_num == 5?'add_citying':''}}" data-id="4" data-num = "5" bindtap="clickNumt">50-60万</view>
+      <view class="phone_selectd_nr_list {{_num == 6?'add_citying':''}}" data-id="5" data-num = "6" bindtap="clickNumt">60万以上</view>
+    </view>
+  </view>
+  <view class="phone_select sadas {{hideReTui ? 'sadas2' : ''}}"   hidden="{{selectPersona}}">
+          <view class='select_one' bindtap="mySelectcpp">不限品牌</view> 
+         <view wx:for="{{sddss}}" wx:key="key">
+          <view class='select_one' wx:for="{{item.carbrandJA}}"  bindtap="mySelectc" data-id="{{city.carbrandid}}" wx:for-item="city" wx:for-index="idx" wx:key="city" data-detail="{{city}}" >
+               {{city.name}}
+        </view>
+        </view>
+  </view>
+  <view class="phone_selectd {{hideReTui ? 'phone_selectd2' : ''}}" hidden="{{selectPersond}}">
+     <view class="phone_selectd_nr">
+      <view class="phone_selectd_nr_bq">车价</view>
+      <view class="phone_selectd_nr_list {{_num == 0?'add_citying':' '}}" data-id="0" data-num = "0" bindtap="clickNum">不限</view>
+      <view class="phone_selectd_nr_list {{_num == 2?'add_citying':''}}" data-id="1" data-num = "2" bindtap="clickNum">30万以下</view>
+      <view class="phone_selectd_nr_list {{_num == 3?'add_citying':''}}" data-id="2" data-num = "3" bindtap="clickNum">30-40万</view>
+      <view class="phone_selectd_nr_list {{_num == 4?'add_citying':''}}" data-id="3" data-num = "4" bindtap="clickNum">40-50万</view>
+      <view class="phone_selectd_nr_list {{_num == 5?'add_citying':''}}" data-id="4" data-num = "5" bindtap="clickNum">50-60万</view>
+      <view class="phone_selectd_nr_list {{_num == 6?'add_citying':''}}" data-id="5" data-num = "6" bindtap="clickNum">60万以上</view>
+    </view>
+     <view class="phone_selectd_nr">
+      <view class="phone_selectd_nr_bq">首付（万）</view>
+      <view class="phone_selectd_nr_list {{_nume == 0?'add_citying':' '}}" data-ide="0" data-num = "0" bindtap="clickNume">不限</view>
+      <view class="phone_selectd_nr_list {{_nume == 1?'add_citying':''}}" data-ide="1" data-num = "1" bindtap="clickNume">8万以下</view>
+      <view class="phone_selectd_nr_list {{_nume == 2?'add_citying':''}}" data-ide="2" data-num = "2" bindtap="clickNume">8-12万</view>
+      <view class="phone_selectd_nr_list {{_nume == 3?'add_citying':''}}" data-ide="3" data-num = "3" bindtap="clickNume">12-16万</view>
+      <view class="phone_selectd_nr_list {{_nume == 4?'add_citying':''}}" data-ide="4" data-num = "4" bindtap="clickNume">16-20万</view>
+      <view class="phone_selectd_nr_list {{_nume == 5?'add_citying':''}}" data-ide="5" data-num = "5" bindtap="clickNume">20万以上</view>
+    </view>
+    <view class="phone_selectd_nr">
+      <view class="phone_selectd_nr_bq">月供</view>
+      <view class="phone_selectd_nr_list {{_numa == 0?'add_citying':' '}}" data-ida="0" data-num = "0" bindtap="clickNuma">不限</view>
+      <view class="phone_selectd_nr_list {{_numa == 1?'add_citying':' '}}" data-ida="1" data-num = "1" bindtap="clickNuma">0.6万以下</view>
+      <view class="phone_selectd_nr_list {{_numa == 2?'add_citying':' '}}" data-ida="2" data-num = "2" bindtap="clickNuma">0.6-0.8万</view>
+      <view class="phone_selectd_nr_list {{_numa == 3?'add_citying':' '}}" data-ida="3" data-num = "3" bindtap="clickNuma">0.8-1万</view>
+      <view class="phone_selectd_nr_list {{_numa == 4?'add_citying':' '}}" data-ida="4" data-num = "4" bindtap="clickNuma">1-1.2万</view>
+      <view class="phone_selectd_nr_list {{_numa == 5?'add_citying':' '}}" data-ida="5" data-num = "5" bindtap="clickNuma">1.2万以上</view>
+    </view>
+    <view class="phone_selectd_nr">
+      <view class="phone_selectd_nr_bq">期限</view>
+      <view class="phone_selectd_nr_list {{_numb == 0?'add_citying':' '}}" data-idb="0" data-num = "0" bindtap="clickNumb">不限</view>
+      <view class="phone_selectd_nr_list {{_numb == 1?'add_citying':' '}}" data-idb="1" data-num = "1" bindtap="clickNumb">12期</view>
+      <view class="phone_selectd_nr_list {{_numb == 2?'add_citying':' '}}" data-idb="2" data-num = "2" bindtap="clickNumb">24期</view>
+      <view class="phone_selectd_nr_list {{_numb == 3?'add_citying':' '}}" data-idb="3" data-num = "3" bindtap="clickNumb">36期</view>
+    </view>
+    <view class="phone_selectd_nr xia">
+ </view>
+    <view class='d'>
+        <view class='cz' bindtap="clickPersondp">重置</view>
+        <view class='qd' bindtap="clickPersondq">确定</view>
+    </view>
+  </view>
+ </view>
+
+<view class="barand-one {{hideReTui ? 'hideBrandOne' : ''}}">
+  <scroll-view class="barand-one-scroll" 
+    style="height: calc(100vh - {{hideReTui ? '192rpx' : '518rpx'}})" 
+    scroll-y
+    @scrolltolower="scrolltolower"
+    @scroll="scroll">
+    <view class='brand-list'  wx:for="{{carmodelja}}" wx:key="key"  @tap="xz_pp({{item.carmodelid}})"  data-index="{{item}}" id="{{item}}">
+      <view class='brand-list-img'><image class="widget__arrow" src="{{item.thumbnailimgurl}}" ></image></view>
+      <view class='brand-list-details' >
+        <view class='brand-list-details1'>{{item.carseriesname}}</view>
+        <view class='brand-list-details2'>{{item.name}}</view>
+        <view class='brand-list-details5'><text>厂家指导价<text class='brand-list-three'>{{item.price/10000}}</text>万</text></view>
+        <view class='brand-list-details3' wx:if="{{item.interest=='0'?false:true}}"><text class='brand-list-textone' hidden="{{selectPersonf}}">{{item.interest==1?'0':'低'}}息</text><!-- <text  class='brand-list-texttow'>洗车卷</text> --></view>
+        <view class='brand-list-details4'><text class='brand-list-four'>首付<text>{{item.downpayment/10000}}</text>万</text><text class='brand-list-five'>月供<text>{{item.monthlysupply|Int}}</text>元</text></view>
+      </view>
+    </view>
+    
+  </scroll-view>
+  <view  wx:if="{{code=='A00006'?true:false}}">
+      <view class="kong"  wx:if="{{carmodelJa==''?true:false}}">
+        <image class="kong-image1" src="image/wen.png" mode='widthFix'></image>
+        <view class="kongzi">暂未找到符合条件的车型,请更换条件后再试</view>
+      </view>
+    </view>
+</view>
+
+    </view>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import Input from '../components/substitution';
+export default class products extends wepy.page {
+  config = {
+    navigationBarTitleText: '热销好车',
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark'
+  };
+  components = {
+    Input: Input
+  };
+  data = {
+    // 默认排序显隐
+    selectPerson: true,
+    // 筛选字段
+    firstPerson: '默认排序',
+    firstPersonb: '车价',
+    firstPersonc: '品牌',
+    firstPersond: '筛选',
+    // 筛选条件图标状态
+    selectArea: false,
+    selectAreb: false,
+    selectArec: false,
+    selectAred: false,
+    // 车价显隐
+    selectPersonb: true,
+    // 品牌显隐
+    selectPersona: true,
+    // 筛选显隐
+    selectPersond: true,
+    // 筛选条件值
+    _num: 0,
+    _numa: 0,
+    _numb: 0,
+    _numc: 0,
+    _numd: 0,
+    _nume: 0,
+    _numm: 0,
+    // 车型列表
+    carmodelja: '',
+    carmodeltopja: [],
+    json_link: '',
+    tx: '',
+    // 首付
+    sf: '',
+    sddss: [], // 品牌列表
+    ygje: 0, // 月供
+    sfje: 0, // 首付
+    txje: 0, // 贴息标签
+    qxje: 0, // 期限
+    selectPersonf: false,
+    page: 1,
+    // 搜索字段
+    ipo: '""',
+    carbrandidd: '""',
+    carbrandidred: '', // 品牌id
+    pricetypesort: 0, // 价格排序
+    carpricesection: 0, // 车价,
+    // 热推隐藏
+    hideReTui: false,
+    searchLoadingComplete: false,
+    // scroll:false
+    // 滚动到底部
+    getSousuo: true,
+    searchLoading: false,
+    code:''
+  };
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path:
+          '/pages/products?page=1&pagesize=8&carpricesection=' +
+          this.carpricesection +
+          '&monthlysupplysection=' +
+          this.ygje +
+          '&loantermsection=' +
+          this.qxje +
+          '&downpaymentsection=' +
+          this.sfje +
+          '&carbrandid=' +
+          this.carbrandidred +
+          '&pricetypesort=' +
+          this.pricetypesort +
+          '&specialtype=hotsale'
+      };
+    },
+    // 重置
+    clickPersondp() {
+      let are = this;
+      let selectPersond = this.selectPersond;
+      let json_link = this.json_link;
+      are.firstPerson = '默认排序';
+      are.firstPersonc = '品牌';
+      are.pricetypesort = 0;
+      are.carpricesection = 0;
+      are.carbrandidred = '';
+      are._num = 0;
+      are._numa = 0;
+      are._numb = 0;
+      are._nume = 0;
+      are._numd = 0;
+      are.ygje = 0;
+      are.qxje = 0;
+      are.sfje = 0;
+      are.txje = 0;
+      are.page= 1
+    },
+    // 上拉刷新
+    scrolltolower() {
+      let json_link = this.$parent.globalData.json_link;
+      let parent_data = this.$parent.globalData;
+      if (this.getSousuo == false) {
+        this.searchLoading = true;
+        return;
+      }
+      wx.showLoading({
+        title: '加载中'
+      });
+      if (this.data.ipo != '') {
+        let this_ = this;
+        this_.page = this_.page + 1;
+        //    请求接口
+        this.getRexiao('onReachBottom');
+        return;
+      }
+      let this_ = this;
+      this_.page = this_.page + 1;
+      //    请求接口
+      this.getRexiao('onReachBottom');
+    },
+    // 监听滚动事件
+    scroll(e) {
+      let scrollTop = e.detail.scrollTop;
+      if (scrollTop < 10) {
+        this.hideReTui = false;
+      } else {
+        this.hideReTui = true;
+      }
+    },
+    // 搜索
+    my(e) {
+      let json_link = this.json_link;
+      let are = this;
+      if (e != '') {
+        wx.showLoading({
+          title: '加载中'
+        });
+        are.ipo = e;
+         are.firstPersonc = '品牌';
+         are.carbrandidred='';
+        this.getRexiao();
+      } else {
+        this.ipo = '""';
+        wx.showLoading({
+          title: '加载中'
+        });
+        let that = this;
+        let json_link = this.$parent.globalData.json_link;
+        let parent_data = this.$parent.globalData;
+        let access_token = parent_data.access_token;
+        this.getRexiao();
+      }
+    },
+    // 去金融产品列表
+    xz_pp(e) {
+      wx.navigateTo({
+        url: 'commodity_details?carmodelid=' + e
+      });
+
+      this.$parent.globalData.pageid = [e];
+      this.$parent.globalData.pagename = [3];
+      this.$parent.clicknumordernumstat(1);
+    },
+    /*切换筛选条件*/
+    clickNum(e) {
+      this._num = e.target.dataset.num;
+      this.carpricesection = e.target.dataset.id;
+    },
+    clickNuma(e) {
+      this._numa = e.target.dataset.num;
+      this.ygje = e.target.dataset.ida;
+    },
+    clickNumb(e) {
+      this._numb = e.target.dataset.num;
+      this.qxje = e.target.dataset.idb;
+    },
+    clickNumd(e) {
+      this._numd = e.target.dataset.num;
+      this.txje = e.target.dataset.idd;
+    },
+    clickNume(e) {
+      this._nume = e.target.dataset.num;
+      this.sfje = e.target.dataset.ide;
+    },
+    clickNumc(e) {
+      this._numc = e.target.dataset.num;
+    },
+    clickNumt(e) {
+      wx.showLoading({
+        title: '加载中'
+      });
+      this.page = 1;
+      this.carmodelja = [];
+      this._num = e.target.dataset.num;
+      this.firstPersonb = e.target.dataset.me;
+      this.carpricesection = e.target.dataset.id;
+      this.selectAreb = false;
+      this.selectPersonb = true;
+      let json_link = this.json_link;
+      let are = this;
+      this.getRexiao();
+    },
+    /*切换筛选条件*/
+
+    /*点击筛选条件*/
+    clickPersona() {
+      let selectPerson = this.data.selectPerson;
+      if (selectPerson == true) {
+        this.selectArea = true;
+        (this.selectAreb = false),
+          (this.selectArec = false),
+          (this.selectAred = false),
+          (this.selectPerson = false);
+        this.selectPersonb = true;
+        this.selectPersond = true;
+        this.selectPersona = true;
+      } else {
+        this.selectArea = false;
+        this.selectArec = false;
+        this.selectAreb = false;
+        this.selectPerson = true;
+        this.selectPersonb = true;
+        this.selectPersond = true;
+        this.selectPersona = true;
+      }
+    },
+    clickPersonb() {
+      let selectPersonb = this.data.selectPersonb;
+      if (selectPersonb == true) {
+        this.selectAreb = true;
+        (this.selectArea = false),
+          (this.selectArec = false),
+          (this.selectAred = false),
+          (this.selectPersonb = false);
+        this.selectPerson = true;
+        this.selectPersond = true;
+        this.selectPersona = true;
+      } else {
+        this.selectAreb = false;
+        this.selectPersonb = true;
+        this.selectPerson = true;
+        this.selectPersond = true;
+        this.selectPersona = true;
+      }
+    },
+    clickPersonc() {
+      let selectPersona = this.data.selectPersona;
+      if (selectPersona == true) {
+        this.selectArec = true;
+        (this.selectArea = false),
+          (this.selectAred = false),
+          (this.selectAreb = false),
+          (this.selectPersona = false);
+        this.selectPerson = true;
+        this.selectPersond = true;
+        this.selectPersona = false;
+      } else {
+        this.selectPersona = true;
+        this.selectArec = false;
+        this.selectPersonb = true;
+        this.selectPerson = true;
+        this.selectPersond = true;
+      }
+    },
+    clickPersond() {
+      let selectPersond = this.data.selectPersond;
+      if (selectPersond == true) {
+        (this.selectAred = true),
+          (this.selectAreb = false),
+          (this.selectArea = false),
+          (this.selectArec = false),
+          (this.selectPersond = false);
+        this.selectPersonb = true;
+        this.selectPerson = true;
+      } else {
+        this.selectAred = false;
+        this.selectPersond = true;
+        this.selectPersonb = true;
+        this.selectPerson = true;
+      }
+    },
+    clickPersondq() {
+      wx.showLoading({
+        title: '加载中'
+      });
+      let are = this;
+      let selectPersond = this.data.selectPersond;
+      let json_link = this.json_link;
+       are.page= 1;
+      this.getRexiao();
+      if (selectPersond == true) {
+        (this.selectAred = true),
+          (this.selectAreb = false),
+          (this.selectArea = false),
+          (this.selectArec = false),
+          (this.selectPersond = false);
+        this.selectPersonb = true;
+        this.selectPerson = true;
+      } else {
+        this.selectAred = false;
+        this.selectPersond = true;
+        this.selectPersonb = true;
+        this.selectPerson = true;
+      }
+    },
+    /*点击筛选条件*/
+    // 点击切换
+    mySelect(e) {
+      wx.showLoading({
+        title: '加载中'
+      });
+      this.page = 1;
+      this.carmodelja = [];
+      this._numm = e.target.dataset.num;
+      this.firstPerson = e.target.dataset.me;
+      this.pricetypesort = e.target.dataset.id;
+      this.selectArea = false;
+      this.selectPerson = true;
+
+      let json_link = this.json_link;
+      let are = this;
+      this.getRexiao();
+    },
+    mySelectc(e) {
+      wx.showLoading({
+        title: '加载中'
+      });
+      this.page = 1;
+      this.carmodelja = [];
+      this.firstPersonc = e.target.dataset.detail.name;
+      this.carbrandidred = e.target.dataset.id;
+      this.selectArec = false;
+      this.selectPersona = true;
+      let json_link = this.json_link;
+      let are = this;
+      are.code = 'A';
+      are.$invoke('Input', 'clearTap', e.target.dataset.detail.name); 
+      this.getRexiao();
+    },
+    mySelectcpp(e) {
+      wx.showLoading({
+        title: '加载中'
+      });
+      this.page = 1;
+      this.carmodelja = [];
+      this.firstPersonc = '品牌';
+      this.carbrandidred = '';
+      this.selectArec = false;
+      this.selectPersona = true;
+      let json_link = this.json_link;
+      let are = this;
+      are.code = 'A';
+      are.$invoke('Input', 'clearTap', '请选择品牌');
+      this.getRexiao();
+    }
+  };
+
+  // 初始化
+  onLoad() {
+    wx.showLoading({
+      title: '加载中'
+    });
+    let are = this;
+    // 定义url
+    let json_link = this.$parent.globalData.json_link;
+    are.json_link = json_link;
+    this.page = 1;
+    are.code = 'A';
+    are.sddss = [];
+    are.carmodelja = [];
+    are.carmodeltopja = [];
+    this.getRexiao();
+    this.getPinpai();
+  }
+
+  // 统计
+  onShow() {
+    this.$parent.globalData.UVselectType = 3;
+    this.$parent.UVstatistical('choosecarpage');
+    this.$parent.PVUVstatistical('hotsale');
+  }
+
+  // 获取热销好车数据
+  getRexiao(type) {
+    let are = this;
+    let selectPersond = this.selectPersond;
+    let json_link = this.json_link;
+    wx.request({
+      // url拼接
+      url: json_link + '/api/wxapp/carspecialarea/hotsale',
+      method: 'POST',
+      header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        page: are.page,
+        pagesize: 8,
+        searchdata:
+          '{searchname:' +
+          are.ipo +
+          ',carpricesection:' +
+          are.carpricesection +
+          ',monthlysupplysection:' +
+          are.ygje +
+          ',loantermsection:' +
+          are.qxje +
+          ',downpaymentsection:' +
+          are.sfje +
+          ',carbrandid:"' +
+          are.carbrandidred +
+          '",pricetypesort:' +
+          are.pricetypesort +
+          '}'
+      },
+      // 后台返回值
+      success(data) {
+        wx.hideLoading();
+        // 定义返回值的数据
+        if (type === 'onReachBottom') {
+          if (data.data.carmodelJA.length > 0) {
+            are.getSousuo = true;
+
+            are.carmodelja = are.carmodelja.concat(data.data.carmodelJA);
+            are.$apply();
+          } else {
+            are.page -= 1;
+            are.getSousuo = false;
+            are.searchLoading = true;
+            wx.showToast({
+              title: '已经到底线啦~'
+            });
+            are.$apply();
+          }
+        } else {
+          are.carmodelja = data.data.carmodelJA;
+          are.code = data.data.code;
+        }
+        are.carmodeltopja = data.data.carmodeltopJA;
+        // 给数据进行绑定
+        are.$apply();
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+        return;
+      }
+    });
+  }
+
+  // 获取品牌列表
+  getPinpai() {
+    let are = this;
+    let json_link = this.json_link;
+    wx.request({
+      url: json_link + '/api/wxapp/newcarloan/brand/specialareabrandlist',
+      data: {
+        specialtype: 'hotsale'
+      },
+      success(res) {
+        are.sddss = res.data.carbrandgroupJA;
+        are.$apply();
+      }
+    });
+  }
+
+  // 初始化数据
+  init() {
+    let are = this;
+    let selectPersond = this.selectPersond;
+    let json_link = this.json_link;
+    are.firstPerson = '默认排序';
+    are.firstPersonc = '品牌';
+    are.pricetypesort = 0;
+    are.carpricesection = 0;
+    are.carbrandidred = '';
+    are._num = 0;
+    are._numa = 0;
+    are._numb = 0;
+    are._nume = 0;
+    are._numd = 0;
+    are.ygje = 0;
+    are.qxje = 0;
+    are.sfje = 0;
+    are.txje = 0;
+    are.ipo = '""';
+    are.sddss = [];
+    are.carmodelja = [];
+    are.carmodeltopja = [];
+    are.hideReTui = false;
+    are.selectPersona = true;
+  }
+
+  onUnload() {
+    this.init();
+  }
+  // 下拉刷新
+  onPullDownRefresh() {
+    wx.showLoading({
+      title: '加载中'
+    });
+    let are = this;
+    let selectPersond = this.selectPersond;
+    let json_link = this.json_link;
+    wx.request({
+      // url拼接
+      url: json_link + '/api/wxapp/carspecialarea/hotsale',
+      method: 'POST',
+      header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        page: are.page,
+        pagesize: 8,
+        searchdata:
+          '{searchname:' +
+          are.ipo +
+          ',carpricesection:' +
+          are.carpricesection +
+          ',monthlysupplysection:' +
+          are.ygje +
+          ',loantermsection:' +
+          are.qxje +
+          ',downpaymentsection:' +
+          are.sfje +
+          ',carbrandid:"' +
+          are.carbrandidred +
+          '",pricetypesort:' +
+          are.pricetypesort +
+          '}'
+      },
+      // 后台返回值
+      success(data) {
+        wx.hideLoading();
+        // 定义返回值的数据
+        are.carmodelja = data.data.carmodelJA;
+        are.code = data.data.code;
+        are.carmodeltopja = data.data.carmodeltopJA;
+        wx.stopPullDownRefresh();
+        // 给数据进行绑定
+        are.$apply();
+      }
+    });
+  }
+}
+</script>

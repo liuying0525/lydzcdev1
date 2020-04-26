@@ -1,0 +1,167 @@
+<style lang="less">
+/**index.wxss**/
+.opinion-textarea {
+  width: 85%;
+  height: 300px;
+  border: 2px #f2f2f2 solid;
+  margin: 40rpx 36rpx 90rpx 36rpx;
+  padding: 19rpx;
+  font-size: 10pt;
+  border-radius: 4pt;
+}
+.opinion-button {
+  width: 91%;
+  background: rgb(92, 69, 195);
+  color: #fff;
+}
+</style>
+<template>
+     <view class="testresult">
+    <userinfo_alert @childFn.user="alert_userinfo" text_zhi="东正金融请求授权登录"></userinfo_alert>
+    <alert_l @childFn.user="alert_tel" text_zhi="东正金融请求授权手机号"></alert_l>
+     <view class="opinion">
+        <form bindsubmit="bindFormSubmit">
+            <textarea placeholder="您留下的每个字都将帮助我们改善产品，期待您的反馈！" name="textarea" class='opinion-textarea' maxlength='200'/>
+            <button form-type="submit" class='opinion-button'> 提交 </button>
+        </form>
+    </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy';
+import Userinfo_alert from '../components/userinfo_alert';
+import Alert from '../components/alert';
+export default class opinion extends wepy.page {
+  config = {
+    navigationBarTitleText: '意见反馈'
+  };
+  components = {
+    userinfo_alert: Userinfo_alert,
+    alert_l: Alert
+  };
+
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    alert_userinfo(e) {
+      let this_ = this;
+      let zhi = this.$parent.globalData;
+      this_.$invoke('userinfo_alert', 'chufa', false);
+      zhi.java_login(e.detail, this_.request_cs);
+    },
+    alert_tel(res) {
+      let this_ = this;
+      let zhi = this.$parent.globalData;
+      zhi.login_telnum_iv = res.iv;
+      zhi.login_telnum_miyao = res.miyao;
+      this_.$invoke('alert_l', 'chufa', false);
+      // 查看是否授权
+      wx.getSetting({
+        success: function(res) {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: function(res) {
+                zhi.java_login(res, this_.request_cs);
+              }
+            });
+          } else {
+            this_.$invoke('userinfo_alert', 'chufa', true);
+          }
+        }
+      });
+    },
+    // 意见反馈
+    bindFormSubmit(e) {
+      if (e.detail.value.textarea != '') {
+        let this_ = this;
+        let json_link = this.$parent.globalData.json_link;
+        let parent_data = this.$parent.globalData;
+        if (parent_data.access_token != '') {
+          wx.request({
+            url:
+              parent_data.json_link +
+              '/api/wxapp/opinionfeedback/post?access_token=' +
+              parent_data.access_token,
+            method: 'POST',
+            header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+              content: e.detail.value.textarea
+            },
+            success: function(data) {
+              wx.showToast({
+                title: '成功',
+                icon: 'success',
+                duration: 2000
+              });
+              setTimeout(function() {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }, 2000);
+            },
+            fail: function() {
+              wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+              });
+
+              setTimeout(function() {
+                wx.hideToast();
+              }, 2000);
+              return;
+            }
+          });
+        } else {
+          this_.$invoke('alert_l', 'chufa', true);
+          this_.request_cs = function(access_token) {
+            wx.request({
+              url:
+                parent_data.json_link +
+                '/api/wxapp/opinionfeedback/post?access_token=' +
+                parent_data.access_token,
+              method: 'POST',
+              header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              data: {
+                content: e.detail.value.textarea
+              },
+              success: function(data) {
+                wx.showToast({
+                  title: '成功',
+                  icon: 'success',
+                  duration: 2000
+                });
+                setTimeout(function() {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }, 2000);
+              },
+              fail: function() {
+                wx.showToast({
+                  title: '网络异常',
+                  icon: 'none'
+                });
+
+                setTimeout(function() {
+                  wx.hideToast();
+                }, 2000);
+                return;
+              }
+            });
+          };
+        }
+      } else {
+        wx.showToast({
+          title: '不能为空',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }
+  };
+}
+</script>

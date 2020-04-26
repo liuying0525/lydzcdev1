@@ -1,0 +1,192 @@
+
+<style lang="less">
+.view1 {
+  width: 95%;
+  line-height: 75rpx;
+  font-size: 28rpx;
+  color: #000;
+  padding-left: 5%;
+}
+.wrapper {
+  height: 100vh;
+}
+/* 关闭滚动条  */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.list-search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 90rpx;
+  padding: 10rpx 30rpx;
+  box-sizing: border-box;
+  z-index: 20;
+  background: #fff;
+}
+
+.search-title {
+  flex-shrink: 0;
+  font-size: 28rpx;
+  padding-right: 10rpx;
+}
+
+.list-search-box {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  width: 100%;
+  height: 70rpx;
+  background: #f5f5f5;
+  border-radius: 90rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.list-search-box input {
+  width: 100%;
+  padding-left: 10rpx;
+}
+
+.search-button {
+  flex-shrink: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin-left: 10rpx;
+}
+</style>
+<template>
+  <view>
+    <view>
+    <view class="view1"  bindtap="resdf">不限品牌</view>
+    <view class='wrapper'>
+      <list-html leotiancai="{{city}}" binddetail="bindtap" search="{{value}}"></list-html>
+    </view>
+  </view>
+  <sidebar @childFn.user="linkTo2"></sidebar>
+  </view>
+
+</template>
+
+<script>
+import wepy from 'wepy';
+import Sidebar from '../components/sidebar';
+import Substitution from '../components/substitution';
+
+export default class pinpai extends wepy.page {
+  config = {
+    navigationBarTitleText: '选择品牌',
+    usingComponents: {
+      'list-html': '../components/wx-index-list/wx-index-list'
+    }
+  };
+
+  components = {
+    sidebar: Sidebar,
+    substitution:Substitution
+  };
+
+  data = {
+    name: 'leo',
+    // 城市列表
+    city: [],
+    carbrandgroupJA: [],
+    zt: ''
+  };
+
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/pinpai'
+      };
+    },
+    linkTo2(url, evt) {
+      this.$navigate(url, { carseriesid: evt });
+    },
+    // 点击品牌
+    bindtap(e) {
+      let zhi = e.detail;
+      let carbrandid = zhi.carbrandid;
+      let name = zhi.name;
+      if (this.zt == '1') {
+        this.$invoke('sidebar', 'someMethod', {carbrandid: carbrandid});
+      } else {
+        // 非热门品牌进入
+        
+        this.$parent.globalData.biaoji = '1';
+        this.$parent.globalData.nameors = name;
+        this.$parent.globalData.pinpaiid = carbrandid;
+         this.$parent.globalData.turn='品牌页';
+        wx.navigateBack({
+          delta: -1
+        });
+      }
+    },
+    // 选择不限品牌
+    resdf() {
+      this.$parent.globalData.biaoji = '2';
+      this.$parent.globalData.nameors = '品牌';
+      this.$parent.globalData.pinpaiid = '""';
+      this.$parent.globalData.turn='品牌页';
+      wx.navigateBack({
+        delta: -1
+      });
+    },
+  };
+  onLoad(res) {
+    this.$parent.globalData.biaoji = '0';
+    wx.showLoading({
+      title: '加载中'
+    });
+    var this_ = this;
+    if (res.zhi == '热门品牌') {
+      this_.zt = '1';
+    }
+    var json_link = this.$parent.globalData.json_link;
+    // 选择品牌
+    wx.request({
+      url: json_link + '/api/wxapp/newcarloan/brand/brandlist',
+      data: {},
+      success: function(data) {
+        var zhi = data.data;
+        let City = [];
+        for (var i = 0; i < zhi.carbrandgroupJA.length; i++) {
+          City.push({
+            title: zhi.carbrandgroupJA[i].firstpinyin,
+            item: zhi.carbrandgroupJA[i].carbrandJA
+          });
+        }
+        this_.city = City;
+        this_.city = City;
+        wx.hideLoading();
+        this_.$apply();
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+
+        setTimeout(function() {
+          wx.hideToast();
+        }, 2000);
+        return;
+      }
+    });
+  }
+  // 隐藏sliderbar
+  onShow() {
+    this.$invoke('sidebar', 'clear_yy');
+  }
+   onUnload() {
+    this.zt= '';
+  }
+}
+</script>

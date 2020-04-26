@@ -1,0 +1,211 @@
+<style lang="less">
+    .cardUpBook {
+        padding-top: 110rpx;
+        .titles{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            text-align: center;
+            background: #fff;
+            padding: 40rpx 0 10rpx;
+            z-index: 100;
+        }
+        .title{
+            font-size: 30rpx;
+            color: #4b4b4b;
+            padding-bottom: 12rpx;
+            border-bottom: 8rpx solid #fff;
+            margin: 0 auto;
+            max-width: 220rpx;
+            flex: 1.0;
+        }
+        .activeTitle{
+            color: #6044ca;
+            border-color: #6044ca;
+        }
+        .bookImg {
+            display: block;
+            height: 698rpx;
+            width: 560rpx;
+            margin: 0 auto;
+            background: #cacfd5;
+        }
+        .bookBox {
+            position: relative;
+            height: 860rpx;
+            width: 647rpx;
+            margin: 0 auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 80rpx 43rpx 0;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        }
+        .textInfo {
+            font-size: 22rpx;
+            color: #767373;
+            line-height: 36rpx;
+            margin-top: 15rpx;
+        }
+        .saveBtn {
+            font-size: 30rpx;
+            color: #7b60e2;
+            text-align: center;
+            margin-top: 30rpx;
+        }
+        .nextBtn {
+            width: 545rpx;
+            height: 72rpx;
+            line-height: 72rpx;
+            text-align: center;
+            background: #6044cb;
+            color: #fff;
+            -webkit-border-radius: 6rpx;
+            -moz-border-radius: 6rpx;
+            border-radius: 6rpx;
+            margin: 50rpx auto 0;
+        }
+        .waitBtn {
+            width: 545rpx;
+            height: 72rpx;
+            line-height: 72rpx;
+            text-align: center;
+            margin:0 auto;
+            color: #767373;
+            font-size: 24rpx;
+        }
+        .addBtn {
+            width: 174rpx;
+            height: 300rpx;
+            margin: 255rpx auto 0;
+            text-align: center;
+            color: #767373;
+            font-size: 27rpx;
+            image {
+                height: 174rpx;
+                width: 174rpx;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                background: silver;
+                margin-bottom: 32rpx;
+            }
+        }
+        .delete {
+            position: absolute;
+            top: 46rpx;
+            right: 16rpx;
+            height: 60rpx;
+            width: 60rpx;
+        }
+    }
+</style>
+<template>
+    <view class="cardUpBook">
+        <view class="titles">
+            <view class="title {{imgType==='authorizationFile'?'activeTitle':''}}" @tap="changeState('authorizationFile')">扣款授权书</view>
+            <view class="title {{imgType==='stopAuthorizationFile'?'activeTitle':''}}"  @tap="changeState('stopAuthorizationFile')">终止划扣授权书</view>
+        </view>
+        <view class="bookBox">
+            <image class="bookImg" src="{{imgSrc}}" mode="aspectFit" wx:if="{{imgSrc!==''}}"></image>
+            <image src="{{url_link?url_link + '/delete.png':''}}" class="delete" wx:if="{{imgSrc!==''}}" @tap="deleteImg"></image>
+            <view class="addBtn" @tap="getBook" wx:if="{{imgSrc===''}}">
+                <image></image>
+                <text>点击上传</text>
+            </view>
+        </view>
+        <view class="nextBtn" @tap="upBook">提交</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import toastInfo from '../components/toastInfo'
+  export default class CardUpBook extends wepy.page{
+    config = {
+      navigationBarTitleText: '还款卡变更'
+    }
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link:'',
+      parent_data: '',
+      imgType: 'authorizationFile',
+      authorizationFile: '',
+      stopAuthorizationFile: '',
+      authorizationFileNum: '',
+      stopAuthorizationFileNum: '',
+      changeId: '',
+      imgSrc: ''
+    }
+    methods = {
+      changeState: function(imgType) {
+        this.imgType = imgType;
+        this.imgSrc = this[this.imgType]
+      },
+      upBook: function () {
+        let that = this;
+        wx.request({
+          url: that.parent_data.json_dhLink + '/paycardModifyRecord/upload/authorization',
+          data: {
+            authorizationFile: that.authorizationFileNum,
+            stopAuthorizationFile: that.stopAuthorizationFileNum,
+            userId: that.parent_data.login_userId,
+            loginToken: that.parent_data.login_token,
+            modifyId: that.changeId
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function(res) {
+            if (res.data.code == '10001') {
+              wx.navigateBack({
+                delta: 1
+              })
+            } else {
+              that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+            }
+          },
+          fail: function( ) {
+            console.log('还款卡变更申请失败')
+          }
+        })
+      },
+      getBook: function () {
+        let that = this;
+        wx.chooseImage({
+          success: function(res) {
+            var tempFilePaths = res.tempFilePaths;
+            that[that.imgType] = tempFilePaths[0];
+            that.imgSrc = that[that.imgType]
+            that.$apply();
+            wx.uploadFile({
+              url: that.parent_data.json_dhLink + '/upload/wx',
+              filePath: tempFilePaths[0],
+              name: 'file',
+              success: function(res) {
+                that[that.imgType+'Num'] = JSON.parse(res.data).data;
+                that.$apply();
+              }
+            });
+          }
+        })
+      },
+      deleteImg: function () {
+        this[this.imgType] = '';
+        this[this.imgType + 'Num'] = '';
+        this.imgSrc = '';
+      }
+    }
+    onLoad(options) {
+      this.parent_data = this.$parent.globalData;
+      this.url_link = this.$parent.globalData.url_link;
+      this.changeId = options.id;
+    }
+  }
+</script>

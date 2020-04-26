@@ -1,0 +1,369 @@
+<style lang="less">
+  .earlyList {
+    view,input{
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    padding: 130rpx 50rpx 46rpx;
+    .earlyTime {
+      height: 85rpx;
+      line-height: 85rpx;
+      font-size: 26rpx;
+      padding: 0 58rpx;
+      border-bottom: 1px solid #e4e6eb;
+    }
+    .titles{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      text-align: center;
+      background: #fff;
+      padding: 40rpx 0 10rpx;
+      z-index: 100;
+    }
+    .title{
+      font-size: 30rpx;
+      color: #4b4b4b;
+      padding-bottom: 12rpx;
+      border-bottom: 8rpx solid #fff;
+      margin: 0 auto;
+      max-width: 120rpx;
+      flex: 1.0;
+    }
+    .activeTitle{
+      color: #6044ca;
+      border-color: #6044ca;
+    }
+    .earlyBox {
+      -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      margin-bottom: 34rpx;
+    }
+    .earlyItem{
+      position: relative;
+      padding: 38rpx 58rpx 50rpx;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      .textImage{
+        width: 220rpx;
+        height: 148rpx;
+        margin-bottom: 44rpx;
+        image{
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .textItem{
+        width: 100%;
+        font-size: 26rpx;
+        margin-bottom: 44rpx;
+      }
+      .changeBtn{
+        width: 136rpx;
+        height: 46rpx;
+        line-height: 46rpx;
+        color: #fff;
+        background: #6044cb;
+        text-align: center;
+        -webkit-border-radius: 6rpx;
+        -moz-border-radius: 6rpx;
+        border-radius: 6rpx;
+        margin-right: 66rpx;
+        padding: 4rpx 10rpx;
+        border: 1px solid #6044cb;
+      }
+      .cancelBtn{
+        .changeBtn;
+        border: 1px solid #6044cb;
+        color: #6044cb;
+        background: #fff;
+        float: left;
+        margin:0 10rpx;
+      }
+      .editBtn {
+        background: #6044cb;
+        color: #fff;
+      }
+      .getAgain {
+        background: #00c7ae;
+        border-color: #00c7ae;
+        color: #fff;
+      }
+      .itemState {
+        position: absolute;
+        right: 66rpx;
+        top:190rpx;
+        image{
+          height:105rpx ;
+          width: 139rpx;
+        }
+      }
+    }
+    .cancelReason{
+      background: #f2f4f8;
+      padding: 38rpx 58rpx;
+      .textItem{
+        width: 100%;
+        font-size: 26rpx;
+        margin-bottom: 0rpx;
+      }
+    }
+  }
+  .createOne{
+    height: 82rpx;
+    line-height: 82rpx;
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+    background: #6144cb;
+    font-size: 30rpx;
+    width: 100%;
+    text-align: center;
+    .addIcon{
+      color: #fff;
+      font-size: 40rpx;
+      font-weight: bolder;
+      padding-right: 10rpx;
+    }
+  }
+  .createOnePro {
+    height: 112rpx;
+    line-height: 82rpx;
+    padding: 0 0 30rpx;
+  }
+  .noData {
+    width: 500rpx;
+    margin: 300rpx auto;
+    image {
+      display: block;
+      height: 252rpx;
+      width: 309rpx;
+      margin: 0 auto;
+    }
+    .textInfo {
+      text-align: center;
+      font-size: 36rpx;
+      line-height: 120rpx;
+    }
+  }
+</style>
+<template>
+  <view class="earlyList">
+    <view class="titles">
+      <view class="title {{state==0?'activeTitle':''}}" @tap="changeState(0)">受理中</view>
+      <view class="title {{state==1?'activeTitle':''}}"  @tap="changeState(1)">已受理</view>
+      <view class="title {{state==2?'activeTitle':''}}"  @tap="changeState(2)">已取消</view>
+    </view>
+    <view class="earlyBox" wx:for="{{list}}" wx:key="{{item.id}}">
+      <view class="earlyTime">提交时间 ：{{item.createTime}}</view>
+      <view class="earlyItem">
+        <!--<view class="textImage">-->
+          <!--<image src="{{item.cardnumurl}}" mode="aspectFit"></image>-->
+        <!--</view>-->
+        <view class="textItem">姓名 : {{item.name}}</view>
+        <view class="textItem">手机号 : {{item.telephone}}</view>
+        <view class="textItem">新卡卡号 : {{item.bankCardNew}}</view>
+        <view class="textItem">合同号：{{item.contractNo}}</view>
+        <view class="textItem">合同信息 : {{item.carInfo}}</view>
+        <view class="textItem" style="margin: 0;height:80rpx;" wx:if="{{item.status == 0}}">
+          <text class="cancelBtn"  @tap="cancelSubmit({{item.id}})">取消申请</text>
+          <!--<text class="cancelBtn editBtn" @tap="uploadBook({{item.id}})" wx:if="{{!item.authorizationImg}}">上传授权书</text>-->
+          <!--<text class="cancelBtn getAgain"  @tap="getAgain({{item.id}})">重新获取</text>-->
+        </view>
+        <view class="itemState">
+          <image src="{{url_link?url_link+ states[state]:''}}"></image>
+        </view>
+      </view>
+      <view class="cancelReason" wx:if="{{state == 2}}">
+        <view class="textItem">取消类型  ：  {{item.cancelTypeStr}}</view>
+        <view class="textItem" style="margin-top: 28rpx;" wx:if="{{item.cancelType==2}}">取消原因  ：  {{item.cancelReason}}</view>
+      </view>
+    </view>
+    <view class="noData" wx:if="{{noData_show}}">
+      <image src="{{url_link?url_link + '/noData.png':''}}" mode="aspectFit"></image>
+      <view class="textInfo">啊哦，暂无记录~</view>
+    </view>
+  </view>
+  <view class="createOne {{iphoneX?'createOnePro':''}}"  @tap="add" wx:if="{{!existProcessing}}"><text class="addIcon">+</text>新建申请</view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  export default class cardList extends wepy.page {
+    config = {
+      navigationBarTitleText: '还款卡变更',
+      onReachBottomDistance: 50
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      iphoneX:false,
+      url_link: '',
+      parent_data: '',
+      states: ['earlySLZ.png','earlyYSL.png','earlyYQX.png'],
+      state: 0,
+      list: [], // 列表
+      currentNum: 1, // 当前页
+      existProcessing: false
+    };
+    computed = {
+      // 缺省压面是否显示
+      noData_show: function () {
+        if (this.list.length == 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    };
+    methods = {
+      changeState: function(state) {
+        this.state = state;
+        this.list = [];
+        this.currentNum = 1;
+        this.getList();
+      },
+      // 新建申请
+      add: function () {
+        this.$navigate('cardPerson');
+      },
+      //上传授权书
+      uploadBook: function (id) {
+        this.$navigate('cardUpBook', {id: id});
+      },
+      // 重新获取
+      getAgain: function (id) {
+        this.$navigate('cardGetAgain', {id: id});
+      },
+      cancelSubmit: function (id) {
+        let that = this;
+        wx.showModal({
+          title: '温馨提示',
+          content: '小主，确定取消该手机号修改申请吗？',
+          cancelText: '再想想',
+          confirmText: '确定',
+          success(res) {
+            if (res.confirm) {
+              wx.request({
+                url: that.parent_data.json_dhLink + '/paycardModifyRecord/cancel',
+                data: {
+                  userId: that.parent_data.login_userId,
+                  loginToken: that.parent_data.login_token,
+                  recordId: id
+                },
+                method: 'POST',
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded' // 默认值
+                },
+                success: function(res) {
+                  if (res.data.code == '10001') {
+                    that.list = [];
+                    that.currentNum = 1;
+                    that.getList();
+                  } else {
+                    that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+                  }
+                },
+                fail: function( ) {
+                  console.log('还款卡变更申请失败')
+                }
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    };
+    getList() {
+      let that = this;
+      wx.showLoading({
+        title: '加载中',
+      });
+      wx.request({
+        url: that.parent_data.json_dhLink + '/paycardModifyRecord/list',
+        data: {
+          pageNum: that.currentNum,
+          pageSize: 10,
+          loginToken: that.parent_data.login_token,
+          userId: that.parent_data.login_userId,
+          status: that.state
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            wx.hideLoading();
+            that.existProcessing = res.data.data.existProcessing;
+            for(let i in res.data.data.list) {
+              res.data.data.list[i].createTime = that.timeReg(res.data.data.list[i].createTime)
+            }
+            if (res.data.data.list.length > 0) {
+              that.list = that.list .concat(res.data.data.list);
+              that.$apply();
+            } else {
+              if (that.currentNum == 1) {
+                that.list = res.data.data.list;
+                that.$apply();
+              } else {
+                that.currentNum = that.currentNum <= 1 ? 1: that.currentNum- 1;
+                wx.showToast({
+                  title: '加载全部',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+                return false;
+            }
+          } else {
+            wx.hideLoading();
+            that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+          }
+        }
+      })
+    }
+    timeReg (num) {
+      let date = new Date(num * 1000);
+      let Y = date.getFullYear() + '-';
+      let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+      let D = date.getDate() < 10? ('0'+ (date.getDate()) + ' ') : (date.getDate() + ' ');
+      let h = date.getHours() < 10 ? (('0' + date.getHours()) + ':') : (date.getHours() + ':');
+      let m = date.getMinutes() < 10 ? (('0' + date.getMinutes()) + ':') : (date.getMinutes() + ':');
+      let s = date.getSeconds()< 10 ? ('0' + date.getSeconds()) : date.getSeconds();
+      return Y+M+D+h+m+s;
+    }
+    onPullDownRefresh() {
+      this.list = [];
+      this.currentNum = 1;
+      this.getList();
+    }
+    onReachBottom() {
+      this.currentNum = this.currentNum + 1;
+      this.getList();
+    }
+    onLoad() {
+    }
+    onShow() {
+      this.url_link = this.$parent.globalData.url_link;
+      this.parent_data = this.$parent.globalData;
+      var res = wx.getSystemInfoSync();
+      if (res.model.search('iPhone X') !== -1) {
+        this.iphoneX = true;
+      } else {
+        this.iphoneX = false;
+      }
+      if (this.parent_data.login_token !== '') {
+        this.currentNum = 1;
+        this.list = [];
+        this.getList();
+      } else {
+        this.$redirect('secLogin',{backUrl: 'cardList'});
+      }
+    }
+  }
+</script>

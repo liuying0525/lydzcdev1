@@ -1,0 +1,372 @@
+<style lang="less">
+  .testresult {
+    background: #eee;
+  }
+
+  .phone_selectd_nr {
+    width: 90%;
+    padding: 42rpx 40rpx 20rpx 40rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+  }
+
+  .phone_selectd_nr_list {
+    display: block;
+    width: 30%;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #000;
+    border-radius: 8rpx;
+    border: 1px solid #a5a5a5;
+    margin-bottom: 36rpx;
+    float: left;
+  }
+
+  .one {
+    width: 96%;
+    margin: 0 auto;
+    font-size: 32rpx;
+    color: rgb(0, 199, 174);
+    line-height: 70rpx;
+  }
+
+  .one_one {
+    width: 88%;
+    margin: 0 6%;
+    background: #fff;
+    border-radius: 5rpx;
+    box-shadow: 8rpx 10rpx 3rpx rgb(207, 206, 206);
+  }
+
+  .one_one_re {
+    font-size: 30rpx;
+    line-height: 70rpx;
+    padding: 0 3%;
+    border-bottom: #cecccc 1rpx solid;
+  }
+
+  .di {
+    font-size: 34rpx;
+    color: #555555;
+    margin: 2% 5%;
+  }
+
+  .diw {
+    margin-left: 20rpx;
+    transform: scale(-1, 1);
+    font-size: 34rpx;
+    color: #555555;
+    float: right;
+    position: relative;
+  }
+
+  .one_one_mose {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+  }
+
+  .csx {
+    margin-right: 30rpx;
+  }
+
+  .csxds {
+    display: flex;
+    border-bottom: 1rpx #ccc solid;
+    width: 80%;
+    line-height: 60rpx;
+  }
+
+  .dz {
+    flex: 1;
+    color: rgb(0, 199, 174);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ds {
+    width: 80%;
+    line-height: 60rpx;
+    display: flex;
+  }
+
+  .add_citying {
+    color: #fff;
+    background: rgb(0, 199, 174);
+    border: 1px solid rgb(0, 199, 174);
+  }
+
+  .zxkf {
+    width: 100%;
+    line-height: 100rpx;
+    background: rgb(92, 69, 195);
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    font-size: 28rpx;
+  }
+
+  .sdsdsd {
+    width: 100%;
+    height: 120rpx;
+  }
+
+  .leo_xinzeng {
+    border: none;
+  }
+
+  page {
+    background-color: #efeff4;
+  }
+
+  .tui-picker-content {
+    padding: 30rpx;
+    text-align: center;
+  }
+
+  .tui-picker-name {
+    height: 80rpx;
+    line-height: 80rpx;
+  }
+
+  // .tui-picker-detail{
+  //   height: 80rpx;
+  //   line-height: 80rpx;
+  //   background-color: #fff;
+  //   font-size: 35rpx;
+  //   padding: 0 10px;
+  //   overflow: hidden;
+  // }
+</style>
+<template>
+  <view class="testresult">
+    <view class="one">1</view>
+    <view class="one_one">
+      <view class="one_one_re">选择车型与购车城市</view>
+      <view class="one_one_mose">
+        <text class="di iconfont #icon-qiche"></text>
+        <view class="csxds" @tap="csxds_btn">
+          <text class="csx">车型</text>
+          <text class="dz">{{cx_name}}</text>
+          <text class="diw iconfont #icon-jiantou"></text>
+        </view>
+      </view>
+      <view class="one_one_mose">
+        <text class="di iconfont #icon-dingwei1"></text>
+        <view class="ds">
+          <text class="csx">城市</text>
+          <view class="dz">
+            <picker bindchange="changeCountry" value="{{countryIndex}}" range="{{city}}">
+              <view class="tui-picker-detail">{{country}}
+                <text class="diw iconfont #icon-jiantou"></text>
+              </view>
+            </picker>
+
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view class="one">2</view>
+    <view class="one_one">
+      <view class="one_one_re">您的户口所在地是？</view>
+      <view class="phone_selectd_nr">
+        <view class="phone_selectd_nr_list {{_numa == 0?'add_citying':' '}}" data-ide="0" data-numa="0" bindtap="clickNuma">
+          本地
+        </view>
+        <view class="phone_selectd_nr_list {{_numa == 1?'add_citying':' '}}" data-ide="1" data-numa="1" bindtap="clickNuma">
+          外地
+        </view>
+      </view>
+    </view>
+    <view class="one">3</view>
+    <view class="one_one">
+      <view class="one_one_re">您的住房状态是？</view>
+      <view class="phone_selectd_nr">
+        <view class="phone_selectd_nr_list {{_numc == 0?'add_citying':' '}}" data-ide="1" data-numc="0" bindtap="clickNumc">按揭
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 1?'add_citying':' '}}" data-ide="2" data-numc="1" bindtap="clickNumc">共有住宅
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 2?'add_citying':' '}}" data-ide="3" data-numc="2" bindtap="clickNumc">集体宿舍
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 3?'add_citying':' '}}" data-ide="4" data-numc="3" bindtap="clickNumc">亲属楼宇
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 4?'add_citying':' '}}" data-ide="5" data-numc="4" bindtap="clickNumc">直租
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 5?'add_citying':' '}}" data-ide="6" data-numc="5" bindtap="clickNumc">租房
+        </view>
+        <view class="phone_selectd_nr_list {{_numc == 6?'add_citying':' '}}" data-ide="0" data-numc="6" bindtap="clickNumc">其他
+        </view>
+        <view class="phone_selectd_nr_list leo_xinzeng">
+        </view>
+        <view class="phone_selectd_nr_list leo_xinzeng">
+        </view>
+      </view>
+    </view>
+    <view class="one">4</view>
+    <view class="one_one dsers">
+      <view class="one_one_re">您的月收入是？</view>
+      <view class="phone_selectd_nr">
+        <view class="phone_selectd_nr_list {{_numd == 0?'add_citying':' '}}" data-ide="1" data-numd="0" bindtap="clickNumd">1万以下
+        </view>
+        <view class="phone_selectd_nr_list {{_numd == 1?'add_citying':' '}}" data-ide="2" data-numd="1" bindtap="clickNumd">1万-1.5万
+        </view>
+        <view class="phone_selectd_nr_list {{_numd == 2?'add_citying':' '}}" data-ide="3" data-numd="2" bindtap="clickNumd">1.5万-2.0万
+        </view>
+        <view class="phone_selectd_nr_list {{_numd == 3?'add_citying':' '}}" data-ide="4" data-numd="3" bindtap="clickNumd">2.0万-2.5万
+        </view>
+        <view class="phone_selectd_nr_list {{_numd == 4?'add_citying':' '}}" data-ide="5" data-numd="4" bindtap="clickNumd">2.5万-3.0万
+        </view>
+        <view class="phone_selectd_nr_list {{_numd == 5?'add_citying':' '}}" data-ide="6" data-numd="5" bindtap="clickNumd">3.0万以上
+        </view>
+      </view>
+    </view>
+    <view class="sdsdsd"></view>
+    <view class="zxkf" @tap="submit_tj">
+      提交申请
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class choose extends wepy.page {
+    config = {
+      navigationBarTitleText: '帮您贷款'
+    };
+
+    data = {
+      // 户口所在地
+      _numa: 0,
+      // 住房状态
+      _numc: 0,
+      // 月收入
+      _numd: 0,
+      // 选择车型input文本
+      cx_name: '点击选择车型',
+      // 城市名
+      cityname: '',
+      // 车型id
+      carmodelid: '',
+      // 户口
+      nativeplace: '0',
+      // 住房状态
+      householdtype: '1',
+      // 月收入
+      monthlysupplysection: 1,
+      // 普通选择器列表设置,及初始化
+      countryIndex: 1,
+      // 城市
+      country: '选择城市',
+      city: []
+    };
+
+    methods = {
+      // 分享
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/choose'
+        };
+      },
+      // 城市下拉框数据
+      changeCountry(e) {
+        this.country = this.city[e.detail.value];
+      },
+      // 选择车型
+      csxds_btn() {
+        this.$navigate('brand');
+      },
+      // 户口所在地
+      clickNuma(e) {
+        this._numa = e.target.dataset.numa;
+        this.nativeplace = e.target.dataset.ide;
+      },
+      // 住房状态
+      clickNumc(e) {
+        this._numc = e.target.dataset.numc;
+        this.householdtype = e.target.dataset.ide;
+      },
+      // 月收入
+      clickNumd(e) {
+        this._numd = e.target.dataset.numd;
+        this.monthlysupplysection = e.target.dataset.ide;
+      },
+      // 提交申请
+      submit_tj() {
+        let this_ = this;
+        let carmodelid = this.carmodelid;
+        let cityname = this.country;
+        let nativeplace = this.nativeplace;
+        let householdtype = this.householdtype;
+        let monthlysupplysection = this.monthlysupplysection;
+        // 判断条件
+        if (!carmodelid || cityname == '选择城市') {
+          wx.showToast({
+            title: '信息填写未完成',
+            icon: 'none'
+          });
+        } else {
+          // borrow
+          this_.$redirect('borrow', {
+            carmodelid: carmodelid,
+            cityname: cityname,
+            nativeplace: nativeplace,
+            householdtype: householdtype,
+            monthlysupplysection: monthlysupplysection
+          });
+        }
+      }
+    };
+    // 城市列表接口
+    chengshi() {
+      let this_ = this;
+      let json_link = this_.$parent.globalData.json_link;
+      wx.request({
+        // url拼接
+        url: json_link + '/api/wxapp/appointment/businessprocity',
+        // 后台返回值
+        success: function (data) {
+          let zhi = data.data.data;
+          let length = data.data.data.length - 1;
+          let City = [];
+          // city push添加数据
+          for (var i = 0; i < length; i++) {
+            City.push(zhi[i].state_name);
+          }
+          // 赋值
+          this_.city = City;
+          // 给数据进行绑定
+          this_.$apply();
+        }
+      });
+    }
+    onLoad(res) {
+      // 移除缓存中的车型数据
+      wx.removeStorageSync('chexing');
+      let parent_data = this.$parent.globalData;
+      this.chengshi();
+      this.$apply();
+    }
+    onShow() {
+      // 统计
+      this.$parent.PVUVstatistical('helpyouload');
+      // 从缓存中取出carmodelid和cx_name
+      if (wx.getStorageSync('chexing')) {
+        this.carmodelid = wx.getStorageSync('chexing').carmodelid;
+        this.cx_name = wx.getStorageSync('chexing').name;
+      }
+    }
+    onUnload() {
+      // 移除缓存中的车型数据
+      wx.removeStorageSync('chexing');
+    }
+  }
+</script>

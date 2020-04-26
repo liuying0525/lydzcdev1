@@ -1,0 +1,140 @@
+<style lang="less">
+    .submitSuccess{
+        padding: 110rpx 90rpx;
+        .successIcon{
+            height: 128rpx;
+            width: 128rpx;
+            margin: 0 auto;
+            image{
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .successTitle{
+            font-size: 34rpx;
+            color: #000;
+            text-align: center;
+            margin: 54rpx auto 90rpx;
+        }
+        .successInfo{
+            font-size: 26rpx;
+            line-height: 40rpx;
+        }
+        .earlyBtn{
+            width: 546rpx;
+            height: 74rpx;
+            line-height: 74rpx;
+            color: #fff;
+            background: rgb(96,68,203);
+            font-size: 30rpx;
+            -webkit-border-radius: 10rpx;
+            -moz-border-radius: 10rpx;
+            border-radius: 10rpx;
+            margin: 86rpx auto 0;
+            text-align: center;
+        }
+        .cancelBtn{
+            .earlyBtn;
+            font-size: 24rpx;
+            color: #6044cb;
+            background: #fff;
+            margin-top: 0;
+        }
+        .earlyInfo {
+            width: 546rpx;
+            margin: 30rpx auto 0;
+            font-size: 22rpx;
+            color: #595959;
+            line-height: 36rpx;
+        }
+    }
+</style>
+<template>
+    <view class="submitSuccess">
+        <view class="successIcon">
+            <image src="{{url_link?url_link+'/submitS.png':''}}"></image>
+        </view>
+        <view class="successTitle">提交成功!</view>
+        <view class="successInfo">
+            提前还款已受理，将有客服人员(021-2068开头的座机号码)与您取得联系，请保持手机畅通。
+        </view>
+        <view class="earlyBtn" @tap="goList">确定</view>
+        <view class="cancelBtn" @tap="cancelSubmit">取消申请</view>
+        <view class="earlyInfo">
+            *已提交的提前还款申请可于扣款日之前在提前还款页面取消,如有疑问可联系<text style="color: #6044cb;" @tap="makeCall('400-920-7258')">400-920-7258</text>咨询
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    import toastInfo from '../components/toastInfo'
+    export default class earlySubmit extends wepy.page {
+      config = {
+        navigationBarTitleText: '提前还款'
+      };
+      components = {
+        toastInfo: toastInfo
+      };
+      data = {
+        url_link: '',
+        datas: '',
+        parent_data: ''
+      };
+      methods = {
+        // 取消申请
+        cancelSubmit: function () {
+          let that = this;
+          wx.showModal({
+            title: '温馨提示',
+            content: '小主，确定取消该前提还款申请吗？',
+            cancelText:'再想想',
+            confirmText:'确定',
+            success (res) {
+              if (res.confirm) {
+                wx.request({
+                  url: that.parent_data.json_dhLink + '/repayment/cancel',
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded' // 默认值
+                  },
+                  method: 'POST',
+                  data: {repaymentId: that.datas.id,loginToken: that.parent_data.login_token, userId: that.parent_data.login_userId},
+                  success: function (res) {
+                    if (res.data.code == '10001') {
+                      that.$redirect('earlyCancel')
+                    } else {
+                      that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+                    }
+                  },
+                  fail: function () {
+                    console.log('取消申请失败了');
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        },
+        // 去列表
+        goList: function () {
+          // this.$redirect('earlyList')
+          wx.navigateBack({
+            delta: 2
+          })
+        },
+        makeCall: function (phone) {
+          wx.makePhoneCall({
+            phoneNumber: phone
+          })
+        }
+      };
+      onLoad(options) {
+        this.datas = options;
+      }
+      onShow() {
+        this.url_link = this.$parent.globalData.url_link;
+        this.parent_data = this.$parent.globalData;
+      }
+    }
+</script>

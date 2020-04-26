@@ -1,0 +1,346 @@
+<style lang="less">
+.order-view2 {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.order-view2-view1 {
+  width: 32%;
+  text-align: center;
+}
+.order-view2-view1 image {
+  width: 100%;
+}
+.songchexiang {
+  width: 88%;
+  font-size: 24rpx;
+  margin: 0 auto;
+  lint-height: 38rpx;
+  border: 1rpx rgb(0, 199, 174) solid;
+  padding: 4rpx;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+}
+.order-view2-view2 {
+  width: 65%;
+  letter-spacing: 3rpx;
+}
+.order-view2-view4 {
+  font-size: 31rpx;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  padding-bottom: 20rpx;
+}
+.order-view2-view5 {
+  font-size: 28rpx;
+  color: rgb(68, 68, 68);
+}
+.zxkf {
+  width: 100%;
+  line-height: 100rpx;
+  background: rgb(92, 69, 195);
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  font-size: 34rpx;
+}
+.order-view2-view3 {
+  line-height: 30rpx;
+  margin: 20rpx 10rpx 40rpx 0rpx;
+}
+.order-view2 {
+  padding: 10rpx 0;
+}
+.order-view1-view3 {
+  font-size: 24rpx;
+  margin-top: 52rpx;
+}
+.order-view1-view3 text text {
+  color: red;
+}
+.jiage1 {
+  margin-left: 20rpx;
+}
+.daxiao1 {
+  color: rgb(0, 199, 174);
+  // pa-top:2rpx
+  // padding-top:2rpx;
+  padding-right: 10rpx;
+  font-size: 24rpx;
+}
+.order-te1 {
+  border-top: 7rpx #eee solid;
+  padding: 0 5%;
+  padding-top: 30rpx;
+  margin-bottom: 50rpx;
+}
+.order-te2 {
+  line-height: 80rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.order-te2 image {
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+.order-te4 {
+  font-size: 28rpx;
+  color: rgb(82, 82, 82);
+}
+.order-te5 {
+  font-size: 28rpx;
+  color: #000;
+  margin-left: -6.5%;
+  margin-top: 10rpx;
+  display: flex;
+}
+.order-te3 {
+  margin-left: 9%;
+  margin-top: 10rpx;
+  // margin-bottom:30rpx;
+}
+.daxiao3 {
+  font-size: 34rpx;
+  color: rgb(0, 199, 174);
+  //  margin-left:-3rpx;
+  margin-right: 7rpx;
+}
+.order-we1 {
+  border-top: 7rpx #eee solid;
+  padding: 0 5%;
+  padding-top: 15rpx;
+  margin-bottom: 50rpx;
+}
+.order-we2 {
+  line-height: 80rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.order-we3 {
+  display: flex;
+  font-size: 34rpx;
+  line-height: 38rpx;
+  margin-top: 50rpx;
+  align-items: center;
+  // display: table-cell;
+
+  vertical-align: middle;
+}
+.order-we3 image {
+  width: 40rpx;
+  margin-right: 20rpx;
+  font-size: 28rpx;
+}
+.index_ss {
+  background: #eee;
+  margin-left: 20rpx;
+  width: 69%;
+  padding-left: 20rpx;
+  height: 66rpx;
+}
+.placeholder {
+  font-size: 28rpx;
+  //  margin-left:20rpx
+}
+.index_sa {
+  margin-left: 55rpx;
+  height: 66rpx;
+}
+.order-we4 image {
+  width: 45rpx !important;
+}
+.daxiao4 {
+  width: 50rpx;
+  height: 20rpx;
+  position: absolute;
+  right: 10%;
+  text-align: center;
+  line-height: 120rpx;
+  transform: rotate(180deg);
+  font-size: 36rpx;
+}
+.nem {
+  width: 80%;
+}
+</style>
+<template>
+        <view class="order-view1">
+           <view class="order-view2">
+               <view class="order-view2-view1">
+                   <image src="{{img_url}}" mode="widthFix"></image>
+               </view>
+               <view class="order-view2-view2">
+                   <view class="order-view2-view3">
+                       <view class="order-view2-view4"><text>{{cahg}}</text></view>
+                       <view class="order-view2-view5"><text>{{name}}</text></view>
+                   </view>
+                   <view class="order-view1-view3">
+                        <text class="jiage">首付<text>{{sf/10000}}</text>万</text>
+                        <text class="jiage1"><text>{{yg}}</text>元/月</text>
+                   </view>
+               </view>
+           </view>
+           <view class="order-te1" @tap='toMendian({{wp}},{{wpid}})'>
+           <view class="order-te2"><image src="image/dm@3x.png" mode="widthFix"></image>预约门店</view>
+           <view class="order-te3">
+               <view class="order-te4">{{md.business_partner_nme}}</view>
+               <view class="order-te5"><text class="daxiao3 iconfont #icon-dingwei"></text><view class="nem">{{md.building_nme}}</view></view>
+           </view>
+           <view class="daxiao4  iconfont icon-jiantou"></view>
+           </view>
+            <view class="zxkf" @tap="click_">
+            提交申请
+        </view>
+        </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class personal extends wepy.page {
+  config = {
+    navigationBarTitleText: '预约确认'
+  };
+  data = {
+    // 门店信息
+    zhi: {},
+    img_url: '',
+    name: '',
+    // 产品名
+    finan: '',
+    // 首付
+    sf: '',
+    // 月供
+    yg: '',
+    // 姓名
+    username: '',
+    // 身份证号
+    sfz: '',
+    cahg: '',
+    // 产品外部id
+    wp: '',
+    wpid: '',
+    // 产品id
+    shuju: '',
+    // 门店信息
+    md: [],
+    disabled: true
+  };
+
+  methods = {
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    // 选择门店
+    toMendian(e, a) {
+      let this_ = this;
+      let json_link = this.$parent.globalData.json_link;
+      wx.navigateTo({
+        url: 'mendian?e=' + e + '&a=' + a + '&json_link=' + json_link
+      });
+    },
+    // 提交申请
+    click_() {
+      if (this.disabled == false) {
+        return;
+      }
+      this.shengqin();
+    },
+    // 输入姓名
+    username(e) {
+      this.username = e.detail.value;
+    },
+    // 输入身份证号
+    usersfz(e) {
+      this.sfz = e.detail.value;
+    }
+  };
+
+  // 初始化订单
+  onLoad(e, res) {
+    console.log(e)
+    console.log(res)
+    this.PVUVfrom = e.PVUVfrom;
+    if (e.PVUVfrom === 'zhizu') {
+      this.$parent.PVUVstatistical('rentfillinorderpage');
+    }
+    let this_ = this;
+    this_.zhi = e;
+    this_.shuju = res.from.zhi.productlist[0].financialproductid;
+    this_.img_url = e.thumbnailimgurl;
+    this_.name = e.name;
+    this_.finan = e.financialproductName;
+    this_.wp = res.from.zhi.productlist[0].financial_product_id;
+    this_.wpid = e.asset_model_cde;
+    this_.sf = e.downpayment;
+    this_.yg = e.monthsuppert;
+    this_.cahg = e.carseriesname;
+    this_.md = res.from.zhi.productlist[0].businessinfoJO;
+    this_.$apply();
+  }
+  // 申请
+  shengqin() {
+    let this_ = this;
+    let json_link = this.$parent.globalData.json_link;
+    this.json_link = json_link;
+    let parent_data = this.$parent.globalData;
+
+    wx.request({
+      url:
+        parent_data.json_link +
+        '/api/wxapp/reservationorder/createorder?access_token=' +
+        parent_data.access_token,
+      data: {
+        carmodelid: this_.zhi.carmodelid,
+        financialproductid: this_.shuju,
+        downpaymentratio: 20,
+        businessid: this_.md.businessid,
+        term: 36,
+        tailmoney: 0,
+        downpaymentpara: this_.zhi.downpayment / 10000,
+        productpara: this_.zhi.financingamt,
+        finalpayment: 0,
+        monthlysupply: this_.zhi.monthsuppert,
+        source: parent_data.source,
+        sourceid: parent_data.sourceid
+      },
+      success: function(data) {
+        if(data.data.code=="A00005"){
+          wx.showToast({
+          title: data.data.errmsg,
+          icon: 'none'
+        });
+        return
+        }
+        this_.disabled = true;
+        this_.$apply();
+        data.data.orderinfo.from = 'details';
+        this_.$navigate('successfulorder', data.data.orderinfo);
+      },
+      fail: function() {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
+
+        setTimeout(function() {
+          wx.hideToast();
+        }, 2000);
+        return;
+      }
+    });
+  }
+  // 初始化数据
+  onShow() {
+    this.$parent.UVstatistical('loanproductdetail');
+    this.$parent.PVUVstatistical('loanproductdetail');
+    if (this.$parent.globalData.selectMendian.businessid) {
+      this.md = this.$parent.globalData.selectMendian;
+    }
+  }
+}
+</script>

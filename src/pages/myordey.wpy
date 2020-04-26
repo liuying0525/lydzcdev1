@@ -1,0 +1,513 @@
+<style lang="less">
+.successfulorder {
+  width: 100%;
+}
+.successfulorder-danhao {
+  font-size: 20rpx;
+  display: flex;
+  padding: 20rpx 40rpx;
+  border-top: 2rpx #eee solid;
+  align-items: center;
+  color: rgb(85, 85, 85);
+}
+.successfulorder-anniu {
+  font-size: 24rpx;
+  color: rgb(92, 69, 195);
+  position: absolute;
+  right: 70rpx;
+}
+
+.successfulorder-xinxi {
+  display: flex;
+  padding: 20rpx 0rpx 20rpx 40rpx;
+  align-items: center;
+}
+.successfulorder-tupian {
+  width: 240rpx;
+}
+.successfulorder-xiangqing-one {
+  margin-bottom: 30rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.successfulorder-xiangqing-tow {
+  font-size: 28rpx;
+}
+.fenqi {
+  color: rgb(68, 68, 68) !important;
+}
+.successfulorder-xiangqing-tow text {
+  color: rgb(247, 0, 0);
+}
+
+.successfulorder-xiangqing-dinwei {
+  width: 20rpx;
+  height: 30rpx;
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+}
+.successfulorder-xiangqing-dizhi {
+  display: flex;
+  font-size: 24rpx;
+  color: rgb(68, 68, 68);
+}
+.successfulorder-xiangqing {
+  line-height: 42rpx;
+  margin-left: 30rpx;
+  width: 60%;
+}
+.scheme {
+  font-size: 26rpx;
+  display: flex;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  font-weight: 600;
+  padding: 20rpx 40rpx;
+  border-bottom: 2rpx #eee solid;
+}
+.scheme-one {
+  width: 60%;
+  border-right: 4rpx #eee solid;
+  white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+
+}
+.scheme-tow {
+  width: 35%;
+  text-align: center;
+}
+.scheme-one text {
+  font-weight: 500;
+  color: #999;
+}
+.liwu {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 16rpx;
+  padding-top: 2rpx;
+}
+.about-img-img {
+  width: 100%;
+  height: 140rpx;
+}
+.daxiao3 {
+  font-size: 34rpx;
+  color: rgb(0, 199, 174);
+  margin-right: 7rpx;
+}
+.successfulorder-danhao-2 {
+  margin-left: 30rpx;
+}
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
+}
+.content {
+  width: 100%;
+  line-height: 22px;
+  margin-right: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(50px);
+  transform: translateX(50px);
+  margin-left: -50px;
+}
+.del {
+  background-color: rgb(153, 153, 153);
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(50px);
+  transform: translateX(50px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.touch-move-active .content,
+.touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.kong {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.kong-image1 {
+  width: 250rpx;
+  height: 202rpx;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  margin-left: -116rpx;
+  margin-top: -20rpx;
+}
+
+.kong-image2 {
+  width: 250rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  margin-left: -116rpx;
+  margin-top: -20rpx;
+}
+
+.brand-list-textone1 {
+  font-size: 22rpx;
+  display: inline-block;
+  padding: 0 10rpx;
+  text-align: center;
+  line-height: 34rpx;
+  border: 2rpx #00c7ae solid;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+}
+.tiexu{
+    font-size: 22rpx;
+  display: inline-block;
+  padding: 0 10rpx;
+  text-align: center;
+  line-height: 34rpx;
+  border: 2rpx #00c7ae solid;
+  border-radius: 8rpx;
+  margin-top: 10rpx;
+}
+</style>
+<template>
+        <view class="">
+               <userinfo_alert @childFn.user="alert_userinfo" text_zhi="东正金融请求授权登录"></userinfo_alert>
+  <alert_l @childFn.user="alert_tel" text_zhi="东正金融请求授权手机号"></alert_l>
+      <view class="kong" wx:if="{{text.length === 0}}">
+      <image class="kong-image1" src="image/kong.png" mode='widthFix'></image>
+      <image class="kong-image2" src="image/guanguang.png" mode='widthFix'  bindtap='gg'></image>
+    </view>
+            <view class="container">
+ <view  wx:if="{{text.length > 0}}" class="touch-item {{footIndex == index ? 'touch-move-active' : ''}}" data-index="{{index}}" @touchstart="touchstart" @touchmove="touchmove" wx:for="{{text}}" wx:key="key">
+    <view class='successfulorder content'  bindtap="to_xq({{item}}, {{item.collectiontype}})">
+        <view class='successfulorder-xinxi'>
+              <view class='successfulorder-tupian'>
+                <view class='brand-list-textone1'>{{item.collectiontype === 0 ? '新车贷' : '直租'}}</view>
+                <image class="about-img-img" src="{{item.carmodel.thumbnailimgurl}}"  mode="aspectFill"></image>
+              </view>
+              <view class='successfulorder-xiangqing'>
+                <view class='successfulorder-xiangqing-one'>{{item.carmodel.name}}</view>
+                <view class='successfulorder-xiangqing-tow' wx:if="{{item.collectiontype === 1 ?false:true}}">首付<text>{{item.downpayment}}</text>万  月供<text>{{item.msup}}</text>元</view>
+                <view class='successfulorder-xiangqing-tow' wx:if="{{item.collectiontype === 0 ?false:true}}">首付<text>{{item.downpayment}}</text>万  月租<text>{{item.msup}}</text>元</view>
+               <view class='tiexu'  wx:if="{{item.financial_product.interest === 1 ?true:false}}">{{item.financial_product.interest === 1 ? '0息' : ''}}</view>
+               <view class='tiexu' wx:if="{{item.financial_product.interest === 2 ?true:false}}">{{item.financial_product.interest === 2 ? '低息' : ''}}</view>
+              </view>
+
+        </view>
+        <!-- <view class='scheme' wx:if="{{item.collectiontype === 0}}"> -->
+        <view class='scheme' >
+            <view class='scheme-one'>产品金融方案：
+                <text wx:if="{{item.financial_product.financial_name!=''?false:true}}">{{item.financial_product.financial_name}}</text>
+                <text wx:if="{{item.financial_product.line_pro_name!=''?true:false}}">{{item.financial_product.line_pro_name}}</text>
+              </view>
+            <view class='scheme-tow' wx:if="{{!item.financial_product.activityJO.name?false:true}}"><image class="liwu" src="image/lw@2x.png"></image>{{item.financial_product.activityJO.name}}</view>
+        </view>
+    </view>
+
+      <view class="del"  @tap="del({{item.collectionid}})" data-index="{{index}}">删除</view>
+ </view>
+</view>
+        </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import Userinfo_alert from '../components/userinfo_alert';
+import Alert from '../components/alert';
+
+export default class myordey extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的收藏'
+  };
+  components = {
+    userinfo_alert: Userinfo_alert,
+    alert_l: Alert
+  };
+  data = {
+    request_cs: function() {},
+    startX: 0, //开始坐标
+    startY: 0,
+    // 车型id
+    carmodelid: '',
+    // 产品id
+    financialproductid: '',
+    // 收藏列表数据
+    text: [],
+    // 当前左滑的item索引
+    footIndex: -1,
+  };
+  methods = {
+    onShareAppMessage: function () {
+    return {
+          path: '/pages/index'
+        }
+      },
+    // 去首页
+    gg(e) {
+      wx.reLaunch({
+        url: 'index'
+      });
+    },
+    // 收藏列表跳转详情
+    to_xq(e, collectiontype){
+      this.footIndex = -1;
+      this.$parent.globalData.UVselectType = -1;
+      let carmodelid = e.carmodel.carmodelid;
+      let financialproductid = e.financial_product.financialproductid;
+      let downpaymentpercent = 20;
+      let loanterm = e.term;
+      if (collectiontype == 0) {
+        // 贷款
+        let res = {carmodelid:carmodelid,financialproductid:financialproductid,downpaymentpercent:downpaymentpercent,loanterm:loanterm};
+        this.$navigate('details',res);
+      } else {
+        // 直租
+        let res = {carmodelid:carmodelid,financialid:financialproductid,downpaymentpercent:downpaymentpercent,loanterm:loanterm};
+        this.$navigate('straight_detail',res);
+      }
+    },
+    //删除事件
+    del(e) {
+      let this_ = this;
+      let json_link = this.$parent.globalData.json_link;
+      let parent_data = this.$parent.globalData;
+      wx.showModal({
+        title: '取消收藏',
+        content: '是否取消该商品收藏',
+        success(res) {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '删除中'
+            });
+            wx.request({
+              url:
+                parent_data.json_link +
+                '/api/wxapp/collection/unoper?access_token=' +
+                parent_data.access_token,
+              data: {
+                collectionid: e
+              },
+              success: function(data) {
+                wx.request({
+                  url:
+                    parent_data.json_link +
+                    '/api/wxapp/collection/mycollectionlist?access_token=' +
+                    parent_data.access_token,
+                  data: {},
+                  success: function(data) {
+                    setTimeout(function() {
+                      wx.hideLoading();
+                    }, 0);
+                      this_.footIndex = -1;
+                    wx.showToast({
+                      title: '删除收藏成功',
+                      icon: 'success',
+                      duration: 700
+                    });
+                    this_.text = data.data.data;
+                    // 取值.00
+                this_.text = data.data.data.map((ele) => {
+                    ele.downpayment = ele.downpayment.toFixed(2);
+                    return ele;
+                  });
+                  this_.text = data.data.data.map((ele) => {
+                    ele.msup = ele.msup.toFixed(2);
+                    return ele;
+                  });
+                    // 给数据进行绑定
+                    this_.$apply();
+                  }
+                });
+              }
+            });
+          } else if (res.cancel) {
+            this_.footIndex = -1;
+          }
+          this_.$apply();
+        }
+      })
+    },
+    // 开始滑动
+    touchstart(e) {
+      this.startX = e.changedTouches[0].clientX;
+      this.startY = e.changedTouches[0].clientY;
+    },
+    alert_userinfo(e) {
+      let this_ = this;
+      let zhi = this.$parent.globalData;
+      this_.$invoke('userinfo_alert', 'chufa', false);
+      zhi.java_login(e.detail, this_.request_cs);
+    },
+    alert_tel(res) {
+      let this_ = this;
+      let zhi = this.$parent.globalData;
+      zhi.login_telnum_iv = res.iv;
+      zhi.login_telnum_miyao = res.miyao;
+      this_.$invoke('alert_l', 'chufa', false);
+      // 查看是否授权
+      wx.getSetting({
+        success: function(res) {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: function(res) {
+                zhi.java_login(res, this_.request_cs);
+              }
+            });
+          } else {
+            this_.$invoke('userinfo_alert', 'chufa', true);
+          }
+        }
+      });
+    },
+    //滑动事件处理
+    touchmove(e) {
+      var that = this,
+        index = e.currentTarget.dataset.index, //当前索引
+        startX = that.data.startX, //开始X坐标
+        startY = that.data.startY, //开始Y坐标
+        touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+        touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
+        //获取滑动角度
+        angle = that.angle(
+          { X: startX, Y: startY },
+          { X: touchMoveX, Y: touchMoveY }
+        );
+
+      that.text.forEach(function(v, i) {
+        //滑动超过30度角 return
+        if (Math.abs(angle) > 30) return;
+        if (i == index) {
+          if (touchMoveX > startX) {
+            //右滑
+            if (that.footIndex == index) {
+              that.footIndex = -1;
+            }
+          } else {
+            //左滑
+            that.footIndex = index;
+          }
+        }
+      });
+    },
+    alert_tel(res) {
+      let this_ = this;
+      let zhi = this.$parent.globalData;
+      zhi.login_telnum_iv = res.iv;
+      zhi.login_telnum_miyao = res.miyao;
+      this_.$invoke('alert_l', 'chufa', false);
+      // 查看是否授权
+      wx.getSetting({
+        success: function(res) {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            wx.getUserInfo({
+              success: function(res) {
+                zhi.java_login(res, this_.request_cs);
+              }
+            });
+          } else {
+            this_.$invoke('userinfo_alert', 'chufa', true);
+          }
+        }
+      });
+    }
+  };
+    //   /**
+    //    * 计算滑动角度
+    //    * @param {Object} start 起点坐标
+    //    * @param {Object} end 终点坐标
+    //    */
+  angle(start, end) {
+    var _X = end.X - start.X,
+      _Y = end.Y - start.Y;
+    //返回角度 /Math.atan()返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+  }
+
+  onLoad() {
+    let this_ = this;
+    let json_link = this.$parent.globalData.json_link;
+    let parent_data = this.$parent.globalData;
+    if (parent_data.access_token != '') {
+      wx.showLoading({
+        title: '加载中'
+      });
+      // 收藏列表
+      wx.request({
+        url:
+          parent_data.json_link +
+          '/api/wxapp/collection/mycollectionlist?access_token=' +
+          parent_data.access_token,
+        data: {},
+        success: function(data) {
+          setTimeout(function() {
+            wx.hideLoading();
+          }, 0);
+
+          this_.text = data.data.data;
+
+           this_.text = data.data.data.map((ele) => {
+              ele.downpayment = ele.downpayment.toFixed(2);
+              return ele;
+            });
+             this_.text = data.data.data.map((ele) => {
+              ele.msup = ele.msup.toFixed(2);
+              return ele;
+            });
+          // 给数据进行绑定
+          this_.$apply();
+        }
+      });
+    } else {
+      this_.$invoke('alert_l', 'chufa', true);
+      this_.request_cs = function(access_token) {
+        // 收藏列表
+        wx.request({
+          url:
+            parent_data.json_link +
+            '/api/wxapp/collection/mycollectionlist?access_token=' +
+            parent_data.access_token,
+          data: {},
+          success: function(data) {
+            setTimeout(function() {
+              wx.hideLoading();
+            }, 0);
+            this_.text = data.data.data.map((ele) => {
+               ele.downpayment = ele.downpayment.toFixed(2);
+              return ele;
+            });
+            // 给数据进行绑定
+            this_.$apply();
+          }
+        });
+      };
+    }
+  }
+
+  onShow() {
+    this.onLoad();
+  }
+
+  // 初始化
+  onUnload() {
+    this.footIndex = -1;
+  }
+}
+</script>

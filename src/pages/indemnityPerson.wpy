@@ -1,0 +1,433 @@
+<style lang="less">
+    .indemnityPerson {
+        view,input{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        padding: 46rpx 50rpx;
+        .indemnityPersonT{
+            padding: 0 58rpx 30rpx;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            .title{
+                height: 100rpx;
+                line-height: 100rpx;
+                font-size: 30rpx;
+                color: #000;
+                text-align: center;
+                margin-bottom: 10rpx;
+            }
+            .textItem{
+                position: relative;
+                width: 100%;
+                height: 56rpx;
+                font-size: 26rpx;
+                margin-bottom: 44rpx;
+                text{
+                    float: left;
+                    line-height: 56rpx;
+                }
+                .early{
+                    color: rgb(96,68,203);
+                    position: relative;
+                }
+                .earlyHelp{
+                    position: absolute;
+                    display: block;
+                    right: -30rpx;
+                    top: -10rpx;
+                    line-height: 26rpx;
+                    width: 26rpx;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                    text-align: center;
+                    border: 1px solid rgb(96,68,203);
+                    font-size: 20rpx;
+                }
+                .earlyTime{
+                    height: 56rpx;
+                    padding:0 20rpx;
+                    margin-left: 40rpx;
+                }
+                input{
+                    float: right;
+                    height: 56rpx;
+                    border: 1px solid #ddd;
+                    width: 370rpx;
+                    padding-left: 30rpx;
+                    font-size: 24rpx;
+                }
+            }
+            .textItemInfos {
+                position: absolute;
+                line-height: 56rpx;
+                border: 1px solid #e5e5e5;
+                border-bottom: none;
+                border-top: none;
+                width: 370rpx;
+                font-size: 24rpx;
+                right: 0;
+                top: 56rpx;
+                z-index: 100;
+                .textItemInfo{
+                    height: 56rpx;
+                    border-bottom: 1px solid #e5e5e5;
+                    font-size: 20rpx;
+                    color: #393939;
+                    background: #fff;
+                    /*text-align: center;*/
+                    white-space: nowrap;
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                }
+            }
+            .textItemPic{
+                position: relative;
+                width: 100%;
+                height: auto;
+                display: inline-block;
+                min-height:100rpx;
+                font-size: 26rpx;
+                margin-bottom: 44rpx;
+                .pic{
+                    position: relative;
+                    height: 120rpx;
+                    width: 176rpx;
+                    line-height: 116rpx;
+                    text-align: center;
+                    border: 2rpx dashed #ddd;
+                    font-size: 50rpx;
+                    color: #666;
+                    font-weight: bold;
+                    float: left;
+                    margin:0 18rpx 18rpx 0;
+                    text{
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        text-align: center;
+                    }
+                    .srcImg{
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        background: #eee;
+                    }
+                    .deleteImg {
+                        height: 40rpx;
+                        width: 40rpx;
+                        position: absolute;
+                        right: -6rpx;
+                        top: -12rpx;
+                        background:#fff;
+                        z-index: 1000;
+                        -webkit-border-radius: 50%;
+                        -moz-border-radius: 50%;
+                        border-radius: 50%;
+                    }
+                }
+                .pic:nth-of-type(2n) {
+                    margin-right: 0;
+                }
+                .picBox{
+                    float: right;
+                    width: 370rpx;
+                }
+                .picText{
+                    line-height: 120rpx;
+                }
+            }
+        }
+        .earlyBtn{
+            width: 546rpx;
+            height: 74rpx;
+            line-height: 74rpx;
+            color: #fff;
+            background: rgb(96,68,203);
+            font-size: 30rpx;
+            -webkit-border-radius: 10rpx;
+            -moz-border-radius: 10rpx;
+            border-radius: 10rpx;
+            margin: 86rpx auto 0;
+            text-align: center;
+        }
+        .earlyNoBtn{
+            .earlyBtn;
+            background: #e5e5e5;
+            color: #000;
+        }
+        .earlyInfo {
+            width: 546rpx;
+            margin: 30rpx auto 0;
+            font-size: 22rpx;
+            color: #595959;
+        }
+    }
+</style>
+<template>
+    <view class="indemnityPerson">
+        <view class="indemnityPersonT">
+            <view class="title">个人信息填写</view>
+            <view class="textItem">
+                <text>姓名</text><input type="text" @input="changeValue" disabled data-name="name" placeholder="请输入你的姓名" value="{{name}}"/>
+            </view>
+            <view class="textItem">
+                <text>手机号</text><input type="text" @input="changeValue" disabled data-name="phone" placeholder="请输入你填写合同时的手机号" value="{{phone}}"/>
+            </view>
+            <view class="textItem">
+                <text>身份证号</text><input type="text" @input="changeValue" disabled data-name="IdCard" placeholder="请输入你填写合同时的身份证号" value="{{IdCard}}"/>
+            </view>
+            <!--<view class="textItem" style="margin-bottom: 50rpx;">-->
+                <!--<text>合同信息</text><input type="text" @tap="getContracts" disabled placeholder="点击获取合同列表" value="{{contractnum}}"/>-->
+                <!--<view class="textItemInfos" wx:if="{{contract_show}}">-->
+                    <!--<view class="textItemInfo" @tap="selectContract({{item}})" wx:for="{{contracts}}">{{item.comments}} : {{item.externalContractNbr}}</view>-->
+                <!--</view>-->
+            <!--</view>-->
+            <view class="textItem">
+                <text>合同信息</text>
+                <picker value="{{contractnum}}" range="{{contracts}}" bindchange="selectContract">
+                    <view class="picker">
+                        <text class="earlyTime">{{contractnum}}</text>
+                    </view>
+                </picker>
+            </view>
+            <view class="textItem" style="text-align: center;">
+                <radio-group class="radio-group" bindchange="radioChange">
+                    <label class="radio" style="margin-right: 138rpx;">
+                        <radio value="{{'1'}}" checked="{{fileType === '1'}}" name="fileType" color="#6044cb"/>电子文件
+                    </label>
+                    <label class="radio">
+                        <radio value="{{'2'}}" checked="fileType === '2'" name="fileType"  color="#6044cb"/>纸质文件
+                    </label>
+                </radio-group>
+            </view>
+            <view class="textItem" wx:if="{{fileType == '1'}}">
+                <text>邮箱</text><input type="text" @input="changeValue" value="{{email}}" data-name="email" placeholder="请输入邮箱地址"/>
+            </view>
+            <view class="textItem" wx:if="{{fileType == '2'}}">
+                    <text>地址</text><input type="text" @input="changeValue" value="{{address}}" data-name="address" placeholder="请输入地址查收纸质理赔函"/>
+                </view>
+            <view class="textItem">
+                    <text>定损金额(元)</text><input type="number" value="{{moneyNum}}" maxlength="8" @input="changeValue" data-name="moneyNum" placeholder="请输入定损金额"/>
+                </view>
+            <view class="textItemPic">
+                    <text class="picText">上传定损单</text>
+                    <view class="picBox">
+                        <view class="pic" wx:for="{{policyurls}}">
+                            <image class="deleteImg" src="{{url_link?url_link+'delete.png':''}}" @tap="deleteImg({{index}})"></image>
+                            <image class="srcImg" src="{{item}}" @tap="previewImg"></image>
+                        </view>
+                        <view class="pic" @tap="chooseImg">
+                            <text>+</text>
+                        </view>
+                    </view>
+                </view>
+        </view>
+        <view class="earlyBtn" @tap="submit">提交</view>
+        <view class="earlyInfo">*填写个人信息后才可获得理赔证明明细哦</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo';
+  export default class earlyPerson extends wepy.page {
+    config = {
+      navigationBarTitleText: '理赔证明'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      parent_data: '',
+      fileType: '1',// 1 ： 邮箱 2： 地址
+      name: '',
+      phone:'',
+      IdCard: '', // 身份证号
+      IdCardR:false, //校验身份证号
+      phoneR: false, // 验证手机格式
+      email: '',
+      address:'',
+      policyurls: [],//保单图片地址
+      policyurlsNums: [], // 保单图片地址代码
+      cardnumurl: '', // 身份证图片地址
+      contractnum: '点击选择合同号', // 合同号
+      moneyNum: '', // 定损金额
+      contracts: [], //合同列表
+      contract_show: false, // 是否显示合同列表
+      canSubmit: false, // 信息填写的是否完整
+      canClickAgin:true
+    };
+    computed = {
+      canSubmitFunc: function() {
+        if(!this.canClickAgin){
+          this.canSubmit = false;
+        }else{
+          this.canSubmit=true;
+        }
+        if (this.fileType == '1') {
+          if (this.name != '' && this.IdCard!='' && this.contractnum !='点击选择合同号' && this.phone != '' && this.email != '' && this.policyurlsNums.length > 0 && this.moneyNum != '') {
+            this.canSubmit = true;
+          } else {
+            this.canSubmit = false;
+          }
+        } else {
+          if (this.name != ''&& this.IdCard!='' && this.contractnum !='点击选择合同号' && this.phone != '' && this.address != '' && this.policyurlsNums.length > 0 && this.moneyNum != '') {
+            this.canSubmit = true;
+          } else {
+            this.canSubmit = false;
+          }
+        }
+      }
+    };
+    methods = {
+      //切换文件类型
+      radioChange: function (e) {
+        this.fileType = e.detail.value;
+      },
+      deleteImg: function (index) {
+        this.policyurls.splice(index,1);
+        this.policyurlsNums.splice(index,1);
+      },
+      //选择图片
+      chooseImg: function() {
+        let that = this
+        wx.chooseImage({
+          success: function(res) {
+            var tempFilePaths = res.tempFilePaths;
+            wx.showLoading({
+              mask:true,
+              title: '上传中...',
+            })
+            wx.uploadFile({
+              url: that.parent_data.json_dhLink + '/upload/wx',
+              filePath: tempFilePaths[0],
+              name: 'file',
+              formData: {
+                'loginToken': that.parent_data.login_token,
+                'userId': that.parent_data.login_userId
+              },
+              success: function(res) {
+                wx.hideLoading();
+                if (JSON.parse(res.data).code == '10001') {
+                  that.policyurls.push(tempFilePaths[0]);
+                  that.policyurlsNums.push(JSON.parse(res.data).data);
+                  console.log(that.policyurlsNums);
+                  that.$apply();
+                } else {
+                  that.$invoke('toastInfo','modelFunc',JSON.parse(res.data).code, JSON.parse(res.data).msg);
+                }
+              }
+            });
+          }
+        })
+      },
+      // 预览图片
+      previewImg: function () {
+        let that = this;
+        wx.previewImage({
+          current: that.policyurls[0], // 当前显示图片的http链接
+          urls: that.policyurls // 需要预览的图片http链接列表
+        })
+      },
+      // 更改input值
+      changeValue: function (e) {
+        this[e.currentTarget.dataset.name] = e.detail.value;
+      },
+      // 选择一个合同
+      selectContract: function (item) {
+        this.contractnum = this.contracts[item.detail.value].split(':')[0]
+        console.log(this.contractnum);
+      },
+      //提交表单
+      submit: function() {
+        let that = this;
+        let requestData = {};
+        if(!that.canClickAgin){
+          return false
+        }
+        requestData = {
+          fileList: that.policyurlsNums,
+          contractNo: that.contractnum,
+          fileType: that.fileType,
+          address: that.fileType == '1' ? that.email : that.address,
+          lossAmount: that.moneyNum,
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token
+        }
+        if (!that.canSubmit) {
+          that.$invoke('toastInfo','modelFunc', 'A00004', '个人信息填写不完整');
+          return false;
+        }
+        that.canClickAgin=false;
+        wx.request({
+          url: that.parent_data.json_dhLink+ '/insuranceClaim/apply',
+          data: requestData,
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success:function (res) {
+            that.canClickAgin=true;
+            if (res.data.code == '10001') {
+              that.$redirect('indemnitySubmit',{id: res.data.data.recordId});
+            } else {
+              that.$invoke('toastInfo','modelFunc', res.data.code, res.data.msg);
+            }
+          },
+          fail:function(res) {
+            console.log(res)
+          }
+        })
+      }
+    };
+    //获取合同信息
+    getContracts() {
+      let that = this;
+      wx.request({
+        url: that.parent_data.json_dhLink + '/contract/getlist',
+        data: {
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            that.contracts = [];
+            res.data.data.forEach(function (item) {
+              that.contracts.push(item.externalContractNbr + ':' + item.comments)
+            })
+            that.$apply();
+          } else {
+            that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+          }
+        },
+        fail: function () {
+          console.log('获取合同列表失败了')
+        }
+      })
+    }
+    onLoad() {
+    }
+    onShow() {
+      let that = this;
+      that.url_link = that.$parent.globalData.url_link;
+      that.parent_data = that.$parent.globalData;
+      this.name = this.$parent.globalData.login_name;
+      this.phone = this.$parent.globalData.login_phone;
+      this.IdCard = this.$parent.globalData.login_idCard;
+      this.getContracts()
+    }
+  }
+</script>

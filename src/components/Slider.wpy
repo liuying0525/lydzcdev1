@@ -1,0 +1,218 @@
+<style lang="less">
+  .slider {
+    position: relative;
+    width: 100%;
+    height: 60rpx;
+    border-radius: 4rpx;
+  }
+
+  .slider__progress {
+    position: absolute;
+  }
+
+  .slider__line {
+    position: absolute;
+    height: 6rpx;
+    top: 30rpx;
+    left: 0rpx;
+    border-radius: 4rpx;
+    background-color: #00C7AE;
+
+  }
+
+  .block-image {
+    position: absolute;
+    top: 0;
+    width: 80rpx;
+    height: 80rpx;
+  }
+
+  .slider__progress {
+    position: absolute;
+    top: 30rpx;
+    left: 0;
+    right: 0;
+  }
+
+  .progress__bg {
+    width: 100%;
+    height: 6rpx;
+    border-radius: 2px;
+    background-color: #8F8F8F;
+  }
+</style>
+
+
+<template>
+  <view class='slider slider__bg' id="mySlider" style="height: 40rpx;">
+
+    <view class="slider__progress">
+      <view class="progress progress__bg"></view>
+    </view>
+
+    <view class='slider__line' style="width: {{(values - min) / (max - min) * width}}rpx;">
+    </view>
+
+    <image src='{{blockUrl}}' style="left: {{(values - min ) / (max - min) * width - 40}}rpx;" bindtouchstart='sliderStart' bindtouchmove='sliderChange'
+      bindtouchend='sliderEnd' bindtouchcancel='sliderCancel' class="block-image"></image>
+
+  </view>
+</template>
+
+<script>
+  // 首付slider
+  import wepy from 'wepy'
+
+  export default class Slider extends wepy.component {
+    props = {
+      // 滑动值
+      value: {
+        type: [Number, String],
+        default: 20,
+      },
+      // 最大值
+      max: {
+        type: [Number, String],
+        default: 100
+      },
+      // 最小值
+      min: {
+        type: [Number, String],
+        default: 0
+      },
+      // 步长
+      step: {
+        type: [Number, String],
+        default: 1
+      },
+      // 滑块图片
+      blockUrl: {
+        type: [Number, String]
+      },
+      isMonitoring: {
+        type: Boolean,
+        default: true
+      }
+    }
+
+    data = {
+      width: 0,
+      screenRatio: 0,
+      // 滑块的x坐标
+      sliderStartX: 0,
+      // 滑块滑动的距离
+      activeLength: 0,
+      // slider节点的左边界坐标
+      sliderLeftX: 0,
+      values: ''
+    }
+
+    methods = {
+      sliderStart(e) {
+        let that = this;
+        let changedTouches = e.changedTouches[0];
+        this.isMonitoring = false;
+        // 每次开始滑动时，更新滑块的x坐标
+        this.sliderStartX = changedTouches.pageX;
+        this.$emit('sliderStart');
+      },
+      sliderChange(e) {
+        let step = parseInt(this.step);
+        let changedTouches = e.changedTouches[0];
+        // 滑动的距离
+        let activeLength = changedTouches.pageX - this.sliderStartX;
+        // 滑动的距离转换成rpx
+        let activeLengthRPX = activeLength * this.screenRatio;
+        // values 计算: (手指的x坐标 - slider节点的左边界坐标) * 屏幕的像素比 / slider宽度 * (values范围的最大值 - values范围的最小值) + values范围的最小值
+        let values = parseInt((changedTouches.pageX - this.sliderLeftX) * this.screenRatio / this.width * (this.max -
+          this.min) + Number(this.min));
+        if (activeLength < this.activeLength) {
+          // 滑动的距离小于上次滑动的距离，表示向左划
+          if (this.values - values >= parseInt(step / 2)) {
+            // 手指滑动的距离大于step的一半，向左滑一个step，然后更新values
+            this.values -= parseInt(step);
+            this.$emit('sliderChange', this.values);
+          }
+        } else {
+          // 滑动的距离大于上次滑动的距离，表示向右划
+          if (values - this.values >= parseInt(step / 2)) {
+            // 手指滑动的距离大于step的一半，向又滑一个step，然后更新values
+            this.values = parseInt(this.values) + parseInt(step);
+            this.$emit('sliderChange', this.values);
+          }
+        }
+        this.activeLength = activeLength;
+
+        // 超出边界时
+        if (values < this.min) {
+          values = this.min;
+          this.values = this.min;
+          this.$emit('sliderChange', this.values);
+        }
+        if (values > this.max) {
+          values = this.max;
+          this.values = this.max;
+          this.$emit('sliderChange', this.values);
+        }
+      },
+      // 滑动结束
+      sliderEnd(e) {
+        this.isMonitoring = true;
+        let that = this;
+
+        // 超出边界时
+        if (this.values < this.min) {
+          this.values = this.min;
+        }
+        if (this.values > this.max) {
+          this.values = this.max;
+        }
+
+        let detail = e.changedTouches;
+        let option = {};
+        this.$emit('sliderEnd', detail, option);
+      },
+      // 滑动取消
+      sliderCancel(e) {
+        let that = this;
+        this.isMonitoring = true;
+        let detail = e.changedTouches;
+        let option = {};
+        this.$emit('sliderCancel', detail, option);
+      }
+    }
+
+    events = {
+      // 初始化
+      attachhed() {
+        console.log(this.value)
+        let that = this;
+        this.screenRatio = this.getSystemScreenRatio();
+        this.getWidth();
+        let values = this.value;
+        that.values = values;
+      },
+      setValues(value) {
+        // console.log('setValues', value);
+        this.values = value;
+      }
+    }
+
+    // 获取元素的宽度和左边界坐标
+    getWidth() {
+      let that = this;
+      wx.createSelectorQuery().select('#mySlider').boundingClientRect(function (rect) {
+        that.width = rect.width * that.screenRatio;
+        that.sliderLeftX = rect.left;
+        that.$apply();
+      }).exec()
+      that.$apply();
+    }
+
+    // 获取到屏幕像素比
+    getSystemScreenRatio() {
+      var res = wx.getSystemInfoSync();
+      return 750 / res.screenWidth;
+    }
+  }
+</script>

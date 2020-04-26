@@ -1,0 +1,478 @@
+<style lang="less">
+  /**index.wxss**/
+
+  page {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .opinion-textarea {
+    width: 96%;
+    height: 80rpx;
+    border: 1px rgb(92, 69, 195) solid;
+    margin: 40rpx 0rpx 41rpx 0rpx;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    border-radius: 10rpx;
+    padding-left: 20rpx;
+  }
+
+  .change-mima {
+    width: 60%;
+    height: 80rpx;
+    border: 2rpx rgb(92, 69, 195) solid;
+    font-size: 30rpx;
+    line-height: 80pt;
+    border-radius: 10rpx;
+    padding-left: 20rpx;
+  }
+
+  .change-yzm {
+    width: 36%;
+    background: rgb(92, 69, 195);
+    color: #fff;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    margin-top: 2rpx;
+    border-radius: 10rpx;
+    margin-left: 24rpx; // padding-left: 29rpx;
+    text-align: center;
+  }
+
+  /* .opinion-center {margin-left: 20rpx } */
+
+  .change-kuan {
+    display: flex;
+    margin-bottom: 120rpx;
+    position: relative;
+  }
+
+  .opinion-button {
+    width: 100%;
+    background: rgb(92, 69, 195);
+    color: #fff;
+  }
+
+  .timeBack {
+    width: 36%;
+    background-color: #ccc;
+    color: #fff;
+    font-size: 30rpx;
+    line-height: 85rpx;
+    margin-top: 2rpx;
+    border-radius: 10rpx;
+    margin-left: 24rpx; // padding-left: 29rpx;
+    text-align: center;
+    position: absolute;
+    right: 0rpx;
+  }
+</style>
+<template>
+  <view class="testresult">
+    <userinfo_alert @childFn.user="alert_userinfo" text_zhi="东正请求授权登录"></userinfo_alert>
+    <alert_l @childFn.user="alert_tel" text_zhi="东正金融请求授权手机号"></alert_l>
+    <view class="opinion">
+      <form bindsubmit="formSubmit">
+        <input name="code" type='number' placeholder="请输入新手机号" maxlength='11' class='opinion-textarea' bindinput="userNameInput"
+          placeholder-class="opinion-center" value="{{code}}" />
+        <view class='change-kuan'>
+          <input class="weui-input f36r" name="password" type='number' placeholder="请输入验证码" maxlength='6' bindinput="passWdInput" placeholder-class="opinion-center"
+            class='change-mima ' />
+          <view class='change-yzm' bindtap="getVerificationCode" wx:if="{{!second_show}}">获取验证码</view>
+          <view wx-if="{{ second_show }}" class="timeBack">{{ second }}s</view>
+        </view>
+        <button formType="submit" class='opinion-button'>确认修改</button>
+      </form>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import Userinfo_alert from '../components/userinfo_alert';
+  import Alert from '../components/alert';
+  export default class change extends wepy.page {
+    config = {
+      navigationBarTitleText: '修改手机号'
+    };
+
+    data = {
+      url_link: '',
+      // 输入的手机号
+      code: '',
+      // 输入的验证码
+      password: '',
+      // 倒计时值
+      second: '60',
+      clear_time: null,
+      second_show: false,
+      // 当前手机号
+      currentPhone: ''
+    };
+
+    methods = {
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/index'
+        };
+      },
+      // 输入手机号
+      userNameInput(e) {
+        this.code = e.detail.value;
+      },
+      // 输入验证码
+      passWdInput: function (e) {
+        this.password = e.detail.value;
+      },
+      alert_userinfo(e) {
+        let this_ = this;
+        let zhi = this.$parent.globalData;
+        this_.$invoke('userinfo_alert', 'chufa', false);
+        zhi.java_login(e.detail, this_.request_cs);
+      },
+      alert_tel(res) {
+        let this_ = this;
+        let zhi = this.$parent.globalData;
+        zhi.login_telnum_iv = res.iv;
+        zhi.login_telnum_miyao = res.miyao;
+        this_.$invoke('alert_l', 'chufa', false);
+        // 查看是否授权
+        wx.getSetting({
+          success: function (res) {
+            if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+              wx.getUserInfo({
+                success: function (res) {
+                  zhi.java_login(res, this_.request_cs);
+                }
+              });
+            } else {
+              this_.$invoke('userinfo_alert', 'chufa', true);
+            }
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+              // duration: 10000
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      },
+      // 确认修改
+      formSubmit(e) {
+        //点击登录时，调用的函数
+
+        var data = e.detail.value; //获取提交from的json数据
+
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/; //手机正则式
+        if (!this.code) {
+          wx.showToast({
+            title: '请先填写手机号',
+            mask: true
+          });
+          return false;
+        }
+        if (!this.password) {
+          wx.showToast({
+            title: '请填写验证码'
+          });
+          return false;
+        }
+
+        if (!myreg.test(data.code)) {
+          //验证手机号
+
+          wx.showToast({
+            title: '手机号有误！',
+            icon: 'none'
+          });
+
+          return false;
+        } else {
+          // wx.showLoading({
+          //   title: '修改中'
+          // });
+          let this_ = this;
+          let json_link = this.$parent.globalData.json_link;
+          let parent_data = this.$parent.globalData;
+          if (parent_data.access_token != '') {
+            wx.request({
+              url: parent_data.json_link +
+                '/api/wxapp/userinfo/updatenum?access_token=' +
+                parent_data.access_token,
+              method: 'POST',
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: {
+                mobile: this_.data.code,
+                identifyingcode: this_.data.password
+              },
+              success(data) {
+                // wx.hideLoading();
+                this_.text = data.data.data;
+                if (data.data.code === 'A00006') {
+                  wx.showToast({
+                    title: '修改成功',
+                    icon: 'success',
+                    duration: 3000
+                  });
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: -1
+                    });
+                  }, 3000);
+                } else {
+                  wx.showToast({
+                    title: '验证码错误',
+                    icon: 'success',
+                    duration: 1500
+                  });
+                }
+                // 给数据进行绑定
+                this_.$apply();
+              },
+              fail() {
+                wx.showToast({
+                  title: '网络异常',
+                  icon: 'none'
+                });
+
+                setTimeout(function () {
+                  wx.hideToast();
+                }, 2000);
+                return;
+              }
+            });
+          } else {
+            this_.$invoke('alert_l', 'chufa', true);
+            this_.request_cs = function (access_token) {
+              // wx.showLoading({
+              //   title: '修改中'
+              // });
+              wx.request({
+                url: parent_data.json_link +
+                  '/api/wxapp/userinfo/updatenum?access_token=' +
+                  parent_data.access_token,
+                method: 'POST',
+                header: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: {
+                  mobile: this_.data.code,
+                  identifyingcode: this_.data.password
+                },
+                success(data) {
+                  // wx.hideLoading();
+                  this_.text = data.data.data;
+                  if (data.data.code === 'A00006') {
+                    wx.showToast({
+                      title: '修改成功',
+                      icon: 'success',
+                      duration: 3000
+                    });
+                    setTimeout(function () {
+                      wx.navigateBack({
+                        delta: -1
+                      });
+                    }, 3000);
+                  } else {
+                    wx.showToast({
+                      title: '验证码错误',
+                      icon: 'success',
+                      duration: 1500
+                    });
+                  }
+                  // 给数据进行绑定
+                  this_.$apply();
+                },
+                fail() {
+                  wx.showToast({
+                    title: '网络异常',
+                    icon: 'none'
+                  });
+
+                  setTimeout(function () {
+                    wx.hideToast();
+                  }, 2000);
+                  return;
+                }
+              });
+            };
+          }
+        }
+      },
+      // 获取验证码
+      getVerificationCode(e) {
+        if (!this.code) {
+          wx.showToast({
+            title: '请先填写手机号',
+            mask: true
+          });
+          return false;
+        }
+
+        if (this.currentPhone == this.code) {
+          wx.showToast({
+            title: '该手机号已存在'
+          });
+          return false;
+        }
+        wx.showLoading({
+          title: '加载中'
+        });
+
+        let this_ = this;
+        let json_link = this.$parent.globalData.json_link;
+        let parent_data = this.$parent.globalData;
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/; //手机正则式
+        if (parent_data.access_token != '') {
+          if (!myreg.test(this_.code)) {
+            //验证手机号
+
+            wx.showToast({
+              title: '手机号有误！',
+              icon: 'none',
+              duration: 1500
+            });
+
+            return false;
+          } else {
+            // 发送验证码
+            wx.request({
+              url: parent_data.json_link +
+                '/api/wxapp/userinfo/getmobilecode?access_token=' +
+                parent_data.access_token,
+              method: 'POST',
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: {
+                mobile: this_.data.code
+              },
+              success(data) {
+                wx.hideLoading();
+                this_.text = data.data.data;
+                if (data.data.code === 'A00006') {
+                  // 给数据进行绑定
+                  this_.second_show = true;
+                  this_.countDown();
+                } else {
+                  wx.showToast({
+                    title: '每日上限为5次',
+                    duration: 3000
+                  });
+                }
+                this_.$apply();
+              },
+              fail() {
+                wx.showToast({
+                  title: '网络异常',
+                  icon: 'none'
+                });
+
+                setTimeout(function () {
+                  wx.hideToast();
+                }, 2000);
+                return;
+              }
+            });
+          }
+        } else {
+          wx.hideLoading();
+          this_.$invoke('alert_l', 'chufa', true);
+          this_.request_cs = function (access_token) {
+            wx.showLoading({
+              title: '加载中'
+            });
+            wx.request({
+              url: parent_data.json_link +
+                '/api/wxapp/userinfo/getmobilecode?access_token=' +
+                parent_data.access_token,
+              method: 'POST',
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: {
+                mobile: this_.data.code
+              },
+              success(data) {
+                wx.hideLoading();
+                this_.text = data.data.data;
+                if (data.data.code === 'A00006') {
+                  // 给数据进行绑定
+                  this_.second_show = true;
+                  this_.countDown();
+                } else {
+                  wx.showToast({
+                    title: '每日上限为5次',
+                    duration: 3000
+                  });
+                }
+                // 给数据进行绑定
+                this_.$apply();
+              },
+              fail() {
+                wx.showToast({
+                  title: '网络异常',
+                  icon: 'none'
+                });
+                return;
+              }
+            });
+          };
+        }
+      }
+    };
+
+    // 初始倒计时状态
+    onLoad(res) {
+      this.currentPhone = res.currentPhone;
+      let timerState = this.$parent.changeTimerState('get');
+      // 当前时间戳到秒
+      let newtimestr = Date.parse(new Date()) / 1000;
+      if (newtimestr - timerState.timestr < timerState.timerNum) {
+        this.second_show = true;
+        this.second = timerState.timerNum - (newtimestr - timerState.timestr);
+        this.code = timerState.phone;
+        this.countDown();
+        this.$parent.changeTimerState('remove');
+        return false;
+      }
+      this.second_show = false;
+    }
+
+    // 倒计时
+    countDown() {
+      let that = this;
+      let second = that.second; //获取倒计时初始值
+      this.clear_time = setInterval(function () {
+        second--;
+        that.second = second;
+        that.$apply();
+
+        if (second == 0) {
+          clearInterval(that.clear_time);
+          that.second_show = false;
+          that.second = 60;
+          that.$apply();
+        }
+      }, 1000);
+    }
+
+    onUnload() {
+      // 改变倒计时的状态
+      if (this.second_show) {
+        this.$parent.changeTimerState('set', this.code, this.second);
+      }
+      this.second = '60';
+      this.code = '';
+      clearInterval(this.clear_time);
+    }
+  }
+</script>

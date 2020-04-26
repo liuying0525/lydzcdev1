@@ -1,0 +1,93 @@
+<style lang="less">
+    .canvasBox{
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        canvas{
+            display: block;
+        }
+    }
+</style>
+<template>
+    <view class="canvasBox">
+        <!--<canvas style="width: 100%; height: 100%;" disable-scroll="true" bindtouchstart="start"  bindtouchmove="move" bindtouchend="end" canvas-id="firstCanvas"></canvas>-->
+        <canvas style="width: 100%; height: 100%;" disable-scroll="true" canvas-id="firstCanvas"></canvas>
+        <button @tap="draw">保存</button>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Canvas extends wepy.component{
+      data = {
+        context: ''
+      };
+      props = {};
+      methods = {
+        start: function (e) {
+          // this.context.save();
+          this.context.setStrokeStyle('#000');
+          this.context.setLineWidth(1);
+          this.context.setFontSize(22)
+          this.context.fillText('Hello', 20, 20)
+          this.context.fillText('MINA', 100, 100)
+          // this.context.beginPath();
+          this.context.moveTo(e.changedTouches[0]['x'],e.changedTouches[0]['y']);
+          console.log(e.changedTouches[0]['x'],e.changedTouches[0]['y'])
+        },
+        move: function (e) {
+          this.context.lineTo(e.changedTouches[0]['x'],e.changedTouches[0]['y']);
+          this.context.stroke();
+          console.log(e.changedTouches[0]['x'],e.changedTouches[0]['y'])
+        },
+        end: function () {
+          this.context.stroke();
+          this.context.draw();
+        },
+        draw: function () {
+          let that = this;
+          that.context.draw(true, function() {
+            wx.canvasToTempFilePath({
+              x: 0,
+              y: 0,
+              width: 200,
+              height: 200,
+              destWidth: 100,
+              destHeight: 100,
+              canvasId: 'firstCanvas',
+              success(res) {
+                console.log(res.tempFilePath);
+                // that.context.draw(false)
+                that.context.draw(true)
+              }
+            })
+          });
+        }
+      };
+      onLoad() {
+        let that = this
+        that.context = wx.createCanvasContext('firstCanvas');
+        this.context.setFontSize(12)
+        wx.getImageInfo({
+          src: 'image/bg.jpg',
+          success (res) {
+           console.log(res)
+          }
+        })
+        wx.downloadFile({
+          // url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561699335592&di=bcaea1c4de279aecc3f670d7e29ceb44&imgtype=0&src=http%3A%2F%2Fpic38.nipic.com%2F20140225%2F2531170_213938070000_2.jpg',
+          url: '../image/bg.jpg',
+          success: (res) => {
+            if (res.statusCode === 200) {
+              console.log(res)
+              that.context.drawImage(res.tempFilePath, 0, 0, 500, 707)
+              that.context.fillText('客户授权及承诺申请书', 20, 20)
+              that.context.fillText('上海东正汽车金融有限责任公司：', 100, 100)
+              that.context.stroke()
+              that.context.draw()
+              that.$apply()
+            }
+          }
+        })
+      }
+    }
+</script>

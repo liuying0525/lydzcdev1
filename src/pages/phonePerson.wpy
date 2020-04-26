@@ -1,0 +1,421 @@
+<style lang="less">
+    .phonePeople {
+        view,input{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        padding: 46rpx 50rpx;
+        .phonePeopleT{
+            padding: 0 58rpx 30rpx;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+            .title{
+                height: 100rpx;
+                line-height: 100rpx;
+                font-size: 30rpx;
+                color: #000;
+                text-align: center;
+                margin-bottom: 10rpx;
+            }
+            .textItem{
+                position: relative;
+                width: 100%;
+                height: 56rpx;
+                font-size: 26rpx;
+                margin-bottom: 44rpx;
+                text{
+                    float: left;
+                    line-height: 56rpx;
+                }
+                .early{
+                    color: rgb(96,68,203);
+                    position: relative;
+                }
+                .earlyHelp{
+                    position: absolute;
+                    display: block;
+                    right: -30rpx;
+                    top: -10rpx;
+                    line-height: 26rpx;
+                    width: 26rpx;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                    text-align: center;
+                    border: 1px solid rgb(96,68,203);
+                    font-size: 20rpx;
+                }
+                .earlyTime{
+                    height: 56rpx;
+                    padding:0 20rpx;
+                    margin-left: 40rpx;
+                }
+                input{
+                    float: right;
+                    height: 56rpx;
+                    border: 1px solid #ddd;
+                    width: 370rpx;
+                    padding-left: 30rpx;
+                    font-size: 24rpx;
+                }
+                .phoneCode{
+                    width: 184rpx;
+                }
+                .getCode{
+                    width: 170rpx;
+                    float: right;
+                    font-size: 20rpx;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 56rpx;
+                    background: #6144cb;
+                    -webkit-border-radius: 10rpx;
+                    -moz-border-radius: 10rpx;
+                    border-radius: 10rpx;
+                    margin-left: 16rpx;
+                }
+                .picCode{
+                    .getCode;
+                    -webkit-border-radius: 0;
+                    -moz-border-radius: 0;
+                    border-radius: 0;
+                    background: #fff;
+                    image{
+                        display: block;
+                        width: 100%;
+                        height: 54rpx;
+                    }
+                }
+                .getNoCode{
+                    background: #e5e5e5;
+                    color: #000;
+                }
+            }
+            .textItemInfos {
+                position: absolute;
+                line-height: 56rpx;
+                border: 1px solid #e5e5e5;
+                border-bottom: none;
+                border-top: none;
+                width: 370rpx;
+                font-size: 24rpx;
+                right: 0;
+                top: 56rpx;
+                z-index: 100;
+                .textItemInfo{
+                    height: 56rpx;
+                    border-bottom: 1px solid #e5e5e5;
+                    font-size: 20rpx;
+                    color: #393939;
+                    background: #fff;
+                    /*text-align: center;*/
+                    white-space: nowrap;
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                }
+            }
+        }
+        .earlyBtn{
+            width: 546rpx;
+            height: 74rpx;
+            line-height: 74rpx;
+            color: #fff;
+            background: rgb(96,68,203);
+            font-size: 30rpx;
+            -webkit-border-radius: 10rpx;
+            -moz-border-radius: 10rpx;
+            border-radius: 10rpx;
+            margin: 86rpx auto 0;
+            text-align: center;
+        }
+        .earlyNoBtn{
+            .earlyBtn;
+            background: #e5e5e5;
+            color: #000;
+        }
+        .earlyInfo {
+            width: 546rpx;
+            margin: 30rpx auto 0;
+            font-size: 22rpx;
+            color: #595959;
+        }
+    }
+</style>
+<template>
+    <view class="phonePeople">
+        <view class="phonePeopleT">
+            <view class="title">个人信息填写</view>
+            <view class="textItem">
+                <text>姓名</text><input type="text" placeholder="请输入你的姓名" value="{{name}}" disabled data-name="name" @input="changeValue"/>
+            </view>
+            <view class="textItem">
+                <text>原手机号</text><input type="text" placeholder="请输入你填写合同时的手机号" disabled  value="{{phone}}" data-name="phone" @input="changeValue"/>
+            </view>
+            <view class="textItem">
+                <text>身份证号</text><input type="text" placeholder="请输入你填写身份证号" disabled value="{{IdCard}}" data-name="IdCard" @input="changeValue"/>
+            </view>
+            <!--<view class="textItem" style="margin-bottom: 50rpx;">-->
+                <!--<text>合同信息</text><input type="text" placeholder="点击输入框获取" disabled value="{{contractnum}}" @tap="getContracts" />-->
+                <!--<view class="textItemInfos" wx:if="{{contract_show}}">-->
+                    <!--<view class="textItemInfo" @tap="selectContract({{item}})" wx:for="{{contracts}}">{{item.comments}} : {{item.externalContractNbr}}</view>-->
+                <!--</view>-->
+            <!--</view>-->
+            <view class="textItem">
+                <text>合同信息</text>
+                <picker value="{{contractnum}}" range="{{contracts}}" bindchange="selectContract">
+                    <view class="picker">
+                        <text class="earlyTime">{{contractnum}}</text>
+                    </view>
+                </picker>
+            </view>
+            <view class="textItem">
+                <text>新手机号</text><input type="text" placeholder="请输入新的手机号" value="{{newPhone}}" data-name="newPhone" @input="changeValue"/>
+            </view>
+            <view class="textItem">
+                <text>短信验证码</text>
+                <view class="getCode {{phoneCodeTime>0 || canTryTime>0?'getNoCode':''}}" @tap="getCode">{{phoneCodeTime>0?phoneCodeTime+'s后可重新获取': '获取验证码'}}</view>
+                <input class="phoneCode" type="text" value="{{phoneCode}}" data-name="phoneCode" @input="changeValue"/>
+            </view>
+            <view class="textItem" wx:if="{{picCode_show}}">
+                <text>图形验证码</text>
+                <view class="picCode">
+                    <image src="{{picCode_url}}" @tap="getPic"></image>
+                </view>
+                <input class="phoneCode" type="text" value="{{picCode}}" data-name="picCode" @input="changeValue"/>
+            </view>
+        </view>
+        <view class="{{canSubmit?'earlyBtn':'earlyNoBtn'}}" @tap="submit">提交</view>
+        <view class="earlyInfo">*填写完整个人信息后才可修改手机号哦</view>
+    </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  export default class phonePerson extends wepy.page {
+    config = {
+      navigationBarTitleText: '修改手机号'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      name: '',
+      parent_data: '',
+      phone: '', // 原手机号
+      phoneR:false, // 验证手机号格式
+      IdCard: '', // 身份证号
+      IdCardR:false, //校验身份证号
+      newPhone: '', // 新手机号
+      newPhoneR: false, // 验证手机号格式
+      contractnum: '点击选择合同号', // 合同号
+      contracts: [], // 合同列表
+      contract_show: false, // 是否显示合同列表
+      picCode_show: false, // 是否显示图形验证码
+      picCode_url: '', // 图形验证码图片地址
+      phoneCode: '', // 手机验证码
+      phoneCodeTime: -1, // 手机验证码倒计时
+      picCode: '', // 图形验证码
+      canSubmit: false,
+      requestData: '' ,// 请求参数
+    };
+    computed = {
+      canSubmitFunc: function () {
+        if (this.phoneCode !='' && this.phone != '' && this.contractnum != '点击选择合同号' && this.newPhone != '' && this.name != '' && this.IdCard != '') {
+          if (this.picCode_show ) {
+            if (this.picCode != '') {
+              this.canSubmit = true;
+            } else {
+              this.canSubmit = false;
+            }
+          }
+
+          
+          if (this.$invoke('toastInfo', 'phoneReg', this.phone)) {
+            this.phoneR = true
+          } else {
+            this.phoneR = false;
+          }
+          if (this.$invoke('toastInfo', 'idCardReg', this.IdCard)) {
+            this.IdCardR = true;
+          } else {
+            this.IdCardR = false;
+          }
+          if (this.$invoke('toastInfo', 'phoneReg', this.newPhone)) {
+            this.newPhoneR = true;
+          } else {
+            this.newPhoneR = false;
+          }
+          this.canSubmit = true;
+        } else {
+          this.canSubmit = false;
+        }
+      }
+    };
+    methods = {
+      // 更改input值
+      changeValue: function (e) {
+        this[e.currentTarget.dataset.name] = e.detail.value;
+        console.log(e.currentTarget.dataset.name, e.detail.value)
+      },
+      // 选择一个合同
+      selectContract: function (item) {
+        this.contractnum = this.contracts[item.detail.value].split(':')[0]
+        console.log(this.contractnum);
+      },
+      //获取短信验证码
+      getCode: function () {
+        let that = this;
+        if (that.phoneCodeTime > 0) {
+          return false
+        }
+        if (!that.$invoke('toastInfo', 'phoneReg', that.newPhone)) {
+          that.$invoke('toastInfo', 'modelFunc', '000', '请输入正确的新手机号');
+          return false;
+        }
+        wx.request({
+          url: that.parent_data.json_dhLink  + '/sms/sendModifyTelephone',
+          data: {
+            telephone : that.newPhone,
+            verify: that.picCode
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == '10001') {
+              that.phoneCodeTime = 60;
+              that.timer(60, 'phoneCodeTime');
+            } else {
+              if (res.data.code == '20017') {
+                that.phoneCodeTime = 60;
+                that.timer(60, 'phoneCodeTime');
+                that.getPicCode();
+              } else {
+                that.$invoke('toastInfo', 'modelFunc',res.data.code, res.data.msg);
+              }
+            }
+            that.$apply();
+          }
+        })
+      },
+      // 获取图形验证码
+      getPic: this.getPicCode,
+      // 提交修改
+      submit: function () {
+        let that = this;
+        if (!that.canSubmit) {
+          return false;
+        }
+        if (!that.$invoke('toastInfo', 'phoneReg', that.newPhone)) {
+          that.$invoke('toastInfo', 'modelFunc', '000', '请输入正确的新手机号')
+          return false;
+        }
+        that.canSubmit = false;
+            that.requestData = {
+              authenticationCode: that.phoneCode,
+              telephoneNew: that.newPhone,
+              contractNo: that.contractnum,
+              loginToken: that.parent_data.login_token,
+              userId: that.parent_data.login_userId
+            }
+        if (that.picCode_show) {
+          // that.requestData.divnceId = that.picCode;
+        }
+        if (wx.getStorageSync('phoneChange_id')) {
+          that.requestData.recordId = wx.getStorageSync('phoneChange_id');
+        }
+        wx.request({
+          url: that.parent_data.json_dhLink + '/mobileModifyRecord/apply',
+          data: that.requestData,
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            if (res.data.code == '10001') {
+              that.canSubmit = true;
+              that.$redirect('phoneSubmit', {id: res.data.data.recordId})
+            } else {
+              that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg)
+            }
+          },
+          fail: function () {
+            console.log('修改合同手机号失败')
+          }
+        })
+      }
+    };
+    //获取合同信息
+    getContracts() {
+      let that = this;
+      console.log(that.phone)
+      wx.request({
+        url: that.parent_data.json_dhLink + '/contract/getlist',
+        data: {
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            that.contracts = [];
+            res.data.data.forEach(function (item) {
+              that.contracts.push(item.externalContractNbr + ':' + item.comments)
+            })
+            that.$apply();
+          } else {
+            that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+          }
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
+    }
+    // 获取图形验证码
+    getPicCode () {
+      let that = this;
+      let time = new Date().getTime();
+      that.picCode_show = true;
+      that.picCode_url = that.parent_data.json_dhLink  + '/getVerify';
+    }
+    // 定时器
+    timer(time, name) {
+      let that = this;
+      var timeInfo = time;
+      var timerFunc = setInterval(function() {
+        if (timeInfo >= 0) {
+          that[name] = timeInfo--;
+          that.$apply();
+        } else {
+          clearInterval(timerFunc);
+        }
+      }, 1000)
+    }
+    onLoad(options) {
+      if (!options.type) {
+        this.contractnum = options.ctnumber;
+        this.newPhone = options.newPhone;
+      } else {
+        this.contractnum = '点击选择合同号';
+        this.newPhone = '';
+      }
+      this.phoneCode = '';
+    }
+    onShow() {
+      this.name =  this.$parent.globalData.login_name;
+      this.phone =  this.$parent.globalData.login_phone;
+      this.IdCard = this.$parent.globalData.login_idCard;
+      this.url_link = this.$parent.globalData.url_link;
+      this.parent_data = this.$parent.globalData;
+      this.phoneCodeTime = -1;
+      this.getContracts()
+    }
+  }
+</script>

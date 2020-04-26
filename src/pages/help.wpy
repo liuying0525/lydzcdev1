@@ -1,0 +1,303 @@
+<style lang="less">
+    .testresult {
+        padding:0 40rpx;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .bzzx {
+      width: 90%;
+      margin-left: 25rpx;
+      margin-top: 30rpx;
+      margin-bottom: 40rpx;
+      font-family: 'PingFangSC-Regular';
+        font-size: 28rpx;
+    }
+    .bzzx-view1 {
+      display: flex;
+      font-size: 28rpx;
+    }
+    .view1 {
+      color: rgb(92, 69, 195);
+      margin-bottom: 21rpx;
+    }
+    .view2 {
+      color: rgb(115, 115, 115);
+    }
+    .bzzx-w {
+      margin-left: 30rpx;
+    }
+    .bzzx-lxwm {
+      width: 100%;
+      position: fixed;
+      right: 10rpx;
+      bottom: 140rpx;
+    }
+    .bzzx-lxwm-yuan {
+      width: 68rpx;
+      height: 68rpx;
+      text-align: center;
+      background: #00c7ae;
+      font-size: 24rpx;
+      border-radius: 50rpx;
+      padding: 13rpx;
+      position: absolute;
+      left: 83%;
+      color: #fff;
+    }
+    .bzzx-lxwm-yuan-2 {
+      width: 68rpx;
+    }
+    .types {
+        width: 100%;
+        font-size: 32rpx;
+        height: 100rpx;
+        line-height: 100rpx;
+        padding: 0 20%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: flex;
+        margin-bottom: 20rpx;
+    }
+    .type{
+        border-bottom: 8rpx solid #fff;
+        flex:1;
+        text-align: center;
+        margin: 0 50rpx;
+    }
+    .activeType{
+        color: #6044ca;
+        border-color: #6044ca;
+    }
+    .dqBox,.dhBox {
+        padding: 20rpx;
+        -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+    }
+    .textTitle {
+        color: red;
+        font-size: 28rpx;
+        text-indent: 25rpx;
+    }
+    .textInfo{
+        color: #737373;
+    }
+</style>
+<template>
+     <view class="testresult">
+         <view class="types">
+             <view class="type {{type=='dq'?'activeType':''}}" @tap="changeText({{'dq'}})">贷前</view>
+             <view class="type {{type=='dh'?'activeType':''}}" @tap="changeText({{'dh'}})">贷后</view>
+         </view>
+         <view class="dqBox" wx:if="{{type=='dq'}}">
+            <view class='bzzx'>
+                <view class='bzzx-view1 view1'>
+                    <view class='bzzx-q'>Q：</view>
+                    <view class='bzzx-w'> 没有收入证明可以贷款吗？</view></view>
+                    <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                    <view class='bzzx-w'>具体要看申请哪个金融产品，有些不需要收入证明；即使需要的话，其他财力证明也可以替换收入证明，比如房产证，大额存款证明等。</view></view>
+            </view>
+            <view class='bzzx'>
+                <view class='bzzx-view1 view1'>
+                    <view class='bzzx-q'>Q：</view>
+                    <view class='bzzx-w'> 银行流水是什么？</view></view>
+                    <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                    <view class='bzzx-w'>您好，是指您本人名下的银行卡（借记卡）或者银行活期存折，在一段时间内与银行发生存取款业务交易清单银行一般免费提供，有A4张大小，上面有银行公章。</view></view>
+            </view>
+            <view class='bzzx'>
+                <view class='bzzx-view1 view1'>
+                    <view class='bzzx-q'>Q：</view>
+                    <view class='bzzx-w'> 总成本包含在首付款里面吗？</view></view>
+                    <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                    <view class='bzzx-w'>不包含，总成本是贷款利息，首付款是购车除了可贷款以外的部分。</view></view>
+            </view>
+            <view class='bzzx'>
+                <view class='bzzx-view1 view1'>
+                    <view class='bzzx-q'>Q：</view>
+                    <view class='bzzx-w'> 办理贷款所需要的材料有哪些？</view></view>
+                    <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                    <view class='bzzx-w'>贷款办理一般需要您提供身份证、户口本、工作证明、收入证明、驾驶执照等，具体资料证明需要根据您选择的金融贷款方案要求为准。</view></view>
+            </view>
+         </view>
+         <view class="dhBox" wx:if="{{type=='dh'}}">
+             <view class="textTitle">内容查询类</view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 如何查询我的贷款账户信息（月供、期数、剩余金额等）？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>可拨打我司人工客服热线:400-920-7258，服务时间为工作日9点至18点。</view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 需要汇款到东正金融，你们的对公账户信息是什么？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>
+                         <text>账户信息如下：
+                             账号：31001520368050005668
+                             名称：上海东正汽车金融股份有限公司
+                             开户行：中国建设银行股份有限公司上海环球支行
+                         </text>
+                     </view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class="textInfo">温馨提示：</view>
+                 <view class="textInfo">* 备注栏请您注明：贷款人姓名 + 身份证后四位，以便准确入账</view>
+                 <view class="textInfo">* 工作日17时前到账的电汇款项将于当天入账；工作日17时后到账的款项将于下一工作日入账；节假日到账的电汇款项将于节后第一个工作日入账。</view>
+                 <view class="textInfo">* 如未按时还款，东正金融将收取逾期罚息，并依据国家规定上报征信记录。请您提前汇款，注意汇款到账时间。</view>
+             </view>
+             <view class='bzzx'>
+                 <view class="textInfo">温馨提示：</view>
+                 <view class="textInfo">* 月供款项请提早并足额存入银行卡中，避免因动用还款款项导致后续扣款失败的情况发生。</view>
+             </view>
+             <view class="textTitle">信息变更类：</view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>我要变更银行卡，该如何操作？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>登录我司微信小程序，通过身份验证后，点击“还款卡变更”，根据系统提示流程填写并上传相应资料后进行提交。提交后系统将生成《扣款授权书》及《终止划付授权通知书》并发送至您填写的邮箱，请您下载、打印、签字后，将签字原件邮寄至我司。我司收到申请快递后3-5个工作日完成银行卡的变更。</view></view>
+             </view>
+             <view class='bzzx'>
+                 <view class="textInfo">温馨提示：</view>
+                 <view class="textInfo">* 系统提交申请后，务必打印《扣款授权书》及《终止划付授权通知书》，签字后原件邮寄至：上海市浦东新区耀元路58号环球都会大厦2号楼15楼 东正运营贷后组收（021-20689999）。如未收到签字版原件材料，我们无法为您做变更操作，感谢您的理解与支持！</view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>如何更改我的手机号码？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>我司支持手机号码变更。登陆我司微信小程序，通过身份验证后，点击“修改手机号”，根据系统提示填写相应信息，完成手机号码的变更（更改后生效时间为1个工作日，节假日顺延）。</view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>身份证件到期，如何处理？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>根据国家法规要求，当您在我司办理贷款的身份证件过期后，应主动将新的证件在我司备案。</view>
+                 </view>
+             </view>
+             <view class="textTitle">贷款结清类：</view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>何时能申请提前结清？提前结清是否有违约金？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>任何时候都可以申请提前结清，但根据产品情况及已还款期数，可能会收取提前还款违约金， 具体金额及明细可参考小程序内试算。</view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>如何申请提前结清？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>登陆我司微信小程序，通过身份验证后，点击“提前还款”，根据系统提示填写相应信息并提交。后续会有工作人员与您取得联系，最终确认还款日及金额。</view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class="textInfo">温馨提示：</view>
+                 <view class="textInfo">* 提前结清申请至少提前1个工作日，如约定还款日未收到或扣到您的结清款项，则视为放弃本次提前结清，后续如有需求请重新按流程申请。</view>
+                 <view class="textInfo">* 请您务必确保手机畅通，留意接听工作人员021-2068开头的座机来电。</view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>车贷结清了，后续我要怎么办？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>若您的车贷已正常结清或提前结清，我司会在您合同结清后5个工作日内寄出结清资料（即车辆登记证、贷款结清证明、解抵押委托书等）。结清材料统一邮寄至您所属区域工作人员，工作人员将与您联系并会协助您办理解除抵押手续；若工作人员长时间未联系您，您可拨打我司客服热线咨询。</view>
+                 </view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'>邮寄结清资料是哪家快递公司？</view>
+                 </view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>为保障材料安全性与及时性，我司统一使用顺丰速运进行结清资料的派送。</view>
+                 </view>
+             </view>
+             <view class="textTitle">理赔证明类：</view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 车辆出险了需要我司出具理赔证明函，如何申请？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>登陆我司微信小程序，通过身份验证后，点击“理赔证明”，根据系统提示填写对应信息提交申请。我们收到申请审核无误后出具理赔证明函（处理时效为1个工作日，节假日顺延），于出具理赔证明函当日通过邮件（申请电子版）或邮寄（申请纸质版）路径提供。</view></view>
+             </view>
+             <view class='bzzx'>
+                 <view class="textInfo">温馨提示：</view>
+                 <view class="textInfo">* 出具理赔证明函的前提是您贷款正常，当前未有逾期。如您恰逢有逾期情况，请还款后再做申请，否则我司将拒绝出具理赔证明函，并有权要求保险公司先行赔付逾期金额。</view>
+                 <view class="textInfo">* 务必确认所需理赔证明函为纸质版还是电子版，以选择正确的路径。</view>
+             </view>
+             <view class="textTitle">其他类：</view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 合同生效后，可以增加、修改或删除借款人、共同借款人、担保人和抵押人么？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>我司暂不支持对上述合同主体对象的变更。</view></view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 贷款期间，车辆可以进行过户么？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>很抱歉，贷款期间车辆无法办理过户手续，您可选择将车贷提前结清后再进行办理。</view></view>
+             </view>
+             <view class='bzzx'>
+                 <view class='bzzx-view1 view1'>
+                     <view class='bzzx-q'>Q：</view>
+                     <view class='bzzx-w'> 碰到一些特殊申请业务而微信小程序又未涉及的，如何进行申请？</view></view>
+                 <view class='bzzx-view1 view2'><view class='bzzx-q'>A：</view>
+                     <view class='bzzx-w'>请发邮件到邮箱：ops@dongzhengafc.com，详细注明你的申请诉求，我司将进行审核并第一时间与您联系反馈最终结果。</view></view>
+             </view>
+             <view style="text-align: right;font-size: 26rpx;">版本号：2019年8月21日</view>
+         </view>
+<!--右下按钮  -->
+      <view class='bzzx-lxwm'>
+        <view class='bzzx-lxwm-yuan'   @tap="tap_tel">
+        <view  class='bzzx-lxwm-yuan-2'>联系我们
+        </view>
+        </view>
+      </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class help extends wepy.page {
+  config = {
+    navigationBarTitleText: '帮助中心'
+  };
+  data = {
+    type: 'dq'
+  }
+  methods = {
+    changeText: function (type) {
+      this.type = type;
+    },
+    onShareAppMessage: function() {
+      return {
+        path: '/pages/index'
+      };
+    },
+    tap_tel() {
+      wx.makePhoneCall({
+        phoneNumber: '400-920-7258' //联系客服
+      });
+    }
+  };
+}
+</script>

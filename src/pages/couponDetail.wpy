@@ -1,0 +1,167 @@
+<style lang="less">
+    .couponDetail {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding:57rpx 72rpx 0;
+    }
+    .codeImgBox{
+        position: relative;
+        width: 604rpx;
+        height: 460rpx;
+        padding-top: 90rpx;
+        -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+        box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+    }
+    .codeImg {
+        height: 300rpx;
+        width: 300rpx;
+        display: block;
+        margin: 0 auto;
+        background: #000;
+    }
+    .codeNum {
+        text-align: center;
+        font-size: 30rpx;
+        margin: 26rpx auto;
+    }
+    .used {
+        opacity: 0.5;
+    }
+    .usedImg{
+        height: 166rpx;
+        width: 166rpx;
+        position: absolute;
+        right: 83rpx;
+        bottom: 50rpx;
+        background: red;
+        opacity: 1;
+        z-index: 10;
+    }
+    .couponInfos {
+        margin-top: 94rpx;
+        font-size: 26rpx;
+        padding: 0 50rpx;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .couponInfo {
+        margin-bottom: 24rpx;
+        font-size: 26rpx;
+        line-height: 40rpx;
+    }
+    .warnInfo {
+        font-size: 20rpx;
+        color: #545454;
+        padding-top: 40rpx;
+    }
+</style>
+<template>
+    <view class="couponDetail">
+        <view class="codeImgBox">
+            <image class="usedImg" src="{{url_link?url_link+'/dhSec11.png':''}}" wx:if="{{couponInfo.status==2}}"></image>
+            <image class="codeImg {{couponInfo.status==2?'used':''}}" src="{{'data:image/png;base64,'+couponInfo.qrCodeImg}}"></image>
+            <view class="codeNum {{couponInfo.status==2?'used':''}}">卡券编号:No.{{couponInfo.couponNo}}</view>
+        </view>
+        <view class="couponInfos">
+            <view class="couponInfo">卡券名称: {{couponInfo.couponName }}</view>
+            <view class="couponInfo">抵扣金额: {{couponInfo.couponAmount}}元</view>
+            <view class="couponInfo">使用时间: {{couponInfo.startDate}}~{{couponInfo.endDate}}</view>
+            <view class="couponInfo">适用范围: 在 <text style="color: rgb(245,37,37);">{{couponInfo.store}}</text>店内，消费精品、工时费、延保、装潢等，均可抵扣{{couponInfo.couponAmount}}元</view>
+            <view class="warnInfo">*本活动最终解释权归上海东正汽车金融股份有限公司所有</view>
+        </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  // let QRCode = require('../pages/js/weapp-qrcode.js');
+  export default class couponDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: '卡券详情'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      //卡券种类
+      state: 1,
+      // 资源地址
+      url_link: '',
+      parent_data: '',
+      couponInfo: ''
+    };
+    methods = {
+
+    };
+
+
+    // 数据获取
+    onLoad(options) {
+      let that = this;
+      that.parent_data = this.$parent.globalData;
+      that.url_link = this.$parent.globalData.url_link;
+      //卡券详情
+      wx.request({
+        url: that.parent_data.json_dhLink + '/coupon/user/use',
+        data: {
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token,
+          couponId: options.id
+        },
+        success(res) {
+          if(res.data.code == 10001) {
+            that.couponInfo = res.data.data;
+            that.$apply();
+          } else {
+            that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+          }
+          // console.log(res)
+          // 解析用户token
+          // wx.request({
+          //   url: that.parent_data.json_link +
+          //     '/api/wxapp/userinfo/getuserid?access_token=' +
+          //     that.parent_data.access_token,
+          //   method: 'POST',
+          //   header: {
+          //     'Content-Type': 'application/x-www-form-urlencoded'
+          //   },
+          //   success(res) {
+          //     that.access = res.data.data;
+          //     qrcode = new QRCode('canvas', {
+          //       text: res.data.data + '&' + that.id,
+          //       width: 150,
+          //       height: 150,
+          //       colorDark: '#000',
+          //       colorLight: 'white',
+          //       correctLevel: QRCode.CorrectLevel.H
+          //     });
+          //     wx.canvasToTempFilePath({
+          //       x: 0,
+          //       y: 0,
+          //       width: 150,
+          //       height: 150,
+          //       canvasId: 'canvas',
+          //       success: function(res) {
+          //         console.log(res)
+          //         that.radarImg= res.tempFilePath;
+          //         that.$apply()
+          //       }
+          //     });
+          //     that.$apply();
+          //   }
+          // });
+        }
+      });
+    }
+    onShow() {
+      // this.$parent.PVUVstatistical('cardpagedetail');
+    }
+    onUnload() {
+      // clearInterval(this.set)
+    }
+  }
+</script>

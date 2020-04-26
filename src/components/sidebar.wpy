@@ -1,0 +1,269 @@
+<style lang="less">
+  .right_sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    right: 0;
+    width: 70%;
+    z-index: 999999;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+
+  .right_sidebar_false {
+    display: block;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    right: -100%;
+    width: 100%;
+    z-index: 999999;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 100%;
+  }
+
+  .sidebar_yinying {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    transition: all 0.2s;
+    -webkit-transition: opacity 0.2s;
+    opacity: 0;
+    z-index: 99999;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .sidebar_yinying2 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    transition: all 0.2s;
+    -webkit-transition: opacity 0.2s;
+    opacity: 0.4;
+    z-index: 99999;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .sidebar_right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    word-break: normal;
+    background-color: #ffffff;
+    padding-bottom: 40rpx;
+  }
+
+  .sidebar_bq {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 80rpx;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .sidebar_pp {
+    height: 80rpx;
+    font-size: 32rpx;
+  }
+
+  .sidebar_pp_logo {
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+  }
+
+  .sidebar_pp {
+    display: block;
+    width: 50%;
+    height: 80rpx;
+    color: #434343;
+    line-height: 82rpx;
+    font-size: 28rpx;
+    float: left;
+    text-indent: 22rpx;
+  }
+
+  .sidebar_hui {
+    width: clac(~'100% - 60rpx');
+    padding: 0 30rpx 0 30rpx;
+    background-color: #f0f1f5;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    color: #434343;
+  }
+
+  .sidebar_list {
+    width: clac(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 135rpx;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .list_left {
+    width: 100%;
+  }
+
+  .sidebar_list_left {
+    height: 80rpx;
+    padding: 20rpx 0 20rpx 0;
+    position: relative;
+    float: left;
+    width: 70%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .sidebar_list_title {
+    font-size: 28rpx; // white-space: nowrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidebar_list_rmb {
+    font-size: 22rpx;
+    color: rgb(92, 69, 195);
+  }
+
+  .sidebar_list_right {
+    width: 120rpx;
+    height: 120rpx;
+    float: right;
+  }
+
+  .list_che {
+    width: 120rpx;
+    height: 120rpx;
+  }
+
+  .right_sidebar_false .sidebar_yinying {
+    opacity: 0;
+  }
+
+  .right_sidebar .sidebar_yinying {
+    opacity: 0.4;
+  }
+</style>
+<template>
+  <view>
+    <view class="{{sidebar_?'sidebar_yinying2':'sidebar_yinying'}}" @tap="clear_yy"></view>
+    <view class="{{sidebar_?'right_sidebar':'right_sidebar_false'}}">
+      <view class="sidebar">
+        <scroll-view class="sidebar_right" scroll-y scroll-top="{{scrollTop}}">
+          <view class="sidebar_bq">
+            <image class="sidebar_pp_logo" src="{{ppai_logo}}" mode="aspectFit"></image>
+            <text class="sidebar_pp">{{ppai}}</text>
+          </view>
+          <view wx:for="{{json_zhi.carseriesJA}}" wx:key="key">
+            <view class="sidebar_hui">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="sidebar_list" wx:for="{{item.cmfcarseriesJA}}" wx:for-item="items" wx:key="key" @tap="click_tz({{items.carseriesid}})">
+              <view class="sidebar_list_left">
+                <text class="list_left sidebar_list_title">{{items.name}}</text>
+                <text class="list_left sidebar_list_rmb">{{items.minprice/10000}}万-{{items.maxprice/10000}}万</text>
+              </view>
+              <view class="sidebar_list_right">
+                <image class="list_che" src="{{items.imgurl}}" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+</template>
+<script>
+  // 选择车系列表
+  import wepy from 'wepy';
+  export default class Sidebar extends wepy.component {
+    data = {
+      // 品牌
+      ppai: '',
+      // 品牌logo地址
+      ppai_logo: '',
+      json_link: '',
+      // 数据列表
+      json_zhi: [],
+      // 控制组件显隐
+      sidebar_: false,
+      scrollTop: 0
+    };
+    watch = {
+      sidebar_() {
+        if (!this.sidebar_) {
+          this.json_zhi = [];
+        }
+      }
+    };
+    methods = {
+      //      关闭
+      clear_yy: function () {
+        this.sidebar_ = false;
+      },
+      someMethod: function (res) {
+        wx.showLoading({
+          title: '加载中'
+        });
+        let that = this;
+        let json_link = this.$parent.$parent.globalData.json_link;
+        // 选定品牌-车系列表
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/series/carserieslist',
+          data: {
+            carbrandid: res.carbrandid
+          },
+          success: function (data) {
+            wx.hideLoading();
+            setTimeout(() => {
+              that.scrollTop = 0;
+              that.$apply();
+            }, 1000);
+            that.json_zhi = data.data;
+            that.ppai = data.data.carbrandJO.name;
+            that.ppai_logo = data.data.carbrandJO.imgurl;
+            that.sidebar_ = true;
+            that.$apply();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      },
+      // 去产品列表页
+      click_tz(a) {
+        this.$parent.$parent.globalData.UVselectType = -1;
+        this.$emit('childFn', 'commodity_details', a);
+      }
+    };
+  }
+</script>

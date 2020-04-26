@@ -1,0 +1,363 @@
+<style lang="less">
+  .testresult {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 100rpx;
+  }
+
+  .testresult-top {
+    width: 90%;
+    font-size: 24rpx;
+    color: #666666;
+    line-height: 100rpx;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .daxiao {
+    font-size: 36rpx;
+    color: red;
+    border-radius: 20rpx;
+    margin-right: 30rpx;
+  }
+
+  .testresult-details {
+    width: 100%;
+    padding: 40rpx 0rpx 25rpx 0;
+    display: flex;
+    align-items: center;
+    border-top: 0.5rpx #eee solid;
+    box-shadow: 0rpx 5rpx 50rpx #eee;
+    margin-bottom: 45rpx;
+  }
+
+  .testresult-details-one {
+    width: 35%;
+    font-size: 24rpx;
+    text-align: center;
+  }
+
+  .testresult-details-one text {
+    color: red;
+  }
+
+  .testresult-details-one image {
+    width: 75%;
+    height: 110rpx;
+  }
+
+  .testresult-details-tow {
+    font-size: 32rpx;
+    color: rgb(0, 0, 0);
+    display: flex;
+  }
+
+  .testresult-details-tow .tow1 {
+    font-size: 22rpx;
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .testresult-details-tow .tow2 {
+    margin-right: 20rpx;
+    background: rgb(0, 199, 174);
+    color: #fff;
+    padding-left: 17rpx;
+    padding-right: 17rpx;
+    border-radius: 10rpx;
+    letter-spacing: 5rpx;
+  }
+
+  .details-tow {
+    display: flex;
+    flex-direction: column;
+    line-height: 75rpx;
+  }
+
+  .details-tow2 {
+    display: flex;
+    flex-direction: column;
+    line-height: 38rpx;
+  }
+
+  .details-tow2 text {
+    margin-bottom: 20rpx;
+    font-weight: 800;
+  }
+
+  .testresult-you {
+    border-bottom: 1rpx #eee solid;
+    padding-bottom: 25rpx;
+  }
+
+  .testresult-you2 {
+    width: 64%;
+  }
+
+  .testresult-you1 {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20rpx;
+  }
+
+  .testresult-you1 view {
+    width: 50%;
+    margin-right: 30rpx;
+    font-size: 28rpx;
+    line-height: 70rpx;
+  }
+
+  .testresult-top2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: rgb(67, 67, 67);
+  }
+
+  .shnegqing {
+    background: rgb(92, 69, 195);
+    color: #fff;
+    line-height: 70rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jiage {
+    line-height: 60rpx;
+    letter-spacing: 5rpx;
+  }
+
+  .zxkf {
+    width: 100%;
+    line-height: 100rpx;
+    background: rgb(0, 199, 174);
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .daxiao1 {
+    color: rgb(0, 199, 174);
+    margin-right: 10rpx;
+    font-size: 38rpx;
+  }
+
+  .daxiao2 {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 20rpx;
+  }
+
+  .daxiao3 {
+    width: 30rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+  }
+
+  .songchexiang {
+    display: flex;
+    align-items: center;
+  }
+
+  .dsfd {
+    margin-right: 20rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dsjk {
+    height: 120rpx;
+    .image {
+      height: 144rpx;
+    }
+  }
+
+  .select-icon {
+    margin-left: 20rpx;
+  }
+
+  .tags-cont {
+    display: flex;
+  }
+
+  .kong {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .kong-image1 {
+    width: 250rpx;
+    height: 202rpx;
+    position: absolute;
+    left: 50%;
+    top: 32%;
+    margin-left: -116rpx;
+    margin-top: -20rpx;
+  }
+
+  .kongzi {
+    width: 100%;
+    text-align: center;
+    position: absolute; // left: 7%;
+    top: 52%;
+    font-size: 32rpx;
+    color: #333;
+  }
+</style>
+<template>
+  <view class="testresult">
+    <view class="testresult-top">
+      <text class="daxiao iconfont #icon-careful"></text>此结果仅供参考，实际车和金融产品以经销商提供为准</view>
+    <view class="testresult-details" wx:for="{{financialproductJA}}" wx:key="key">
+      <view class="testresult-top2">
+        <!-- 图片 -->
+        <view class="testresult-details-one one">
+          <view class="dsjk">
+            <image src="{{carmodelJO.thumbnailimgurl}}" mode="widthFix"></image>
+          </view>
+          <view class="jiage">首付
+            <text>{{item.downpayment}}</text>万</view>
+          <view class="jiage">
+            <text>{{item.monthlysupply}}</text>元/月</view>
+        </view>
+        <view class="testresult-you2">
+          <view class="testresult-you">
+            <view class="testresult-details-tow details-tow ">
+              <text class="dsfd">{{carmodelJO.carseriesname}}</text>
+              <view class="tow1">{{carmodelJO.name}}</view>
+            </view>
+            <view class="testresult-details-tow details-tow2 ">
+              <text>{{item.line_pro_name}}</text>
+              <view class="tags-cont">
+                <view class="tow1 tow2" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="key">{{tag}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="testresult-you1">
+            <view class="shnegqing" @tap="sq_btn({{item}})">
+              <image src="image/shenqing@3x.png" class="daxiao2" mode="widthFix"></image>申请</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{code=='A00006'?true:false}}">
+      <view class="kong" wx:if="{{financialproductJA==''? true:false}}">
+        <image class="kong-image1" src="image/wen.png" mode='widthFix'></image>
+        <view class="kongzi">暂未找到符合条件的车型，请重新填写问卷后重试</view>
+      </view>
+    </view>
+    <!-- 咨询按钮 -->
+    <view class="zxkf" @tap="tap_tel">
+      <image src="image/dianhua@3x.png" class="daxiao3" mode="widthFix"></image>
+      咨询客服
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class borrow extends wepy.page {
+    config = {
+      navigationBarTitleText: '帮您贷款'
+    };
+
+    data = {
+      // 月供
+      monthlysupplysection: '',
+      // 车型id
+      carmodelid: '',
+      nativeplace: '',
+      // 城市名称
+      cityname: '',
+      householdtype: '',
+      // 车型信息
+      carmodelJO: {},
+      // 产品列表
+      financialproductJA: [],
+      // 状态码
+      code: ''
+    };
+
+    methods = {
+      // 分享
+      onShareAppMessage: function () {
+        return {
+          path: '/pages/borrow'
+        };
+      },
+      // 申请
+      sq_btn(e) {
+        console.log(e)
+
+        let financialproductid = e.financialproductid;
+        this.$parent.globalData.UVselectType = -1;
+        this.$navigate('details', {
+          carmodelid: this.carmodelid,
+          financialproductid: financialproductid,
+          downpaymentpercent:e.downpaymentPercent,
+          loanterm: e.loanterm
+        });
+      },
+      // 咨询客服
+      tap_tel() {
+        wx.makePhoneCall({
+          phoneNumber: '400-920-7258'
+        });
+      }
+    };
+    // 获取上一个页面值
+    onLoad(res) {
+      this.carmodelid = res.carmodelid;
+      this.cityname = res.cityname;
+      this.nativeplace = res.nativeplace;
+      this.householdtype = res.householdtype;
+      this.monthlysupplysection = res.monthlysupplysection;
+      // 调用产品列表方法
+      this.getList();
+    }
+
+    // 获取产品列表
+    getList() {
+      let that = this;
+      let parent_data = this.$parent.globalData;
+      wx.showLoading({
+        title: '加载中'
+      });
+      // 产品列表接口请求
+      wx.request({
+        url: parent_data.json_link +
+          '/api/wxapp/newcarloan/helpyouloan/productlist',
+        data: {
+          carmodelid: that.carmodelid,
+          cityname: that.cityname,
+          nativeplace: that.nativeplace,
+          householdtype: that.householdtype,
+          monthlysupplysection: that.monthlysupplysection
+        },
+        success(data) {
+          wx.hideLoading();
+          let res = data.data;
+          that.carmodelJO = res.carmodelJO;
+          that.financialproductJA = res.financialproductJA;
+          that.code = res.code;
+          that.$apply();
+        },
+        fail() {
+          wx.showToast({
+            title: '网络异常',
+            icon: 'none'
+          });
+        }
+      });
+    }
+  }
+</script>

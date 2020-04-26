@@ -1,0 +1,58 @@
+<style lang="less">
+    .indemnityState{
+        padding:226rpx 130rpx;
+        .title{
+            font-size: 40rpx;
+            text-align: center;
+        }
+        .stateIcon{
+            width: 100%;
+            margin: 86rpx 0 35rpx;
+            image{
+                display: block;
+                margin: 0 auto;
+                width: 200rpx;
+                height:140rpx;
+            }
+        }
+        .stateText{
+            font-size: 46rpx;
+            color: #6144cb;
+            text-align: center;
+        }
+        .stateDesc{
+            font-size: 24rpx;
+            line-height: 40rpx;
+            margin-top: 140rpx;
+            text-align: center;
+        }
+    }
+</style>
+<template>
+    <view class="indemnityState">
+        <view class="title">理赔函进度</view>
+        <view class="stateIcon">
+            <image src="{{url_link?url_link+stateIcon[stateNum]:''}}" mode="aspectFit"></image>
+        </view>
+        <view class="stateText">{{stateText[stateNum]}}</view>
+        <view class="stateDesc">{{stateDesc[stateNum]}}</view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    export default class indemnityState extends wepy.page {
+      config= {
+        navigationBarTitleText: '保险赔付'
+      };
+      data = {
+        url_link:'',
+        stateIcon: ['lpz.png','yfs.png','yjc.png'],
+        stateText: ['生成中...','已发送','已寄出'],
+        stateDesc: ['别急，理赔函我们正努力为你生成','电子理赔函已发送至你的邮箱1223344@ss.com,请注意查收','纸质理赔函已寄往你提供的住址，请注意查收'],
+        stateNum: 2
+      };
+      onLoad() {
+        this.url_link = this.$parent.globalData.url_link;
+      }
+    }
+</script>

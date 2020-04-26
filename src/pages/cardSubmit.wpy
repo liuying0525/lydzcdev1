@@ -1,0 +1,134 @@
+<style lang="less">
+  .cancelSuccess{
+    padding: 110rpx 90rpx;
+    .successIcon{
+      height: 128rpx;
+      width: 128rpx;
+      margin: 0 auto;
+      image{
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .successTitle{
+      font-size: 34rpx;
+      color: #000;
+      text-align: center;
+      margin: 54rpx auto 90rpx;
+    }
+    .successInfo{
+      width: 460rpx;
+      margin: 0 auto;
+      font-size: 26rpx;
+      line-height: 40rpx;
+    }
+    .earlyBtn{
+      width: 546rpx;
+      height: 74rpx;
+      line-height: 74rpx;
+      color: #fff;
+      background: rgb(96,68,203);
+      font-size: 30rpx;
+      -webkit-border-radius: 10rpx;
+      -moz-border-radius: 10rpx;
+      border-radius: 10rpx;
+      margin: 86rpx auto 0;
+      text-align: center;
+    }
+    .cancelBtn{
+      .earlyBtn;
+      font-size: 24rpx;
+      color: #6044cb;
+      background: #fff;
+      margin-top: 0;
+    }
+    .earlyInfo {
+      width: 546rpx;
+      margin: 30rpx auto 0;
+      font-size: 22rpx;
+      color: #595959;
+      line-height: 36rpx;
+      /*text-align: center;*/
+    }
+  }
+</style>
+<template>
+  <view class="cancelSuccess">
+    <view class="successIcon">
+      <image src="{{url_link?url_link + '/cancelS.png':''}}"></image>
+    </view>
+    <view class="successTitle">变更申请成功!</view>
+    <view class="successInfo">
+      授权书已成功发送至：{{email}}，请在签署后尽快将所签署的材料、银行卡复印件、身份证复印件邮寄邮件中指定地址！
+    </view>
+    <view class="earlyBtn" @tap="goList">确定</view>
+    <view class="cancelBtn" @tap="cancel">取消申请</view>
+    <view class="earlyInfo">
+      *如有疑问或需修改信息，可联系<text style="color: #6044cb;" @tap="makeCall('400-920-7258')">400-920-7258</text>咨询
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import toastInfo from '../components/toastInfo'
+  export default class cardSubmit extends wepy.page {
+    config = {
+      navigationBarTitleText: '还款卡变更'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      email: '',
+      recordId: '',
+      parent_data: ''
+    };
+    methods = {
+      goList: function () {
+        wx.navigateBack({
+          delta: 2
+        })
+      },
+      makeCall: function (phone) {
+        wx.makePhoneCall({
+          phoneNumber: phone
+        })
+      },
+      cancel: function () {
+        let that = this;
+        wx.request({
+          url: that.parent_data.json_dhLink + '/paycardModifyRecord/cancel',
+          data: {
+            userId: that.parent_data.login_userId,
+            loginToken: that.parent_data.login_token,
+            recordId: that.recordId
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function(res) {
+            if (res.data.code == '10001') {
+              that.$redirect('cardCancel',{delta: 3});
+            } else {
+              that.$invoke('toastInfo', 'modelFunc', res.data.code, res.data.msg);
+            }
+          },
+          fail: function( ) {
+            console.log('还款卡变更申请失败')
+          }
+        })
+      }
+    };
+    onLoad(options) {
+      this.recordId = options.recordId;
+      this.email = options.email;
+    }
+    onShow() {
+      this.url_link = this.$parent.globalData.url_link;
+      this.parent_data = this.$parent.globalData;
+    }
+  }
+</script>

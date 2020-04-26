@@ -1,0 +1,98 @@
+<style lang="less">
+  .table_content {
+    display: flex;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    padding-top: 55rpx;
+    padding-bottom: 15rpx;
+    z-index: 9999;
+    background-color: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .table_list {
+    flex: 1;
+  }
+
+  .table_list {
+    font-size: 28rpx;
+    color: #000;
+    text-align: center;
+    position: relative;
+  }
+
+  .table_list_icon {
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top: -45rpx;
+    left: 50%;
+    margin-left: -20rpx;
+  }
+</style>
+<template>
+  <view class="table_content" style='padding-bottom:{{btuBottom}}'>
+    <view class="table_list" @tap="xcdk">
+      <image src="{{che}}" mode="aspectFit" class="table_list_icon iconfont icon-dkw_xiaoxi"></image>
+      新车贷款
+    </view>
+    <!--<view class="table_list" @tap="zhizu">-->
+      <!--<image src="{{ys}}" mode="aspectFit" class="table_list_icon iconfont icon-dkw_xiaoxi"></image>-->
+      <!--直租-->
+    <!--</view>-->
+    <view class="table_list" @tap="my">
+      <image src="{{my}}" mode="aspectFit" class="table_list_icon iconfont icon-dkw_xiaoxi"></image>
+      我的
+    </view>
+  </view>
+</template>
+<script>
+  // 底部导航
+  import wepy from 'wepy';
+  export default class Leotable extends wepy.component {
+    data = {
+      // 文本值
+      che: '',
+      ys: '',
+      my: '',
+      // 底部padding的值
+      btuBottom: ''
+    };
+    props = {
+      che_: String,
+      ys_: String,
+      my_: String
+    };
+    methods = {
+      // 去直租
+      zhizu() {
+        this.$emit('childFn', 'straight');
+      },
+      // 去新车贷款
+      xcdk() {
+        this.$emit('childFn', 'index');
+      },
+      // 去我的页面
+      my() {
+        this.$emit('childFn', 'my');
+      }
+    };
+    // 初始化数据
+    onLoad() {
+      let parent_data = this.$parent.$parent.globalData;
+      var res = wx.getSystemInfoSync();
+      parent_data.login_phonemodel = res.model;
+      if (res.model.search('iPhone X') != -1) {
+        this.btuBottom = '68rpx';
+      } else {
+        this.btuBottom = '15rpx';
+      }
+      this.che = this.che_;
+      this.ys = this.ys_;
+      this.my = this.my_;
+    }
+  }
+</script>

@@ -1,0 +1,930 @@
+<style lang="less">
+    @font-face {
+        font-family: 'iconfont';
+        src: url('iconfont.eot?t=1526455260607'); /* IE9*/
+        src: url('iconfont.eot?t=1526455260607#iefix') format('embedded-opentype'),
+            /* IE6-IE8 */
+        url('data:application/x-font-woff;charset=utf-8;base64,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')
+        format('woff'),
+        url('pages/image/iconfont.ttf?t=1526455260607') format('truetype'),
+            /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+        url('iconfont.svg?t=1526455260607#iconfont') format('svg'); /* iOS 4.1- */
+    }
+
+    .iconfont {
+        font-family: 'iconfont' !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-liwu:before {
+        content: '\e600';
+    }
+
+    .icon-dingwei:before {
+        content: '\e7c4';
+    }
+
+    .icon-dingbu:before {
+        content: '\e76c';
+    }
+
+    .icon-duigou:before {
+        content: '\e712';
+    }
+
+    .icon-weixiu:before {
+        content: '\e639';
+    }
+
+    .icon-careful:before {
+        content: '\e619';
+    }
+
+    .icon-dingwei1:before {
+        content: '\e675';
+    }
+
+    .icon-qiche:before {
+        content: '\e71d';
+    }
+
+    .icon-liuchen:before {
+        content: '\e630';
+    }
+
+    .icon-wodezuji:before {
+        content: '\e631';
+    }
+
+    .icon-TFDD-:before {
+        content: '\e606';
+    }
+
+    .icon-liucheng:before {
+        content: '\e6af';
+    }
+
+    .icon-kefu:before {
+        content: '\e674';
+    }
+
+    .icon-zhangdan:before {
+        content: '\ea7a';
+    }
+
+    .icon-xuanze:before {
+        content: '\e61b';
+    }
+
+    .icon-shoucang:before {
+        content: '\e602';
+    }
+
+    .icon-mendian:before {
+        content: '\e623';
+    }
+
+    .icon-car_hy:before {
+        content: '\e618';
+    }
+
+    .icon-qiche1:before {
+        content: '\e76b';
+    }
+
+    .icon-jiang:before {
+        content: '\e616';
+    }
+
+    .icon-xiala:before {
+        content: '\e663';
+    }
+
+    .icon-Group:before {
+        content: '\e60c';
+    }
+
+    .icon-shoucang1:before {
+        content: '\e604';
+    }
+
+    .icon-zuanshi:before {
+        content: '\e60d';
+    }
+
+    .icon-paixu:before {
+        content: '\e65c';
+    }
+
+    .icon-sousuo:before {
+        content: '\e7e2';
+    }
+
+    .icon-jiantou:before {
+        content: '\e617';
+    }
+
+    .icon-geren11:before {
+        content: '\e601';
+    }
+
+    .icon-shanchu:before {
+        content: '\e622';
+    }
+
+    .icon-bangzhu:before {
+        content: '\e791';
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    // 解决scroll-view组件点透问题
+    .noscroll {
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+        z-index: 0;
+    }
+</style>
+
+<script>
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        // 新车贷款首页
+        'pages/index',
+        // 我的
+        'pages/my',
+        // 还款计划
+        'pages/repayment',
+        //修改手机号-申请记录
+        'pages/phoneList',
+        // 帮助中心
+        'pages/help',
+        // 还款卡变更-列表
+        'pages/cardList',
+        //保险赔付-列表
+        'pages/indemnityList',
+        // 提前还款-申请列表
+        'pages/earlyList',
+        // 卡券
+        'pages/coupon',
+        //个人中心登录页面
+        'pages/secLogin',
+        //还款卡变更-个人信息录入
+        'pages/cardPerson',
+        //卡券详情
+        'pages/couponDetail',
+        // 还款卡变更-扣款授权书
+        'pages/cardBook',
+        // 还款卡变更提交成功
+        'pages/cardSubmit',
+        // 注册页面
+        'pages/secRegister',
+        // 还款卡变更-重新获取
+        'pages/cardGetAgain',
+        // 还款卡变更-添加扣款授权书
+        'pages/cardUpBook',
+        // 还款卡变更-取消成功
+        'pages/cardCancel',
+        //还款卡变更
+        'pages/cardChange',
+        // 提前还款-合同信息
+        'pages/earlyContract',
+        // 修改手机号-提交成功
+        'pages/phoneSubmit',
+        // 修改手机号-个人信息
+        'pages/phonePerson',
+        //修改手机号-取消成功
+        'pages/phoneCancel',
+        // 个人信息
+        'pages/myprofile',
+        // 重置密码
+        'pages/secForget',
+        // 保险理赔-个人信息填写
+        'pages/indemnityPerson',
+        // 提前还款-个人信息
+        'pages/earlyPerson',
+        //保险赔付取消成功页
+        'pages/indemnityCancel',
+        // 提前还款-提交成功
+        'pages/earlySubmit',
+        // 保险理赔-提交成功
+        'pages/indemnitySubmit',
+        // 注册成功
+        'pages/secRegisterSuccess',
+        // 提前还款-取消成功
+        'pages/earlyCancel',
+        // 选择门店
+        'pages/mendian',
+        // 保险理赔-理赔进度
+        'pages/indemnityState',
+        // 条件选车
+        'pages/sousuo',
+        // 金融产品详情页
+        'pages/details',
+        // 帮您贷款申请页
+        'pages/borrow',
+        // 直租
+        'pages/straight',
+        // 直租详情
+        'pages/straight_detail',
+        // 金融产品列表
+        'pages/commodity_details',
+        // 贷款计算器
+        'pages/calculator',
+        // 帮您贷款选择车型
+        'pages/xz_che',
+        // 搜索
+        'pages/brandd',
+        // 选择品牌
+        'pages/pinpai',
+        // 搜索结果
+        'pages/branddd',
+        // 预约确认
+        'pages/order',
+        // 我的订单
+        'pages/myorder',
+        // 我的收藏
+        'pages/myordey',
+        // 意见反馈
+        'pages/opinion',
+        // 关于我们
+        'pages/aboutme',
+        // 贷款流程
+        'pages/loanprocess',
+        // 我的足迹
+        'pages/footprint',
+        // 修改手机号
+        'pages/change',
+        // 热销好车
+        'pages/products',
+        // 贴息专区
+        'pages/tiexi',
+        // 成功页
+        'pages/successfulorder',
+        // 选择车型
+        'pages/brand',
+        // 帮您贷款
+        'pages/choose',
+        // 订单详情
+        'pages/ddxq',
+        // 直租搜索结果页
+        'pages/seek',
+        // 直租搜索页
+        'pages/rent',
+        // 活动
+        'pages/midautumn',
+        'pages/midautumnn',
+        'pages/midautumnone',
+        'pages/midautumnonee',
+        // 活动预约确认
+        'pages/activities',
+        'pages/personal',
+        'pages/url'
+      ],
+      permission: {
+        'scope.userLocation': {
+          'desc': '你的位置信息将用于小程序位置接口的效果展示'
+        }
+      },
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#6044ca',
+        navigationBarTextStyle: 'white',
+        onReachBottomDistance: 10
+      },
+      debug:false
+    };
+
+    globalData = {
+      // 二期贷后以及红旗优惠券静态资源地址
+      url_dhLink: 'https://webapi.dongzhengafc.com:9503/images/',
+      // 二期贷后用的生产接口域名
+       json_dhLink: 'https://webapi.dongzhengafc.com:9503',
+      // 二期贷后用的测试接口域名
+      //json_dhLink: 'http://test-wxapp.dongzhengafc.com:9091',
+      // 是否注册
+      isRegist: false,
+      // login_token 登录的token
+      login_token: '',
+      // 注册登录的手机号
+      login_phone: '',
+      login_idCard: '',
+      login_name: '',
+      login_userId: '',
+      // 品牌列表
+      pinpailist: '123123123123',
+      // 用户信息
+      userInfo: null,
+      // 定位
+      gps_dw: '',
+
+      // 资源地址
+      // url_link: 'https://wxapp.dongzhengafc.com/mg/assets/',
+      // 新的资源地址
+      url_link: 'https://webapi.dongzhengafc.com:9503/images/',
+      //测试资源地址
+      // url_link: 'http://test-wxapp.dongzhengafc.com/assets/',
+      // 正式服务器
+      json_link: 'https://wxapp.dongzhengafc.com',//mg',
+      // 测试地址
+      // json_link:'http://test-wxapp.dongzhengafc.com',
+      // 登录
+      java_login: function(e, hanshu) {
+        console.log('检查是否授权');
+        let this_ = this;
+        this.logining = true;
+        console.log(e)
+        wx.login({
+          success: function(res) {
+            console.log('微信官方登录获取信息');
+            if (res.code) {
+              console.log('微信登录成功');
+              let authid = 'dongzheng';
+              let authsecret = 'dongzheng';
+              let mpid = 'DZ2018';
+              let moduleid = '2cbb2fa14279486499de20c971ef96d1';
+              let jscode = res.code;
+              let iv = e.iv;
+              let encryptedData = e.encryptedData;
+              let convertmpid = 'DZ2018';
+              // 手机参数
+              let telnumdata = this_.login_telnum_miyao;
+              let telnumiv = this_.login_telnum_iv;
+              let phonebrand = this_.login_phonebrand;
+              let phonemodel = this_.login_phonemodel;
+              let system = this_.login_system;
+              let platform = this_.login_platform;
+              let network = this_.login_network;
+              let lat = this_.login_lat;
+              let lng = this_.login_lng;
+              let  country= this_.addressComponent.country;//过
+              let city = this_.addressComponent.city;
+              let province = this_.addressComponent.province;
+              let userid=this_.userid
+              if(userid!=''){
+                console.log('真的特别匹')
+                wx.request({
+                  url: this_.json_link + '/api/wxapp/user/login',
+                  method: 'POST',
+                  header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  data: {
+                    jscode: jscode,
+                    encryptedData: encryptedData,
+                    iv: iv,
+                    convertmpid: convertmpid,
+                    mpid: mpid,
+                    authid: authid,
+                    authsecret: authsecret,
+                    moduleid: moduleid,
+                    withauthdata: 0,
+                    telnumdata: telnumdata,
+                    telnumiv: telnumiv,
+                    phonebrand: phonebrand,
+                    phonemodel: phonemodel,
+                    system: system,
+                    platform: platform,
+                    network: network,
+                    lat: lat,
+                    lng: lng,
+                    country:country,
+                    city:city,
+                    province:province,
+                    referee:userid
+                  },
+                  success: function(data) {
+                    console.log('进入登录成功');
+                    if (data.data.code == 'A00006') {
+                      wx.showToast({
+                        title: '登录成功！',
+                        icon: 'success'
+                      });
+                      this_.access_token = data.data.access_token;
+                      this_.optionid = data.data.optionid;
+                      hanshu(this_.access_token);
+                      wx.request({
+                        // url拼接
+                        url: this_.json_link + '/api/wxapp/userinfo/detail?access_token=' +data.data.access_token,
+                        data: {},
+                        // 后台返回值
+                        success: function(data) {
+                          console.log( data.data.data.userid)
+                          this_.userid=data.data.data.userid;
+                          // 定义返回值的数据
+                          // 领取
+                          wx.request({
+                            // url拼接
+                            url: this_.json_link + '/api/wxapp/card/loginsendcardinfo?access_token=' +data.data.access_token,
+                            data: {},
+                            // 后台返回值
+                            success: function(data) {
+                              console.log(data.data.data.type)
+                              // 领取
+                              if(data.data.data.type==-1){
+
+                              }else if(data.data.data.type==1){
+                                wx.showModal({
+                                  title: '提示',
+                                  content: data.data.data.title,
+                                  showCancel: false,
+                                  confirmText:"领取",
+                                  success: function(res) {
+                                    if (res.confirm) {
+                                      wx.request({
+                                        url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                        data: {
+                                          sendflag: 0
+                                        },
+                                        success: function(data) {
+                                        }
+                                      });
+                                    } else if (res.cancel) {
+                                      console.log('用户点击取消')
+                                    }
+                                  }
+                                })
+                              }else  if(data.data.data.type==0){
+                                wx.showModal({
+                                  title: '提示',
+                                  content: data.data.data.title,
+                                  showCancel: true,
+                                  confirmText:"领取",
+                                  success: function(res) {
+                                    if (res.confirm) {
+                                      wx.request({
+                                        url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                        data: {
+                                          sendflag: 1
+                                        },
+                                        success: function(data) {
+                                        }
+                                      });
+                                    } else if (res.cancel) {
+                                      console.log('用户点击取消')
+                                      wx.request({
+                                        url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                        data: {
+                                          sendflag: 0
+                                        },
+                                        success: function(data) {
+                                        }
+                                      });
+                                    }
+                                  }
+                                })
+                              }
+                              // 定义返回值的数据
+                              // 提示
+
+                            }
+                          });
+                        }
+                      });
+
+
+                    } else {
+                      wx.showToast({
+                        title: '登录失败！',
+                        icon: 'success'
+                      });
+                    }
+                    this_.logining = false;
+                  }
+                });
+              }else{
+                wx.request({
+                  url: this_.json_link + '/api/wxapp/user/login',
+                  method: 'POST',
+                  header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  data: {
+                    jscode: jscode,
+                    encryptedData: encryptedData,
+                    iv: iv,
+                    convertmpid: convertmpid,
+                    mpid: mpid,
+                    authid: authid,
+                    authsecret: authsecret,
+                    moduleid: moduleid,
+                    withauthdata: 0,
+                    telnumdata: telnumdata,
+                    telnumiv: telnumiv,
+                    phonebrand: phonebrand,
+                    phonemodel: phonemodel,
+                    system: system,
+                    platform: platform,
+                    network: network,
+                    lat: lat,
+                    lng: lng,
+                    country:country,
+                    city:city,
+                    province:province
+                  },
+                  success: function(data) {
+                    console.log('进入登录成功');
+                    if (data.data.code == 'A00006') {
+                      wx.showToast({
+                        title: '登录成功！',
+                        icon: 'success'
+                      });
+                      this_.access_token = data.data.access_token;
+                      let access_token=data.data.access_token
+                      this_.optionid = data.data.optionid;
+                      hanshu(this_.access_token);
+                      wx.request({
+                        // url拼接
+                        url: this_.json_link + '/api/wxapp/userinfo/detail?access_token=' +data.data.access_token,
+                        data: {
+                        },
+                        // 后台返回值
+                        success: function(data) {
+                          console.log( data.data.data.userid);
+                          this_.userid=data.data.data.userid;
+                          // 定义返回值的数据
+                        }
+                      });
+                      console.log('登录成功ad！');
+                      // 领取
+                      wx.request({
+                        // url拼接
+                        url: this_.json_link + '/api/wxapp/card/loginsendcardinfo?access_token=' +data.data.access_token,
+                        data: {},
+                        // 后台返回值
+                        success: function(data) {
+                          // 领取
+                          if(data.data.data.type==-1){
+
+                          }else if(data.data.data.type==1){
+                            wx.showModal({
+                              title: '提示',
+                              content: data.data.data.title,
+                              showCancel: false,
+                              confirmText:"领取",
+                              success: function(res) {
+                                if (res.confirm) {
+                                  wx.request({
+                                    url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                    data: {
+                                      sendflag: 0
+                                    },
+                                    success: function(data) {
+                                    }
+                                  });
+                                } else if (res.cancel) {
+                                  console.log('用户点击取消')
+                                }
+                              }
+                            })
+                          }else  if(data.data.data.type==0){
+                            wx.showModal({
+                              title: '提示',
+                              content: data.data.data.title,
+                              showCancel: true,
+                              confirmText:"领取",
+                              success: function(res) {
+                                if (res.confirm) {
+                                  wx.request({
+                                    url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                    data: {
+                                      sendflag: 1
+                                    },
+                                    success: function(data) {
+                                    }
+                                  });
+                                } else if (res.cancel) {
+                                  console.log('用户点击取消')
+                                  wx.request({
+                                    url: this_.json_link + '/api/wxapp/card/loginsendcard?access_token=' +access_token,
+                                    data: {
+                                      sendflag: 0
+                                    },
+                                    success: function(data) {
+                                    }
+                                  });
+                                }
+                              }
+                            })
+                          }
+                          // 定义返回值的数据
+                          // 提示
+
+                        }
+                      });
+
+                    } else {
+                      wx.showToast({
+                        title: '登录失败！',
+                        icon: 'success'
+                      });
+                    }
+                    this_.logining = false;
+                  }
+                });
+              }
+
+            } else {
+              console.log('授权13');
+              this_.logining = false;
+              console.log('登录失败！！！');
+            }
+          }
+        });
+      },
+      addressComponent:'',
+      // token
+      access_token: '',
+      // optionid
+      optionid:'',
+      // 登录需要的参数
+      login_telnum_iv: '',
+      login_telnum_miyao: '',
+      login_phonebrand: '',
+      login_phonemodel: '',
+      login_system: '',
+      login_platform: '',
+      login_network: '',
+      login_lat: '',
+      login_lng: '',
+      nameors: '品牌',
+      // 品牌id
+      pinpaiid: '',
+      biaoji: '0',
+      pageWidth: '', // 页面宽度
+      pageHeight: '', // 页面高度
+      // 保存选中的门店信息
+      selectMendian: {},
+      // 当前城市
+      cityName: '全国',
+      // 正在登陆 true表示正在登陆
+      logining: false,
+      // UV统计选车类型 0--新车贷款 1--条件选车 2--贴息专区 3--热销好车
+      UVselectType: -1,
+      // 点击数生成订单数统计
+      // 当前点击对象的id
+      pageid: [],
+      // 当前操作对象 1:热搜词, 2:热卖车系, 3:车辆, 4:首页车辆图片, 5:广告, 6:活动, 7:直租热搜词
+      pagename: [],
+      // 贷款提交订单接口两个参数
+      // 来源 0 默认 1 贴息 2 活动
+      source: 0,
+      // 来源id carmodelid/activityid
+      sourceid: '',
+      value:'',
+      userid:'',
+      turn:'当前'
+    };
+    constructor() {
+      super();
+      this.use('requestfix');
+    }
+    onLaunch() {
+      let that = this;
+      this.testAsync();
+      wx.setEnableDebug({
+        // 调试模式开关
+          enableDebug: false
+     
+      });
+
+      // 监听网络变化
+      wx.onNetworkStatusChange(res => {
+        if (!res.isConnected) {
+          wx.showToast({
+            title: '网络已断开'
+          });
+        }
+      });
+
+      // 获取导航高度
+      // 获取系统信息
+      wx.getSystemInfo({
+        success: function(res) {
+          // 可使用窗口宽度、高度
+          that.globalData.pageWidth = res.windowWidth;
+          that.globalData.pageHeight = res.windowHeight;
+        }
+      });
+    }
+    sleep(s) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('promise resolved');
+        }, s * 1000);
+      });
+    }
+    async testAsync() {
+      const data = await this.sleep(3);
+    }
+    // 获取用户信息
+    getUserInfo(cb) {
+      const that = this;
+      if (this.globalData.userInfo) {
+        return this.globalData.userInfo;
+      }
+      wepy.getUserInfo({
+        success(res) {
+          that.globalData.userInfo = res.userInfo;
+          cb && cb(res.userInfo);
+        }
+      });
+    }
+    // 维护我的足迹数据
+    /**
+     * value
+     参数:
+     type: 0 直租详情 1 金融商品列表
+     carmodelid: 车系id
+     financialproductid: 产品id(直租)
+     daikuantag: 贷款标签：新车贷(1)
+     goodimage: 图片地址
+     carseriesname: 车系名称
+     name: 产品名称
+     price: 厂家指导价
+     cardpageJA: 活动(直租)
+     downpayment: 首付
+     monthlysupply: 月供(直租详情)
+     downpaymentpercent: 首付百分比
+     loanterm: 贷款期限
+     *
+     */
+    myFootData(option, value) {
+      if (option === 'get') {
+        return wx.getStorageSync('myFoot').data;
+      } else if (option === 'add') {
+        if (wx.getStorageSync('myFoot')) {
+          let data = wx.getStorageSync('myFoot').data;
+          data = data.filter((ele, index) => {
+            return ele.carmodelid !== value.carmodelid;
+          });
+          data.unshift(value);
+          // 保留前50条数据
+          if (data.length > 50) {
+            data = data.slice(0, 50);
+          }
+          wx.setStorageSync('myFoot', { data: data });
+        } else {
+          let myFoot = {
+            data: []
+          };
+          myFoot.data.unshift(value);
+          wx.setStorageSync('myFoot', myFoot);
+        }
+      } else if (option === 'del') {
+        let data = wx.getStorageSync('myFoot').data;
+        data = data.filter((ele, index) => {
+          return ele.carmodelid !== value;
+        });
+        wx.setStorageSync('myFoot', { data: data });
+      }
+    }
+
+    // 修改手机号倒计时状态
+    /**
+     type: set--保存当前倒计时状态  get--获取倒计时状态 remove--移除状态
+     phone: 当前手机号
+     timerNum: 当前倒计时秒数
+     **/
+    changeTimerState(type, phone, timerNum) {
+      if (type === 'set') {
+        // 秒
+        let timestr = Date.parse(new Date()) / 1000;
+        let obj = {
+          phone: phone,
+          timerNum: timerNum,
+          timestr: timestr
+        };
+        wx.setStorageSync('timerState', obj);
+      } else if (type === 'get') {
+        return wx.getStorageSync('timerState');
+      } else if (type === 'remove') {
+        wx.removeStorageSync('timerState');
+      }
+    }
+
+    // UV统计
+    // currentpage: newcarhomepage--新车贷款.choosecarpage--条件选车、贴息专区、热销好车.loanproductlist--金融产品列表.loanproductdetail--金融产品详情.fillinorderpage--预约确认.newordersubmitsuccess--新用户创建订单成功.oldordersubmitsuccess--老用户创建订单成功
+    UVstatistical(currentpage) {
+      let that = this;
+      if (that.globalData.UVselectType < 0) {
+        return false;
+      }
+      wx.request({
+        url: that.globalData.json_link + '/mframework/api/token?authid=dongzheng&authsecret=dongzheng',
+        success(res) {
+          wx.request({
+            url: that.globalData.json_link + '/api/wxapp/stat/orderstat?access_token=' + res.data.access_token,
+            data: {
+              currentpage: currentpage,
+              choosecartype: that.globalData.UVselectType
+            },
+            success(res) {
+              console.log(res);
+            }
+          })
+        }
+      });
+    }
+
+    // PV UV统计
+    /** currentpage:
+     newcarhomepage  首页
+     interestdiscount  贴息专区
+     hotsale  热销好车
+     conditionchoosecar  条件选车
+     loanproductlist  金融产品列表
+     loanproductdetail  金融产品详情
+     directrenthomepage  直租
+     directrentdetail  直租详情
+     my  我的
+     cardpagedetail  卡券详情
+     helpyouload  帮您贷款
+     loancalculator  贷款计算器
+     rentfillinorderpage  直租预约确认
+     rentnewordersubmitsuccess  直租新用户创建订单成功
+     rentoldordersubmitsuccess  直租老用户创建订单成功
+     **/
+    PVUVstatistical(currentpage) {
+      let that = this;
+      wx.request({
+        url: that.globalData.json_link + '/mframework/api/token?authid=dongzheng&authsecret=dongzheng',
+        success(res) {
+          wx.request({
+            url: that.globalData.json_link + '/api/wxapp/stat/flowstat?access_token=' + res.data.access_token,
+            data: {
+              currentpage: currentpage
+            },
+            success(res) {
+              console.log(res);
+            }
+          })
+        }
+      });
+    }
+
+    // 点击数生成订单数统计
+    /** incrfield: 1:点击数  2 ：生成订单数
+     **/
+    clicknumordernumstat(incrfield) {
+      let that = this;
+      wx.request({
+        url: that.globalData.json_link + '/mframework/api/token?authid=dongzheng&authsecret=dongzheng',
+        success(res) {
+          for (let i = 0; i < that.globalData.pageid.length; i++) {
+            wx.request({
+              url: that.globalData.json_link + '/api/wxapp/stat/clicknumordernumstat?access_token=' + res.data.access_token,
+              data: {
+                pageid: that.globalData.pageid[i],
+                pagename: that.globalData.pagename[i],
+                incrfield: incrfield
+              },
+              success(res) {
+                console.log(res);
+              }
+            })
+          }
+        }
+      });
+    }
+
+    onShow() {
+      // 版本更新
+      const updateManager = wx.getUpdateManager();
+      updateManager.onCheckForUpdate(function(res) {
+        // 请求完新版本信息的回调
+        console.log(res.hasUpdate);
+      });
+      updateManager.onUpdateReady(function() {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function(res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate();
+            }
+          }
+        });
+      });
+      updateManager.onUpdateFailed(function() {
+        // 新的版本下载失败
+      });
+      //
+    }
+  }
+</script>

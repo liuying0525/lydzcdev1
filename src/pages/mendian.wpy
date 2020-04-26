@@ -1,0 +1,279 @@
+<style lang="less">
+.order-te3e {
+  height: 60px;
+  padding-top: 20rpx;
+  padding-left: 30rpx;
+  border-bottom: 2rpx #eee solid;
+  box-sizing: border-box;
+}
+.order-te4 {
+  width: 80%;
+  font-size: 28rpx;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.order-te4 .juli {
+  position: absolute;
+  right: 15%;
+  color: rgb(82, 82, 82);
+}
+.order-te5 {
+  width: 80%;
+  font-size: 28rpx;
+  color: #666;
+  // margin-left:-6.5%;
+  margin-top: 15rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.quian {
+  padding: 0 4%;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.di {
+  transform: scale(-1, -1);
+  margin-left: 20rpx;
+  font-size: 34rpx;
+  color: #555555;
+  position: relative;
+  display: inline-block;
+}
+.jl {
+  color: red;
+}
+.cs {
+  padding: 0 4%;
+  line-height: 25px;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  background: #eee;
+}
+.cs-di {
+  height: 60px;
+}
+.zxkf {
+  width: 100%;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  background: #6044ca;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+.right_sidebar {
+  display: block;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  overflow: hidden;
+}
+.right_sidebar_false {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -100%;
+  width: 100%;
+  z-index: 999999;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.menu-cont {
+  display: flex;
+  .menu-l {
+    flex: 0 0 160rpx;
+    .city-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      background-color: rgb(240, 241, 245);
+      .city-item {
+        width: 100%;
+        height: 90rpx;
+        text-align: center;
+        line-height: 90rpx;
+        font-size: 28rpx;
+        color: rgb(117, 117, 117);
+        background-color: rgb(240, 241, 245);
+        &.active {
+          color: #000;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  .menu-r {
+    flex: 1;
+  }
+}
+</style>
+<template>
+  <view class="mendian">
+    <view class="quian">
+      <view>全国</view>
+      <view>共{{dsas}}家门店</view>
+    </view>
+
+    <view class="menu-cont">
+      <!-- 左侧菜单 -->
+      <scroll-view class="menu-l" scroll-y scroll-with-animation style="height: {{menuHeight}}">
+        <view class="city-list">
+          <text wx:for="{{dsa}}" wx:key="{{item.business_partner_id}}" class="city-item {{index === scrollNum ? 'active' : ''}}" data-viewid="{{item.state_namepinyin}}" @tap="selectCity" >{{item.state_name}}</text>
+        </view>
+      </scroll-view>
+      <!-- 右侧菜单 -->
+      <scroll-view class="menu-r" scroll-y scroll-with-animation scroll-into-view="{{viewid}}" scroll-top="{{scrollTop}}" @scroll="goodsScrollAct" style="height: {{menuHeight}}">
+        <view wx:for="{{dsa}}" wx:key="key" id="{{item.state_namepinyin}}">
+          <view class="cs">{{item.state_name}}</view>
+          <view class="cs-di" wx:for="{{item.city}}"  wx:key="key" wx:for-item="city" @tap='mendian({{city.business_partner_nme}},{{city.buildingname}},{{city.state_name}},{{city.businessid}})'>
+            <view class="order-te3e">
+              <view class="order-te4">{{city.business_partner_nme}}</view>
+              <view class="order-te5">{{city.buildingname}}</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+let City = require('../pages/js/allcity.js');
+export default class mendian extends wepy.page {
+  config = {
+    navigationBarTitleText: '选择门店'
+  };
+  data = {
+    // 门店列表
+    dsa: '',
+    dsas: '',
+    dsan: '',
+    // 城市
+    city: City,
+    // 要移动到的位置
+    viewid: '',
+    // 中国城市列表
+    citys: ['北京', '天津', '上海', '重庆', '河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '海南', '四川', '贵州', '云南', '陕西', '甘肃', '青海', '台湾', '内蒙古', '广西', '西藏', '宁夏', '新疆', '香港', '澳门'],
+    // 城市对应的拼音
+    citysPinyin: ['beijing', 'tianjin', 'shanghai', 'chongqing', 'hebei', 'shanxi2', 'liaoning', 'jilin', 'heilongjiang', 'jiangsu', 'zhejiang', 'anhui', 'fujian', 'jiangxi', 'shandong', 'henan', 'hubei', 'hunan', 'guangdong', 'hainan', 'sichuan', 'guizhou', 'yunnan', 'shanxi', 'gansu', 'qinghai', 'taiwan', 'neimenggu', 'guangxi', 'xizang', 'ningxia', 'xinjiang', 'xianggang', 'aomen'],
+    // 右侧导航向上滚动的距离
+    scrollTop: 0,
+    scrollNum: 0,
+    // 门店高度
+    typeHeight: 25,
+    // 城市高度
+    goodHeight: 60
+  };
+  computed = {
+    menuHeight() {
+      // 计算主体部分高度,单位为px
+      // second部分高度 = 利用窗口可使用高度 - first部分高度（这里的高度单位为px，所有利用比例将300rpx转换为px）
+      let parent = this.$parent.globalData;
+      return parent.pageHeight - parent.pageWidth / 750 * 80 + 'px';
+    }
+  };
+  methods = {
+    // 选择门店
+    mendian(e, a, c, d) {
+      this.$parent.globalData.selectMendian = {
+        business_partner_nme: e,
+        building_nme: a,
+        state_name: c,
+        businessid: d
+      };
+      wx.navigateBack();
+    },
+    // 选择城市
+    selectCity(e) {
+      let viewid = e.currentTarget.dataset.viewid;
+      this.viewid = viewid;
+    },
+    // 滚动右侧列表左侧联动
+    goodsScrollAct(e) {
+      let that = this;
+      let typeCount = that.dsan.length;
+      let goodsCount = 0
+      that.dsan.forEach((item) => {
+        goodsCount += item.city.length;
+      });
+      
+      let heightList = [0];
+      let curHeight = 0;
+      that.dsan.forEach((item) => {
+        curHeight += (that.typeHeight + item.city.length * that.goodHeight);
+        heightList.push(curHeight);
+      });
+
+      for (let i = 0; i < heightList.length; i++){
+        if (e.detail.scrollTop >= heightList[i] && e.detail.scrollTop < heightList[i+1]){
+          that.scrollNum = i;
+        }
+      }
+    },
+  };
+
+  // 城市名映射为拼音
+  citytopinyin(value) {
+    return this.citysPinyin[this.citys.indexOf(value)];
+  }
+
+  // 获取页面数据
+  onLoad(options) {
+    let this_ = this;
+    wx.showLoading({
+      title: '加载中'
+    });
+
+    let url;
+    if (options.from == '直租详情') {
+      // 直租预约门店选择
+      url = options.json_link + '/api/wxapp/appointment/selectbusinessdirectrent';
+    } else {
+      // 贷款预约门店选择
+      url = options.json_link + '/api/wxapp/appointment/selectbusiness';
+    }
+
+    wx.request({
+      // url拼接
+      url: url,
+      data: {
+        financialproductid: options.e,
+        assetmodelcde: options.a
+      },
+      // 后台返回值
+      success: function(data) {
+        wx.hideLoading();
+        // 定义返回值的数据
+        let datas = data.data.data;
+        datas.forEach((ele) => {
+          ele.state_namepinyin = this_.citytopinyin(ele.state_name);
+        });
+        this_.dsa = datas;
+        this_.dsan = datas.slice(0, datas.length - 2);
+        this_.viewid = datas[0].state_namepinyin;
+
+        let length = data.data.data.length;
+        let lengthr = length - 1;
+        this_.dsas = data.data.data[lengthr].count;
+        // 给数据进行绑定
+        this_.$apply();
+      }
+    });
+  }
+}
+</script>

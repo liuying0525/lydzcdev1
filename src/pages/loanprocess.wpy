@@ -1,0 +1,203 @@
+<style lang="less">
+.financial-liucheng-tu1 {
+  width: 90rpx;
+}
+.financial-liucheng-tu2 {
+  width: 12rpx;
+}
+.financial-liucheng {
+  display: flex;
+  width: 100%;
+}
+.financial-liucheng-tu {
+  width: 14%;
+  text-align: center;
+}
+.financial-liucheng-wenzi {
+  width: 80%;
+  margin-left: 30rpx;
+  font-size: 20rpx;
+  color: rgb(82, 82, 82);
+  margin-top: 10rpx;
+}
+.financial-div {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
+.financial-liucheng-wenzi1 {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.financial-liucheng-wenzi3 {
+  line-height: 40rpx;
+  padding-bottom: 70rpx;
+}
+
+.financial-div1 {
+  display: flex;
+  width: 100%;
+}
+.financial-biaoti {
+  line-height: 50rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding-left: 40rpx;
+  background: #eee;
+}
+</style>
+<template>
+        <view>
+          <!-- 新车贷款流程 -->
+            <view class='financial-biaoti'>新车贷款流程</view>
+           <view class='financial-div'>
+                <view class='financial-div1'>
+                <view class='financial-liucheng-tu'>
+                <image src='image/sq.png' class='financial-liucheng-tu1' mode='widthFix'></image>
+                <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>
+                </view>
+                <view class='financial-liucheng-wenzi'>
+                <view class='financial-liucheng-wenzi3'>
+                <view class='financial-liucheng-wenzi1'>线上申请</view>
+                <view class='financial-liucheng-wenzi2'>选择心仪车型，填写姓名，手机号等相关材料提交线上申请</view>
+                </view>
+                </view>
+                </view>
+                <view class='financial-div1'>
+                <view class='financial-liucheng-tu'>
+                <image src='image/goutong.png' class='financial-liucheng-tu1' mode='widthFix'></image>
+                <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>
+                </view>
+                <view class='financial-liucheng-wenzi'>
+                <view class='financial-liucheng-wenzi3'>
+                <view class='financial-liucheng-wenzi1'>顾问沟通</view>
+                <view class='financial-liucheng-wenzi2'>我们销售顾问会在24小时内为您安排一对一服务</view>
+                </view>
+                </view>
+                </view>
+                <view class='financial-div1'>
+                <view class='financial-liucheng-tu'>
+                <image src='image/xin.png' class='financial-liucheng-tu1' mode='widthFix'></image>
+                <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>
+                </view>
+                <view class='financial-liucheng-wenzi'>
+                <view class='financial-liucheng-wenzi3'>
+                <view class='financial-liucheng-wenzi1'>信用评估</view>
+                <view class='financial-liucheng-wenzi2'>线下提供简单资质材料，等待贷款审批</view>
+                </view>
+                </view>
+                </view>
+                <view class='financial-div1'>
+                <view class='financial-liucheng-tu'>
+                <image src='image/zhifu.png' class='financial-liucheng-tu1' mode='widthFix'></image>
+                <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>
+                </view>
+                <view class='financial-liucheng-wenzi'>
+                <view class='financial-liucheng-wenzi3'>
+                <view class='financial-liucheng-wenzi1'>支付首付</view>
+                <view class='financial-liucheng-wenzi2'>通知审批通过放款成功，支付首付</view>
+                </view>
+                </view>
+                </view>
+                <view class='financial-div1'>
+                <view class='financial-liucheng-tu'>
+                <image src='image/guoqi.png' class='financial-liucheng-tu1' mode='widthFix'></image>
+                <!-- <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image> -->
+                </view>
+                <view class='financial-liucheng-wenzi'>
+                <view class='financial-liucheng-wenzi3'>
+                <view class='financial-liucheng-wenzi1'>到店提车</view>
+                <view class='financial-liucheng-wenzi2'>办理买车手续，提车回家。小程序或者东正金融微信公众号上查询还款账单，接收还款提醒</view>
+                </view>
+                </view>
+                </view>
+                </view>
+                <!-- 直租流程 -->
+                <!-- &lt;!&ndash; 直租流程 &ndash;&gt;-->
+                 <!--<view class='financial-biaoti'>直租流程</view>-->
+           <!--<view class='financial-div'>-->
+                <!--<view class='financial-div1'>-->
+                <!--<view class='financial-liucheng-tu'>-->
+                <!--<image src='image/sq.png' class='financial-liucheng-tu1' mode='widthFix'></image>-->
+                <!--<image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>-->
+                <!--</view>-->
+                <!--<view class='financial-liucheng-wenzi'>-->
+                <!--<view class='financial-liucheng-wenzi3'>-->
+                <!--<view class='financial-liucheng-wenzi1'>线上申请</view>-->
+                <!--<view class='financial-liucheng-wenzi2'>选择心仪车型,填写名字,手机号等相关材料提交线上申请</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--<view class='financial-div1'>-->
+                <!--<view class='financial-liucheng-tu'>-->
+                <!--<image src='image/goutong.png' class='financial-liucheng-tu1' mode='widthFix'></image>-->
+                <!--<image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>-->
+                <!--</view>-->
+                <!--<view class='financial-liucheng-wenzi'>-->
+                <!--<view class='financial-liucheng-wenzi3'>-->
+                <!--<view class='financial-liucheng-wenzi1'>顾问沟通</view>-->
+                <!--<view class='financial-liucheng-wenzi2'>选择心仪车型,填写名字,手机号等相关材料提交线上申请</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--<view class='financial-div1'>-->
+                <!--<view class='financial-liucheng-tu'>-->
+                <!--<image src='image/xin.png' class='financial-liucheng-tu1' mode='widthFix'></image>-->
+                <!--<image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>-->
+                <!--</view>-->
+                <!--<view class='financial-liucheng-wenzi'>-->
+                <!--<view class='financial-liucheng-wenzi3'>-->
+                <!--<view class='financial-liucheng-wenzi1'>信用评估</view>-->
+                <!--<view class='financial-liucheng-wenzi2'>选择心仪车型,填写名字,手机号等相关材料提交线上申请</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--<view class='financial-div1'>-->
+                <!--<view class='financial-liucheng-tu'>-->
+                <!--<image src='image/zhifu.png' class='financial-liucheng-tu1' mode='widthFix'></image>-->
+                <!--<image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image>-->
+                <!--</view>-->
+                <!--<view class='financial-liucheng-wenzi'>-->
+                <!--<view class='financial-liucheng-wenzi3'>-->
+                <!--<view class='financial-liucheng-wenzi1'>支付首付</view>-->
+                <!--<view class='financial-liucheng-wenzi2'>选择心仪车型,填写名字,手机号等相关材料提交线上申请</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--<view class='financial-div1'>-->
+                <!--<view class='financial-liucheng-tu'>-->
+                <!--<image src='image/guoqi.png' class='financial-liucheng-tu1' mode='widthFix'></image>-->
+                <!--&lt;!&ndash; <image src='image/czjt.png' class='financial-liucheng-tu2' mode='widthFix'></image> &ndash;&gt;-->
+                <!--</view>-->
+                <!--<view class='financial-liucheng-wenzi'>-->
+                <!--<view class='financial-liucheng-wenzi3'>-->
+                <!--<view class='financial-liucheng-wenzi1'>到店提车</view>-->
+                <!--<view class='financial-liucheng-wenzi2'>选择心仪车型,填写名字,手机号等相关材料提交线上申请</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view>-->
+                <!--</view> -->
+        </view>
+
+
+</template>
+
+<script>
+import wepy from 'wepy';
+
+
+
+export default class loanprocess extends wepy.page {
+  config = {
+    navigationBarTitleText: '贷款流程'
+  };
+
+  methods = {
+    onShareAppMessage: function () {
+    return {
+          path: '/pages/loanprocess'
+        }
+      },
+  };
+}
+</script>

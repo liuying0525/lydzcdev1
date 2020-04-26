@@ -1,0 +1,824 @@
+<style lang="less">
+  .container {
+    width: 100%;
+  }
+
+  .c_details_sp {
+    width: 50%;
+    height: 280rpx;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .c_details_h {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar_list_ck {
+    width: calc(~'100% - 80rpx');
+    padding: 0 40rpx 0 40rpx;
+    height: 130rpx;
+    background-color: #f0f1f5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar_list_left_ck {
+    height: 90rpx;
+    padding: 20rpx 0 20rpx 0;
+    position: relative;
+    float: left;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .list_left {
+    width: 90%;
+  }
+
+  .c_details_fs {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar_list_title_ck {
+    font-size: 28rpx;
+    position: relative;
+  }
+
+  .sidebar_list_rmb_ck {
+    width: 46%;
+    font-size: 24rpx;
+    color: #444444;
+    overflow: hidden;
+    position: relative; // right: -77%;
+  }
+
+  .c_details_jt {
+    width: 50rpx;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    line-height: 120rpx;
+    transform: rotate(180deg);
+    font-size: 36rpx;
+  }
+
+  .c_details_ys {
+    color: #f70000;
+  }
+
+  .calculator_hua {
+    display: block;
+    width: calc(~'100% - 100rpx');
+    padding: 40rpx 50rpx 40rpx 50rpx;
+  }
+
+  .container .calculator_hua:last-child {
+    padding-bottom: 106rpx;
+  }
+
+  .calculator_hua_title {
+    font-size: 26rpx;
+    color: #000;
+    text-align: left;
+    width: 100%;
+  }
+
+  .slider_kuai {
+    margin-top: 60rpx;
+  }
+
+  .section_gap_bc {
+    width: 95%;
+    display: flex;
+  }
+
+  .section_gap_bc_list {
+    flex: 1;
+    font-size: 28rpx;
+    color: rgb(80, 63, 160);
+    text-align: left;
+    text-indent: 24rpx;
+  }
+
+  .c_details_fs_list {
+    display: block;
+    width: calc(~'100% - 100rpx');
+    padding: 30rpx 50rpx 30rpx 50rpx;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+  }
+
+  .c_details_fs_name {
+    font-size: 30rpx;
+  }
+
+  .c_details_fs_bq_nr {
+    width: auto;
+    padding: 0 15rpx 0 15rpx;
+    background-color: #00c7ae;
+    text-align: center;
+    height: 38rpx;
+    line-height: 38rpx;
+    font-size: 22rpx;
+    color: #ffffff;
+    border-radius: 8rpx;
+    display: inline-block;
+    margin-bottom: 20rpx;
+    margin-right: 15rpx;
+  }
+
+  .c_details_fs_bq_lw {
+    width: calc(~'100% - 50rpx');
+    color: #000;
+    font-size: 26rpx;
+    display: block;
+    height: 40rpx;
+    line-height: 40rpx;
+    position: relative;
+    padding-left: 50rpx;
+  }
+
+  .icon-liwu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #00c7ae;
+  }
+
+  .c_details_fs_bq_btn {
+    width: 140rpx;
+    background-color: #5c45c3;
+    height: calc(~'100% - 40rpx');
+    position: absolute;
+    top: 20rpx;
+    right: 0;
+    font-size: 28rpx;
+    color: #ffffff;
+    line-height: 166rpx;
+    text-align: center;
+  }
+
+  .c_details_fs_bq_jg {
+    width: 200rpx;
+    position: absolute;
+    right: 180rpx;
+    top: 80rpx;
+    height: 50%;
+  }
+
+  .c_details_fs_bq_sf {
+    font-size: 30rpx;
+    color: #000;
+  }
+
+  .c_details_fs_bq_hk {
+    font-size: 22rpx;
+    color: #000;
+    margin-top: 10rpx;
+  }
+
+  .red {
+    color: #f70000;
+  }
+
+  .c_details_fs .c_details_fs_list:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .c_details_pz_list {
+    width: calc(~'100% - 100rpx');
+    padding: 30rpx 50rpx 30rpx 50rpx;
+    font-size: 30rpx;
+    color: #000;
+    background-color: #ffffff;
+  }
+
+  .c_details_pz_list_bq {
+    width: calc(~'100% - 100rpx');
+    padding: 5rpx 50rpx 5rpx 50rpx;
+    background-color: #f0f1f5;
+    font-size: 26rpx;
+    color: #000;
+  }
+
+  .c_details_xx {
+    font-size: 22rpx;
+    color: #525252;
+    padding-top: 15rpx;
+    padding-bottom: 15rpx;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .c_details_xx_left {
+    float: left;
+  }
+
+  .c_details_xx_right {
+    float: right;
+  }
+
+  .programme-cont {
+    display: flex;
+    width: 100%;
+    .programme-r {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 30rpx;
+      background-color: rgb(240, 241, 245);
+      .select-item {
+        display: flex;
+        margin-bottom: 60rpx;
+        width: 100%;
+        .text1 {
+          margin-top: 16rpx;
+          width: 100rpx;
+          font-size: 26rpx;
+          color: #000;
+        }
+        .select-cont {
+          flex: 1;
+          padding: 0 20rpx;
+          .slider-cont {
+            margin: 0 20rpx 0 0;
+            .slider-item {
+              margin: 0;
+            }
+          }
+          .nums {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 30rpx;
+            margin-left: -16rpx;
+            text {
+              font-size: 26rpx;
+              color: rgb(80, 63, 160);
+            }
+          }
+        }
+        .text2 {
+          margin-top: 16rpx;
+          width: 50rpx;
+          font-size: 24rpx;
+          color: rgb(80, 63, 160);
+        }
+      }
+    }
+  }
+
+  .liwu {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 16rpx;
+    padding-top: 2rpx;
+  }
+
+  .scheme-tow {
+    width: 35%;
+    font-size: 24rpx;
+  }
+</style>
+<template>
+  <view>
+    <sidebarck @childFn.user="linkTo" :sidebar_="sidebar_"></sidebarck>
+    <view class="container">
+      <view class="c_details_h">
+        <image class="c_details_sp" src="{{xq_sj.imgurl}}" mode="widthFix"></image>
+      </view>
+      <view class="sidebar_list_ck" @tap="ck_btn({{xq_sj.carseriesid}})">
+        <view class="sidebar_list_left_ck">
+          <view class="c_details_jt iconfont icon-jiantou"></view>
+          <view class="list_left sidebar_list_rmb_ck">新手指导价￥
+            <text style="float: right;margin-right: 70rpx">{{xq_sj.price/10000}}万</text>
+          </view>
+          <text class="list_left sidebar_list_title_ck">{{xq_sj.name}}</text>
+        </view>
+      </view>
+      <view class="programme-cont">
+        <view class="programme-r">
+          <!-- 首付 -->
+          <view class="select-item">
+            <text class="text1">首付</text>
+            <view class="select-cont">
+              <view class="slider-cont">
+                <shoufuSlider min="20" max="70" step="10" blockUrl="./image/hk.png" :value.sync="shoufuValue" @sliderChange.user="shoufuChange"></shoufuSlider>
+              </view>
+              <view class="nums">
+                <text>20</text>
+                <text>30</text>
+                <text>40</text>
+                <text>50</text>
+                <text>60</text>
+                <text>70</text>
+              </view>
+            </view>
+            <text class="text2">{{shoufuValueNum}}</text>
+          </view>
+          <!-- 期限 -->
+          <view class="select-item">
+            <text class="text1">期限</text>
+            <view class="select-cont">
+              <view class="slider-cont">
+                <qixianSlider min="12" max="60" step="12" blockUrl="./image/hk.png" :value.sync="qixianValue" @sliderChange.user="qixianChange"></qixianSlider>
+              </view>
+              <view class="nums">
+                <text>12</text>
+                <text>24</text>
+                <text>36</text>
+                <text>48</text>
+                <text>60</text>
+              </view>
+            </view>
+            <text class="text2">{{qixianValueNum}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="c_details_fs">
+         <!-- wx:if="{{item.monthlysupply <= 0 ? false : true}}" -->
+        <view class="c_details_fs_list" wx:for="{{financialproductJA}}" wx:key="key">
+          <view class="c_details_fs_name" wx:if="{{item.line_pro_name!=''?false:true}}">{{item.name}}</view>
+          <view class="c_details_fs_name" wx:if="{{item.line_pro_name!=''?true:false}}">{{item.line_pro_name}}</view>
+          <view style="height: 60rpx;">
+            <text class="c_details_fs_bq_nr" wx:for="{{item.tags}}" wx:key="key">{{item == "" || item == "undefined"?"-":item}}</text>
+          </view>
+          <view class='scheme-tow' wx:if="{{item.activityJO.name}}">
+            <image class="liwu" src="image/lw@2x.png"></image>{{item.activityJO.name}}</view>
+          <view class="c_details_fs_bq_btn" @tap="ljsq_btn({{item.financialproductid}})">立即申请</view>
+          <view class="c_details_fs_bq_jg">
+            <view class="c_details_fs_bq_sf">首付
+              <text class="red">{{item.downpayment}}万</text>
+            </view>
+            <view class="c_details_fs_bq_hk">
+              <text class="red">{{item.monthlysupply}}</text>／月
+              <text class="red">起</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="c_details_pz_list">配置信息</view>
+      <view class="c_details_pz_list_bq">基本参数</view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">排量（L)</text>
+        <text class="c_details_xx_right">{{xq_sj.liter == "" || xq_sj.liter == "undefined"? "~":xq_sj.liter}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">最大马力（Ps)</text>
+        <text class="c_details_xx_right">{{xq_sj.engine_power == "" || xq_sj.engine_power=="undefined" ?"~":xq_sj.engine_power}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">变速箱类型</text>
+        <text class="c_details_xx_right">{{xq_sj.gear_type == "" || xq_sj.engine_power=="gear_type"? "~":xq_sj.gear_type}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">排放标准</text>
+        <text class="c_details_xx_right">{{xq_sj.discharge_standard == "" || xq_sj.discharge_standard=="undefined" ? "~":xq_sj.discharge_standard}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">上市日期</text>
+        <text class="c_details_xx_right">{{xq_sj.market_date == "" || xq_sj.market_date=="undefined"? "~":xq_sj.market_date}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">门数</text>
+        <text class="c_details_xx_right">{{xq_sj.door_number == "" || xq_sj.door_number=="undefined"? "~":xq_sj.door_number}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">座位数</text>
+        <text class="c_details_xx_right">{{xq_sj.seat_number == "" || xq_sj.seat_number=="undefined"? "~":xq_sj.seat_number}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">驱动方式</text>
+        <text class="c_details_xx_right">{{xq_sj.drive_type == "" || xq_sj.drive_type=="undefined"? "~":xq_sj.drive_type}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">车身结构</text>
+        <text class="c_details_xx_right">{{xq_sj.car_struct == "" || xq_sj.car_struct=="undefined"? "~":xq_sj.car_struct}}</text>
+      </view>
+      <view class="c_details_pz_list c_details_xx">
+        <text class="c_details_xx_left">车身类型</text>
+        <text class="c_details_xx_right">{{xq_sj.body_type == "" || xq_sj.body_type=="undefined"? "~":xq_sj.body_type}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import Sidebar_ck from '../components/sidebar_ck';
+  import Slider from '../components/Slider';
+
+  export default class Commodity_details extends wepy.page {
+    config = {
+      navigationBarTitleText: '金融产品列表'
+    };
+    data = {
+      zt: 0,
+      json_link: '',
+      // 车系id
+      carseriesid: '',
+      // 车型id
+      carmodelid: '',
+      js: true,
+      // 车信息
+      xq_sj: {},
+      // 产品信息
+      financialproductJA: [],
+      sidebar_: false,
+      // 首付
+      shoufuValue: 20,
+      shoufuValueNum: 20,
+      // 期限
+      qixianValue: 36,
+      qixianValueNum: 36
+    };
+
+    components = {
+      sidebarck: Sidebar_ck,
+      shoufuSlider: Slider,
+      qixianSlider: Slider
+    };
+
+    methods = {
+      onShareAppMessage() {
+        return {
+          path: '/pages/commodity_details?carmodelid=' +
+            this.carmodelid +
+            '&downpaymentpercent=' +
+            this.shoufuValueNum +
+            '&loanterm=' +
+            this.qixianValueNum
+        };
+      },
+      // 车型列表
+      linkTo(a) {
+        var this_ = this;
+        let carmodelid = a;
+        this_.carmodelid = a;
+        let json_link = this.json_link;
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+          data: {
+            carmodelid: carmodelid,
+            downpaymentpercent: this_.shoufuValueNum,
+            loanterm: this_.qixianValueNum
+          },
+          success: function (data) {
+            this_.xq_sj = data.data.carmodelJO;
+            this_.carseriesid = data.data.carmodelJO.carseriesid;
+            this_.financialproductJA = data.data.financialproductJA;
+            this_.$apply();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+
+        this.$parent.globalData.pageid = [a];
+        this.$parent.globalData.pagename = [3];
+        this.$parent.clicknumordernumstat(1);
+      },
+      // 申请
+      ljsq_btn(e) {
+        let carmodelid = this.xq_sj.carmodelid;
+        let financialproductid = e;
+        let businessid = '';
+        let downpaymentpercent = this.shoufuValueNum;
+        let loanterm = this.qixianValueNum;
+        let res = {
+          carmodelid: carmodelid,
+          financialproductid: financialproductid,
+          downpaymentpercent: downpaymentpercent,
+          loanterm: loanterm
+        };
+        this.$navigate('details', res);
+      },
+      // 首付slider滑动
+      shoufuChange(value) {
+        let this_ = this;
+        let json_link = this.$parent.globalData.json_link;
+        this.shoufuValueNum = value;
+        this.addGoodToMyFoot();
+        if (this.zt == 0) {
+          wx.request({
+            url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+            data: {
+              carmodelid: this_.carmodelid,
+              downpaymentpercent: this_.shoufuValueNum,
+              loanterm: this_.qixianValueNum
+            },
+            success: function (data) {
+              this_.xq_sj = data.data.carmodelJO;
+              this_.carseriesid = data.data.carmodelJO.carseriesid;
+              this_.financialproductJA = data.data.financialproductJA;
+                          console.log( this_.financialproductJA)
+            console.log(data.data.financialproductJA)
+              this_.$apply();
+              wx.hideLoading();
+            },
+            fail: function () {
+              wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+              });
+
+              setTimeout(function () {
+                wx.hideToast();
+              }, 2000);
+              return;
+            }
+          });
+        } else {
+          wx.request({
+            url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+            data: {
+              carseriesid: this_.carseriesid,
+              downpaymentpercent: this_.shoufuValueNum,
+              loanterm: this_.qixianValueNum
+            },
+            success: function (data) {
+              this_.xq_sj = data.data.carmodelJO;
+              this_.carseriesid = data.data.carmodelJO.carseriesid;
+              this_.financialproductJA = data.data.financialproductJA;
+                          console.log( this_.financialproductJA)
+            console.log(data.data.financialproductJA)
+              this_.$apply();
+              wx.hideLoading();
+            },
+            fail: function () {
+              wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+              });
+
+              setTimeout(function () {
+                wx.hideToast();
+              }, 2000);
+              return;
+            }
+          });
+        }
+      },
+      // 期限slider滑动
+      qixianChange(value) {
+        let json_link = this.$parent.globalData.json_link;
+        let this_ = this;
+        this.qixianValueNum = value;
+        this.addGoodToMyFoot();
+        if (this_.zt == 0) {
+          wx.request({
+            url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+            data: {
+              carmodelid: this_.carmodelid,
+              downpaymentpercent: this_.shoufuValueNum,
+              loanterm: this_.qixianValueNum
+            },
+            success: function (data) {
+              this_.xq_sj = data.data.carmodelJO;
+              this_.carseriesid = data.data.carmodelJO.carseriesid;
+              this_.financialproductJA = data.data.financialproductJA;
+                          console.log( this_.financialproductJA)
+            console.log(data.data.financialproductJA)
+              this_.$apply();
+              wx.hideLoading();
+            },
+            fail: function () {
+              wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+              });
+
+              setTimeout(function () {
+                wx.hideToast();
+              }, 2000);
+              return;
+            }
+          });
+        } else {
+          wx.request({
+            url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+            data: {
+              carseriesid: this_.carseriesid,
+              downpaymentpercent: this_.shoufuValueNum,
+              loanterm: this_.qixianValueNum
+            },
+            success: function (data) {
+              this_.xq_sj = data.data.carmodelJO;
+              this_.carseriesid = data.data.carmodelJO.carseriesid;
+              this_.financialproductJA = data.data.financialproductJA;
+                          console.log( this_.financialproductJA)
+            console.log(data.data.financialproductJA)
+              
+              this_.$apply();
+              wx.hideLoading();
+            },
+            fail: function () {
+              wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+              });
+
+              setTimeout(function () {
+                wx.hideToast();
+              }, 2000);
+              return;
+            }
+          });
+        }
+        this.$apply();
+      },
+      // 查看车型
+      ck_btn(e) {
+        wx.showLoading({
+          title: '加载中'
+        });
+        let json_link = this.json_link;
+        let this_ = this;
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/listbycarseries',
+          data: {
+            carseriesid: e
+          },
+          success: function (data) {
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 0);
+            this_.$invoke('sidebarck', 'someMethod', data);
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      }
+    };
+
+    onLoad(res) {
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      });
+      var this_ = this;
+      // 判断上一个页面有没有传res.carmodelid
+      // 判断车型id跟车系id
+      if (res.carmodelid != undefined) {
+        let Carmodelid = res.carmodelid;
+        this_.carmodelid = Carmodelid;
+        this_.zt = 0;
+        let json_link = this.$parent.globalData.json_link;
+        this_.json_link = json_link;
+        // 商品详情
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+          data: {
+            carmodelid: Carmodelid,
+            downpaymentpercent: 20,
+            loanterm: 36
+          },
+          success: function (data) {
+            this_.xq_sj = data.data.carmodelJO;
+            this_.carseriesid = data.data.carmodelJO.carseriesid;
+            this_.financialproductJA = data.data.financialproductJA;
+            this_.addGoodToMyFoot();
+            this_.$apply();
+            wx.hideLoading();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      } else {
+        let Carseriesid = res.carseriesid;
+        this_.carseriesid = Carseriesid;
+        this_.zt = 1;
+        let json_link = this.$parent.globalData.json_link;
+        this_.json_link = json_link;
+        wx.request({
+          url: json_link + '/api/wxapp/newcarloan/carmodel/info',
+          data: {
+            carseriesid: Carseriesid,
+            downpaymentpercent: 20,
+            loanterm: 36
+          },
+          success: function (data) {
+            this_.xq_sj = data.data.carmodelJO;
+            this_.carseriesid = data.data.carmodelJO.carseriesid;
+            this_.financialproductJA = data.data.financialproductJA;
+
+            this_.addGoodToMyFoot();
+            this_.$apply();
+            wx.hideLoading();
+          },
+          fail: function () {
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none'
+            });
+
+            setTimeout(function () {
+              wx.hideToast();
+            }, 2000);
+            return;
+          }
+        });
+      }
+
+      // 初始化滑动组件的数值
+      this.$broadcast('attachhed');
+    }
+
+    // 统计
+    onShow() {
+      this.$parent.UVstatistical('loanproductlist');
+      this.$parent.PVUVstatistical('loanproductlist');
+    }
+
+    // 初始化数据
+    onUnload() {
+      this.shoufuValue = 20;
+      this.shoufuValueNum = 20;
+      this.qixianValue = 36;
+      this.qixianValueNum = 36;
+      this.xq_sj = {};
+      this.financialproductJA = [];
+      this.$invoke('sidebarck', 'clear_yy');
+
+      // 清掉贷款提交订单接口两个参数的值
+      this.$parent.globalData.source = 0;
+      this.$parent.globalData.sourceid = '';
+    }
+
+    // 添加足迹
+    addGoodToMyFoot() {
+      // 每次显示，添加到我的足迹
+      let xq_sj = this.xq_sj;
+      let a = parseInt(xq_sj.price) / 10000;
+      let b = parseInt(xq_sj.price * this.shoufuValueNum / 100) / 10000;
+      let c = this.qixianValueNum;
+      let abc = (a - b) / c;
+      if (this.financialproductJA != '') {
+        let good = {
+          // 0 直租详情 1 金融商品列表
+          type: 1,
+          carmodelid: xq_sj.carmodelid,
+          daikuantag: '新车贷',
+          goodimage: xq_sj.imgurl,
+          carseriesname: xq_sj.carseriesname,
+          name: xq_sj.name,
+          price: parseInt(xq_sj.price) / 10000,
+          downpayment: parseInt(xq_sj.price * this.shoufuValueNum / 100) / 10000,
+
+          monthlysupply: this.financialproductJA[0].monthlysupply,
+          label: this.financialproductJA[0].activityJO.name,
+          downpaymentpercent: this.shoufuValueNum,
+          loanterm: this.qixianValueNum
+        };
+        this.$parent.myFootData('add', good);
+      } else {
+        let good = {
+          // 0 直租详情 1 金融商品列表
+          type: 1,
+          carmodelid: xq_sj.carmodelid,
+          daikuantag: '新车贷',
+          goodimage: xq_sj.imgurl,
+          carseriesname: xq_sj.carseriesname,
+          name: xq_sj.name,
+          price: parseInt(xq_sj.price) / 10000,
+          downpayment: parseInt(xq_sj.price * this.shoufuValueNum / 100) / 10000,
+          monthlysupply: 0,
+          downpaymentpercent: this.shoufuValueNum,
+          loanterm: this.qixianValueNum
+        };
+        this.$parent.myFootData('add', good);
+      }
+    }
+  }
+</script>

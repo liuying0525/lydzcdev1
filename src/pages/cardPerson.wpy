@@ -1,0 +1,390 @@
+<style lang="less">
+  .earlyRepaymentS {
+    view,input{
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    padding: 46rpx 50rpx;
+    .earlyRepaymentSt{
+      padding: 0 58rpx 30rpx;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      -moz-box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      box-shadow:0 0 16rpx 6rpx rgba(0,0,0,0.1);
+      .title{
+        height: 100rpx;
+        line-height: 100rpx;
+        font-size: 30rpx;
+        color: #000;
+        text-align: center;
+        margin-bottom: 30rpx;
+      }
+      .textItem{
+        position: relative;
+        width: 100%;
+        height: 56rpx;
+        font-size: 26rpx;
+        margin-bottom: 44rpx;
+        text{
+          float: left;
+          line-height: 56rpx;
+        }
+        .early{
+          color: rgb(96,68,203);
+          position: relative;
+        }
+        .earlyHelp{
+          position: absolute;
+          display: block;
+          right: -30rpx;
+          top: -10rpx;
+          line-height: 26rpx;
+          width: 26rpx;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          text-align: center;
+          border: 1px solid rgb(96,68,203);
+          font-size: 20rpx;
+        }
+        .earlyTime{
+          height: 56rpx;
+          padding:0 20rpx;
+          margin-left: 40rpx;
+        }
+        input{
+          float: right;
+          height: 56rpx;
+          border: 1px solid #ddd;
+          width: 370rpx;
+          padding-left: 30rpx;
+          font-size: 24rpx;
+        }
+      }
+      .textItemPic{
+        position: relative;
+        width: 100%;
+        height:120rpx;
+        font-size: 26rpx;
+        margin-bottom: 44rpx;
+        .pic{
+          position: relative;
+          height: 120rpx;
+          width: 176rpx;
+          line-height: 116rpx;
+          text-align: center;
+          border: 2rpx dashed #ddd;
+          font-size: 50rpx;
+          color: #666;
+          font-weight: bold;
+          float: left;
+          text{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+          }
+          image{
+            top: 0;
+            left: 0;
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .picBox{
+          float: right;
+          width: 370rpx;
+        }
+        .picText{
+          line-height: 120rpx;
+        }
+      }
+      .textItemInfos {
+        position: absolute;
+        line-height: 56rpx;
+        border: 1px solid #e5e5e5;
+        border-bottom: none;
+        border-top: none;
+        width: 370rpx;
+        font-size: 24rpx;
+        right: 0;
+        top: 56rpx;
+        z-index: 100;
+        .textItemInfo{
+          height: 56rpx;
+          border-bottom: 1px solid #e5e5e5;
+          font-size: 20rpx;
+          color: #393939;
+          background: #fff;
+          /*text-align: center;*/
+          white-space: nowrap;
+          overflow-x: scroll;
+          overflow-y: hidden;
+        }
+      }
+    }
+    .earlyBtn{
+      width: 546rpx;
+      height: 74rpx;
+      line-height: 74rpx;
+      color: #fff;
+      background: rgb(96,68,203);
+      font-size: 30rpx;
+      -webkit-border-radius: 10rpx;
+      -moz-border-radius: 10rpx;
+      border-radius: 10rpx;
+      margin: 86rpx auto 0;
+      text-align: center;
+    }
+    .earlyNoBtn{
+      .earlyBtn;
+      background: #e5e5e5;
+      color: #000;
+    }
+    .earlyInfo {
+      width: 546rpx;
+      margin: 30rpx auto 0;
+      font-size: 22rpx;
+      color: #595959;
+    }
+    .errorInfo{
+      position: absolute;
+      right: 10rpx;
+      top: 56rpx;
+      font-size: 20rpx;
+      color: #f43143;
+      text-align: right;
+    }
+  }
+</style>
+<template>
+  <view class="earlyRepaymentS">
+    <view class="earlyRepaymentSt">
+      <view class="title">客户信息录入</view>
+      <view class="textItemPic">
+        <text class="picText">新卡照片</text>
+        <view class="picBox">
+          <view class="pic" @tap="chooseImg({{'newccardurl'}})">
+            <text>+</text>
+            <image src="{{newccardurl}}" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+      <view class="textItemPic">
+        <text class="picText">身份证照片</text>
+        <view class="picBox">
+          <view class="pic" @tap="chooseImg({{'cardHead'}})">
+            <text>+</text>
+            <image src="{{cardHead}}" mode="aspectFit"></image>
+          </view>
+          <view class="pic" style="float: right;" @tap="chooseImg({{'cardTail'}})">
+            <text>+</text>
+            <image src="{{cardTail}}" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+      <view class="textItem">
+        <text>新卡卡号</text><input type="number" data-name="cardNum" value="{{cardNum}}" @input="changeValue" placeholder="请输入银行卡号"/>
+        <view class="errorInfo">*仅支持建行，工行</view>
+      </view>
+      <view class="textItem">
+        <text>新卡银行</text>
+        <picker value="{{cardType}}" range="{{typeList}}" bindchange="typeChange">
+          <input type="number" data-name="cardName" value="{{cardType}}" placeholder="点击选择银行" disabled="true"/>
+        </picker>
+      </view>
+      <view class="textItem">
+        <text>客户姓名</text><input type="text" data-name="name" value="{{name}}" @input="changeValue" disabled="true" placeholder="请输入客户姓名"/>
+      </view>
+      <view class="textItem">
+        <text>手机号</text><input type="number" data-name="phone" value="{{phone}}" @input="changeValue" disabled="true" placeholder="请输入客户手机号"/>
+      </view>
+      <!--<view class="textItem">-->
+        <!--<text>身份证号</text><input type="number" data-name="IdCard" value="{{IdCard}}" @input="changeValue" placeholder="请输入客户身份证号"/>-->
+      <!--</view>-->
+      <!--<view class="textItem" style="margin-bottom: 50rpx;">-->
+        <!--<text>合同信息</text><input type="text" value="{{contractnum}}" disabled @tap="getContracts" placeholder="点击输入框获取"/>-->
+        <!--<view class="textItemInfos" wx:if="{{contract_show}}">-->
+          <!--<view class="textItemInfo" @tap="selectContract({{item}})" wx:for="{{contracts}}">{{item.comments}} : {{item.externalContractNbr}}</view>-->
+        <!--</view>-->
+      <!--</view>-->
+      <view class="textItem">
+        <text>合同信息</text>
+        <picker value="{{contractnum}}" range="{{contracts}}" bindchange="selectContract">
+          <view class="picker">
+            <text class="earlyTime">{{contractnum}}</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="earlyBtn {{canSubmit? '': 'earlyNoBtn'}}" @tap="submit">下一步</view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import toastInfo from '../components/toastInfo'
+  export default class cardPerson extends wepy.page {
+    config = {
+      navigationBarTitleText: '还款卡变更'
+    };
+    components = {
+      toastInfo: toastInfo
+    };
+    data = {
+      url_link: '',
+      img_url: '',
+      parent_data: '',
+      newccardurl: '',//新卡图片地址
+      newccardurlNum: '',
+      cardHead: '', // 身份证正面图片地址
+      cardHeadNum: '',
+      cardTail: '',
+      cardTailNum:'',
+      name: '',
+      phone: '',
+      IdCard:'',
+      cardType: '',//1建行 2工行
+      typeList: ['建设银行','工商银行'],
+      IdCardR: false,
+      phoneR: false, // 手机号格式是否正确
+      cardNum: '', // 银行卡号
+      cardR: false,// 银行卡卡号格式是否正确
+      contractnum: '点击选择合同号', // 合同号
+      contracts: [], // 合同列表
+      contract_show: false, // 是否显示合同列表
+      canSubmit: false // 是否可以提交
+    }
+    methods = {
+      // 选择时间
+      typeChange: function (val) {
+        this.cardType = this.typeList[val.detail.value];
+        console.log(this.cardType);
+      },
+      // 选择图片
+      chooseImg: function(imgType) {
+        let that = this
+        wx.chooseImage({
+          success: function(res) {
+            var tempFilePaths = res.tempFilePaths;
+            that[imgType] = tempFilePaths[0];
+            that.$apply();
+            wx.uploadFile({
+              url: that.parent_data.json_dhLink + '/upload/wx',
+              filePath: tempFilePaths[0],
+              name: 'file',
+              formData: {
+                'loginToken': that.parent_data.login_token,
+                'userId': that.parent_data.login_userId
+              },
+              success: function(res) {
+                that[imgType+'Num'] =JSON.parse(res.data).data;
+                that.$apply();
+              }
+            });
+          }
+        })
+      },
+      // 更改input的值
+      changeValue: function (e) {
+        this[e.currentTarget.dataset.name] = e.detail.value;
+        console.log(e.currentTarget.dataset.name, e.detail.value)
+      },
+      // 选择一个合同
+      selectContract: function (item) {
+        // this.contract_show = false
+        this.contractnum = this.contracts[item.detail.value].split(':')[0]
+        console.log(this.contractnum);
+      },
+      // 还款卡变更提交
+      submit: function () {
+        let that = this;
+        console.log('提交了')
+        if (!that.canSubmit) {
+          that.$invoke('toastInfo', 'modelFunc', '000', '请把个人信息填写完整');
+          return false;
+        }
+        // if (!that.cardR) {
+        //   that.$invoke('toastInfo', 'modelFunc', '000', '请填写正确银行卡号');
+        //   return false;
+        // }
+        let typeName = '';
+        if(that.cardType === '建设银行') {
+          typeName = 'CCB'
+        } else if (that.cardType === '工商银行') {
+          typeName = 'ICBC'
+        }
+        let requestData = {
+          bankCardFile: that.newccardurlNum,
+          idCardHeadFile: that.cardHeadNum,
+          idCardTailFile: that.cardTailNum,
+          bankCardNew: that.cardNum,
+          name: that.name,
+          telephone: that.phone,
+          contractNo: that.contractnum,
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token,
+          bankName: typeName
+        }
+        that.$navigate('cardBook', requestData);
+      }
+    };
+    computed = {
+      // 监控是否填写信息是否完整
+      canSubmitFunc: function() {
+        if (this.newccardurl != '' && this.cardHead != '' && this.cardTail != '' && this.name != '' && this.phone != '' && this.cardNum != '' && this.contractnum != '点击选择合同号' && this.cardType != '') {
+          this.canSubmit = true;
+        } else {
+          this.canSubmit = false;
+        }
+        // if(this.$invoke('toastInfo', 'bankCardReg', this.cardNum)) {
+        //   this.cardR = true;
+        // } else {
+        //   this.cardR = false;
+        // }
+      }
+    }
+    //获取合同信息
+    getContracts() {
+      let that = this;
+      wx.request({
+        url: that.parent_data.json_dhLink + '/contract/getlist',
+        data: {
+          userId: that.parent_data.login_userId,
+          loginToken: that.parent_data.login_token
+        },
+        success: function (res) {
+          if (res.data.code == '10001') {
+            that.contracts = [];
+            res.data.data.forEach(function (item) {
+              that.contracts.push(item.externalContractNbr + ':' + item.comments)
+            })
+            that.$apply();
+          } else {
+            that.$invoke('toastInfo','modelFunc',res.data.code,res.data.msg);
+          }
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
+    }
+    onLoad() {
+    }
+    onShow() {
+      let that = this;
+      that.url_link = that.$parent.globalData.url_link;
+      that.parent_data = that.$parent.globalData;
+      that.name = that.parent_data.login_name;
+      that.phone = that.parent_data.login_phone;
+      this.getContracts()
+    }
+  }
+</script>
